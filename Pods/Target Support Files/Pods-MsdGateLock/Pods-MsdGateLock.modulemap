@@ -1,0 +1,6 @@
+framework module Pods_MsdGateLock {
+  umbrella header "Pods-MsdGateLock-umbrella.h"
+
+  export *
+  module * { export * }
+}

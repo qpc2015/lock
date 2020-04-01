@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumberPassVerifController" customModule="MsdGateLock" customModuleProvider="target">
+            <connections>
+                <outlet property="iconImgView" destination="yqb-uU-u2B" id="mzq-gQ-pxh"/>
+                <outlet property="memberLabel" destination="NC7-gz-b5I" id="No5-Ah-b4C"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yqb-uU-u2B">
+                    <rect key="frame" x="137.5" y="65" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="5WB-AZ-4hj"/>
+                        <constraint firstAttribute="width" constant="100" id="EZu-fs-nbP"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="50"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13888888888" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NC7-gz-b5I">
+                    <rect key="frame" x="140.5" y="178" width="94.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEj-9Y-sSo">
+                    <rect key="frame" x="60" y="308" width="58" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="切换用户"/>
+                    <connections>
+                        <action selector="exchangeUserClick:" destination="-1" eventType="touchUpInside" id="tmF-qM-Sky"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61t-qw-yZS">
+                    <rect key="frame" x="256.5" y="308" width="58" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="忘记密码"/>
+                    <connections>
+                        <action selector="forgetPasswordClick:" destination="-1" eventType="touchUpInside" id="jBa-fX-jsL"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="61t-qw-yZS" secondAttribute="trailing" constant="60" id="90d-Tt-POP"/>
+                <constraint firstItem="yqb-uU-u2B" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BJf-XY-Ucv"/>
+                <constraint firstItem="61t-qw-yZS" firstAttribute="top" secondItem="HEj-9Y-sSo" secondAttribute="top" id="HZ3-dm-K7I"/>
+                <constraint firstItem="HEj-9Y-sSo" firstAttribute="top" secondItem="NC7-gz-b5I" secondAttribute="bottom" constant="113" id="Q65-Ds-9Cr"/>
+                <constraint firstItem="NC7-gz-b5I" firstAttribute="top" secondItem="yqb-uU-u2B" secondAttribute="bottom" constant="13" id="ZEd-Zy-AwI"/>
+                <constraint firstItem="HEj-9Y-sSo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="p6H-54-842"/>
+                <constraint firstItem="yqb-uU-u2B" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="pUG-A1-PnC"/>
+                <constraint firstItem="NC7-gz-b5I" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yA9-0Z-vGH"/>
+            </constraints>
+            <point key="canvasLocation" x="59.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

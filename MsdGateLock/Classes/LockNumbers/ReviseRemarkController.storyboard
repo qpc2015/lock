@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Revise Remark Controller-->
+        <scene sceneID="Zr4-O5-Bmh">
+            <objects>
+                <tableViewController storyboardIdentifier="ReviseRemarkController" id="73Q-XR-9Np" customClass="ReviseRemarkController" customModule="MsdGateLock" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="47" sectionHeaderHeight="28" sectionFooterHeight="28" id="OJh-WK-XcA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="F9I-AQ-dFR">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="8zj-xr-PNm">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8zj-xr-PNm" id="sPh-lb-IaA">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0L-gT-JrS">
+                                                    <rect key="frame" x="22" y="15" width="29" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="大侄子" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="r6j-Bu-UR3">
+                                                    <rect key="frame" x="89" y="14" width="263" height="19"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="r6j-Bu-UR3" firstAttribute="centerY" secondItem="sPh-lb-IaA" secondAttribute="centerY" id="0AO-d3-OkK"/>
+                                                <constraint firstItem="u0L-gT-JrS" firstAttribute="leading" secondItem="sPh-lb-IaA" secondAttribute="leadingMargin" constant="14" id="NlH-aE-HoR"/>
+                                                <constraint firstItem="r6j-Bu-UR3" firstAttribute="leading" secondItem="u0L-gT-JrS" secondAttribute="trailing" constant="38" id="OHs-wJ-xU2"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="r6j-Bu-UR3" secondAttribute="trailing" constant="15" id="QJM-u2-58G"/>
+                                                <constraint firstItem="u0L-gT-JrS" firstAttribute="centerY" secondItem="sPh-lb-IaA" secondAttribute="centerY" id="s11-C6-iaf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="73Q-XR-9Np" id="mfe-Pr-iNZ"/>
+                            <outlet property="delegate" destination="73Q-XR-9Np" id="lMX-q4-JEr"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="remark" destination="r6j-Bu-UR3" id="c9v-7g-AEy"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zei-IM-gZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="144"/>
+        </scene>
+    </scenes>
+</document>

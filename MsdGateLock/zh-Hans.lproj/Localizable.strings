@@ -1,0 +1,16 @@
+/* 
+   Localizable.strings
+  MsdGateLock
+
+  Created by ox o on 2017/9/26.
+  Copyright © 2017年 xiaoxiao. All rights reserved.
+*/
+
+
+"GOOD_MORNING" = "早上好";
+
+//提示汇总
+"Global_LogBackinError" = "请退出重新登录";
+"BlueTool_UserBingFail" = "user绑锁失败";
+"BlueTool_LockConnectLoading" = "门锁连接中...";
+"BlueTool_OpenLoading" = "开门中,请等待...";

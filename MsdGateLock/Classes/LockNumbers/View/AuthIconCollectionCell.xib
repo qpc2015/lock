@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="AuthIconCollectionCell" id="gTV-IL-0wX" customClass="AuthIconCollectionCell" customModule="MsdGateLock" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="127" height="154"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="127" height="154"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xY0-3B-cn4">
+                        <rect key="frame" x="18.5" y="13" width="90" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="W9d-9F-MiK"/>
+                            <constraint firstAttribute="width" constant="90" id="h4J-2K-HOE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大爷" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RzT-PA-3XV">
+                        <rect key="frame" x="0.0" y="111" width="127" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="administrator_bg" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-pF-vzs">
+                        <rect key="frame" x="0.0" y="72" width="127" height="23"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fra-Dc-rr8">
+                        <rect key="frame" x="46.5" y="79" width="34" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="fra-Dc-rr8" firstAttribute="centerX" secondItem="sHr-pF-vzs" secondAttribute="centerX" id="0oI-kr-hxX"/>
+                <constraint firstItem="sHr-pF-vzs" firstAttribute="bottom" secondItem="xY0-3B-cn4" secondAttribute="bottom" constant="-8" id="JG7-qS-0RN"/>
+                <constraint firstAttribute="trailing" secondItem="RzT-PA-3XV" secondAttribute="trailing" id="Kt4-PE-hcT"/>
+                <constraint firstItem="xY0-3B-cn4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="13" id="MyE-q8-ATm"/>
+                <constraint firstItem="fra-Dc-rr8" firstAttribute="centerY" secondItem="sHr-pF-vzs" secondAttribute="centerY" constant="2" id="PoI-pG-I8D"/>
+                <constraint firstItem="sHr-pF-vzs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XJq-dw-Q8e"/>
+                <constraint firstItem="RzT-PA-3XV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gnH-yE-KeY"/>
+                <constraint firstItem="xY0-3B-cn4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gzu-eD-82Y"/>
+                <constraint firstAttribute="trailing" secondItem="sHr-pF-vzs" secondAttribute="trailing" id="jF5-hv-T4h"/>
+                <constraint firstItem="RzT-PA-3XV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="oAa-8J-lMJ"/>
+                <constraint firstItem="sHr-pF-vzs" firstAttribute="centerX" secondItem="xY0-3B-cn4" secondAttribute="centerX" id="wt1-a0-Ngf"/>
+                <constraint firstItem="RzT-PA-3XV" firstAttribute="top" secondItem="xY0-3B-cn4" secondAttribute="bottom" constant="8" id="y6A-uq-FAD"/>
+            </constraints>
+            <size key="customSize" width="263" height="57"/>
+            <connections>
+                <outlet property="adminLabel" destination="fra-Dc-rr8" id="mRj-ky-llc"/>
+                <outlet property="imageView" destination="xY0-3B-cn4" id="qOB-Ls-49h"/>
+                <outlet property="isAdminImgView" destination="sHr-pF-vzs" id="BKV-4E-TcE"/>
+                <outlet property="itemHeight" destination="W9d-9F-MiK" id="Smg-UM-6rA"/>
+                <outlet property="itemWidth" destination="h4J-2K-HOE" id="nIB-Zd-Vb2"/>
+                <outlet property="nameLabel" destination="RzT-PA-3XV" id="mz2-Ax-Va0"/>
+            </connections>
+            <point key="canvasLocation" x="-39.5" y="10"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="administrator_bg" width="121" height="23"/>
+    </resources>
+</document>
