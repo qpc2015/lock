@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  swift
 //  MsdGateLock
 //
 //  Created by ox o on 2017/6/12.
@@ -78,7 +78,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         _ = [super.viewWillAppear(animated)]
-        UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
         //开启蓝牙
         setupBluetool()
         //获取锁列表
@@ -109,9 +108,7 @@ class HomeViewController: UIViewController {
             getUserLockList(UserInfo.getUserId()!)
         }else{
           
-            
         }
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,19 +122,20 @@ class HomeViewController: UIViewController {
     }
 }
 
+
 //MARK:- UI
 extension HomeViewController{
 
     fileprivate func setupNavigationBarWithShowAdd(){
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named : "message icon "), style: .plain, target: self, action: #selector(HomeViewController.messageCenterClick))
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named : "message icon "), style: .plain, target: self, action: #selector(messageCenterClick))
         
-            let item1 =  UIBarButtonItem.init(image: UIImage(named : "user"), style: .plain, target: self, action: #selector(HomeViewController.personCenterClick))
-            let item2 =  UIBarButtonItem.init(image: UIImage(named : "add"), style: .plain, target: self, action: #selector(HomeViewController.addLockClick))
+        let item1 =  UIBarButtonItem.init(image: UIImage(named : "user"), style: .plain, target: self, action: #selector(personCenterClick))
+        let item2 =  UIBarButtonItem.init(image: UIImage(named : "add"), style: .plain, target: self, action: #selector(addLockClick))
             navigationItem.rightBarButtonItems = [item1,item2]
 
         titleBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        titleBtn.addTarget(self, action: #selector(HomeViewController.titleViewClick(_:)), for: .touchUpInside)
+        titleBtn.addTarget(self, action: #selector(titleViewClick(_:)), for: .touchUpInside)
         navigationItem.titleView = titleBtn
     }
     
@@ -156,15 +154,15 @@ extension HomeViewController{
         //开锁按钮
         openLockBtn.setBackgroundImage(UIImage(named:"locking"), for: .selected)
 //        openLockBtn.setBackgroundImage(UIImage(named:"press"), for: .highlighted)
-        openLockBtn.addTarget(self, action: #selector(HomeViewController.openLockClick(btn:)), for: .touchUpInside)
+        openLockBtn.addTarget(self, action: #selector(openLockClick(btn:)), for: .touchUpInside)
         //底部按钮
         lockNumbersBtn.setTitleColor(kTextBlueColor, for: .normal)
         lockNumbersBtn.setTitleColor(kTextBlueColor, for: .highlighted)
-        lockNumbersBtn.addTarget(self, action: #selector(HomeViewController.lockNumbersClick), for: .touchUpInside)
+        lockNumbersBtn.addTarget(self, action: #selector(lockNumbersClick), for: .touchUpInside)
         lockSetBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x2282ff), for: .normal)
         lockSetBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x2282ff), for: .highlighted)
-        lockSetBtn.addTarget(self, action: #selector(HomeViewController.locksetClick), for: .touchUpInside)
-        moreBtn.addTarget(self, action: #selector(HomeViewController.moreClick), for: .touchUpInside)
+        lockSetBtn.addTarget(self, action: #selector(locksetClick), for: .touchUpInside)
+        moreBtn.addTarget(self, action: #selector(moreClick), for: .touchUpInside)
         //设置临时用户底部
         setTempUserFootView()
     }
@@ -197,7 +195,7 @@ extension HomeViewController{
         addLockBtn.setTitle("修改门锁备注", for: .normal)
         addLockBtn.titleLabel?.font = kGlobalTextFont
         addLockBtn.setTitleColor(kTextBlueColor, for: .normal)
-        addLockBtn.addTarget(self, action: #selector(HomeViewController.reviseLockMarkClick), for: .touchUpInside)
+        addLockBtn.addTarget(self, action: #selector(reviseLockMarkClick), for: .touchUpInside)
         bottomView.addSubview(addLockBtn)
         addLockBtn.snp.makeConstraints { (make) in
             make.left.equalTo(67)
@@ -209,7 +207,7 @@ extension HomeViewController{
         orderLockBtn.setTitle("退出门锁组", for: .normal)
         orderLockBtn.titleLabel?.font = kGlobalTextFont
         orderLockBtn.setTitleColor(kTextBlueColor, for: .normal)
-        orderLockBtn.addTarget(self, action: #selector(HomeViewController.outLockClick), for: .touchUpInside)
+        orderLockBtn.addTarget(self, action: #selector(outLockClick), for: .touchUpInside)
         bottomView.addSubview(orderLockBtn)
         orderLockBtn.snp.makeConstraints { (make) in
             make.right.equalTo(-67)
@@ -565,26 +563,26 @@ extension HomeViewController{
     }
     
     @objc func lockNumbersClick(){
-        if currentSeleteLock != nil{
+//        if currentSeleteLock != nil{
             let lockNemVc = LockMembersController()
             lockNemVc.lockModel = currentSeleteLock
             lockNemVc.type = currentSeleteLock?.roleType
             navigationController?.pushViewController(lockNemVc, animated: true)
-        }
+//        }
     }
     
     @objc func locksetClick(){
         //拥有者和授权用户
         let usertype = currentSeleteLock?.roleType
-        if usertype == 0{
-            let lockVC = LockManageController()
-            lockVC.currentLockModel = currentSeleteLock!
-            navigationController?.pushViewController(lockVC, animated: true)
-        }else if usertype == 1{
+//        if usertype == 0{
+//            let lockVC = LockManageController()
+//            lockVC.currentLockModel = currentSeleteLock!
+//            navigationController?.pushViewController(lockVC, animated: true)
+//        }else if usertype == 1{
             let authVC = AuthUserLockManageController()
             authVC.currentLockID = currentSeleteLock?.lockId
             navigationController?.pushViewController(authVC, animated: true)
-        }
+//        }
     }
     
     @objc func personCenterClick(){

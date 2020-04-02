@@ -21,7 +21,7 @@ class MsdGlobals  {
 
 
 ///todo###泛型应该放到方法里 但是swift好像是不支持，有待测试
-class AjaxUtil<T :Mappable>{
+class AjaxUtil<T: Mappable>{
     
     typealias BackJSON = (_ json:BaseResp<T>) -> Void
     typealias ListJSON = (_ arrJson:BaseArrResp<T>) -> Void

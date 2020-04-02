@@ -11,7 +11,7 @@ import ContactsUI
 import AddressBookUI
 
 class TroubleRepairController: UITableViewController {
-
+    
     @IBOutlet weak var contantTip: UILabel!
     @IBOutlet weak var personTip: UILabel!
     @IBOutlet weak var areaTip: UILabel!
@@ -31,19 +31,19 @@ class TroubleRepairController: UITableViewController {
     
     var currentLockID : String?
     var seletedNumber : String?
-//    lazy var datePick : LYJDatePicker02 = {
-//        let datePick = LYJDatePicker02()
-//        return datePick
-//    }()
+    //    lazy var datePick : LYJDatePicker02 = {
+    //        let datePick = LYJDatePicker02()
+    //        return datePick
+    //    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = kGlobalBackColor
         self.title = "故障报修"
         setupUI()
     }
-
+    
     //cell线
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -79,7 +79,7 @@ extension TroubleRepairController{
         timeLabel.textColor = kTextGrayColor
         
         numListBtn.backgroundColor = kTextBlueColor
-        numListBtn.addTarget(self, action: #selector(AddAuthorizaMemberController().seletedAdressList), for: .touchUpInside)
+        numListBtn.addTarget(self, action: #selector(seletedAdressList), for: .touchUpInside)
         
         tipView.backgroundColor = kGlobalBackColor
         tip1Label.textColor = kTextBlockColor
@@ -204,24 +204,23 @@ extension TroubleRepairController : PickerDelegate{
         datepicker?.doneButtonColor = kTextBlueColor
         datepicker?.show()
         
-//        weak var weakSelf = self
-//        self.datePick.canButtonReturnB = {
-//            QPCLog("我要消失了哈哈哈哈哈哈")
-//            weakSelf!.datePick.removeFromSuperview()
-//        }
-//        
-//        self.datePick.sucessReturnB = { returnValue in
-//            debugPrint("我要消失了哈哈哈哈哈哈\(returnValue)")
-//            self.timeLabel.text = returnValue
-//            weakSelf!.datePick.removeFromSuperview()
-//        }
-//        //需要初始化数据
-//        datePick.initData()
-//        datePick.frame = CGRect(x: 0, y: kScreenHeight - 314, width: kScreenWidth, height: 250)
-//        self.view.addSubview(datePick)
+        //        weak var weakSelf = self
+        //        self.datePick.canButtonReturnB = {
+        //            QPCLog("我要消失了哈哈哈哈哈哈")
+        //            weakSelf!.datePick.removeFromSuperview()
+        //        }
+        //
+        //        self.datePick.sucessReturnB = { returnValue in
+        //            debugPrint("我要消失了哈哈哈哈哈哈\(returnValue)")
+        //            self.timeLabel.text = returnValue
+        //            weakSelf!.datePick.removeFromSuperview()
+        //        }
+        //        //需要初始化数据
+        //        datePick.initData()
+        //        datePick.frame = CGRect(x: 0, y: kScreenHeight - 314, width: kScreenWidth, height: 250)
+        //        self.view.addSubview(datePick)
     }
 }
-
 
 //MARK:- CLICK
 extension TroubleRepairController:CNContactPickerDelegate{
@@ -251,7 +250,7 @@ extension TroubleRepairController:CNContactPickerDelegate{
         }
     }
     
-    func seletedAdressList(){
+    @objc func seletedAdressList(){
         
         if #available(iOS 9.0, *) {
             let pickerVC = CNContactPickerViewController()
@@ -305,7 +304,6 @@ extension TroubleRepairController:ABPeoplePickerNavigationControllerDelegate{
     func peoplePickerNavigationControllerDidCancel(_ peoplePicker: ABPeoplePickerNavigationController) {
         peoplePicker.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 

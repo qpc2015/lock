@@ -79,7 +79,7 @@ extension PersonTableController{
         
         let req = BaseReq<CommonReq>()
         req.action = GateLockActions.ACTION_ReservedList
-        req.sessionId = UserInfo.getSessionId()!
+        req.sessionId = UserInfo.getSessionId() ?? ""
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = CommonReq()
         
@@ -127,7 +127,7 @@ extension PersonTableController{
             
             let req = BaseReq<CommonReq>()
             req.action = GateLockActions.ACTION_Logout
-            req.sessionId = UserInfo.getSessionId()!
+            req.sessionId = UserInfo.getSessionId() ?? ""
             
             AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
                 QPCLog(resp)
@@ -153,9 +153,9 @@ extension PersonTableController{
     func getUserInfo(){
         let req =  BaseReq<UserInfoReq>()
         req.action = GateLockActions.ACTION_GetUserInfo
-        req.sessionId = UserInfo.getSessionId()!
+        req.sessionId = UserInfo.getSessionId() ?? ""
         req.sign = LockTools.getSignWithStr(str: "oxo")
-        req.data = UserInfoReq.init(UserInfo.getPhoneNumber()!)
+        req.data = UserInfoReq.init(UserInfo.getPhoneNumber() ?? "")
         weak var weakSelf = self
         QPCLog(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask,true).last)
         AjaxUtil<UserInfoResp>.actionPost(req: req){

@@ -13,7 +13,7 @@ class AuthUserOpenListController: UIViewController {
     var tableView : UITableView!
     var headView : UIView!
     var isHiddenSub : Bool = false
-    var currentLockID : String! //当前门锁id
+    var currentLockID : String? //当前门锁id
     var lockTitle : String?
     var openLockModel : [OpenLockList]?
     var listIndex : Int = 1
@@ -134,7 +134,6 @@ extension AuthUserOpenListController{
     }
 }
 
-
 extension AuthUserOpenListController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -162,33 +161,28 @@ extension AuthUserOpenListController:UITableViewDelegate,UITableViewDataSource{
         cell?.openModel = self.openLockModel?[indexPath.row]
         return cell!
     }
-    
-    
 }
 
 //MARK:-  http
 extension AuthUserOpenListController{
-    
     //下拉刷新最新内容
     @objc func reloadNewData(){
         
         if isHiddenSub {
             let req =  BaseReq<LockAllLogReq>()
             req.action = GateLockActions.ACTION_GetLockLog
-            req.sessionId = UserInfo.getSessionId()!
+            req.sessionId = UserInfo.getSessionId() ?? ""
             //        let userID = UserDefaults.standard.object(forKey: UserInfo.userId) as? Int
-            let lockId = currentLockID
+            let lockId = currentLockID  ?? ""
             let limit = 20
-            req.data = LockAllLogReq.init(lockId!, start: 1, limit: limit)
+            req.data = LockAllLogReq.init(lockId, start: 1, limit: limit)
             
-            weak var weakSelf = self
             AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { (resp) in
-                
                 QPCLog(resp)
                 if let lockModel = resp.data {
-                    weakSelf?.openLockModel = lockModel
+                    self.openLockModel = lockModel
                 }
-                weakSelf?.tableView.reloadData()
+                self.tableView.reloadData()
                 
                 self.tableView.mj_header?.endRefreshing()
             })

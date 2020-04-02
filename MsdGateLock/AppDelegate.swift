@@ -8,17 +8,12 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-var instance:AppDelegate!;
 
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
-    
-    static func getInstance() -> AppDelegate {
-        return instance!;
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -37,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
             self.window?.rootViewController = GuideViewController()
-            
         }else{
             if isLogin{
                 //判断权限用户是否设置数字密码
@@ -57,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         window?.makeKeyAndVisible()
         return true
     }
-    
 }
 
 //MARK:- 第三方初始化

@@ -215,7 +215,7 @@ extension PersonInfoController{
     func getAvatarUploadKey(){
         
         let req = CommonReq()
-        req.sessionId = UserInfo.getSessionId()!
+        req.sessionId = UserInfo.getSessionId() ?? ""
         req.action = GateLockActions.ACTION_AvatarUploadKey
         
         weak var weakSelf = self

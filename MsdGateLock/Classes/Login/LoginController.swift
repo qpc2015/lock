@@ -17,7 +17,7 @@ enum UserType : Int {
 }
 
 class LoginController: UIViewController {
-
+    
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var veritLabel: UILabel!
     @IBOutlet weak var verBottomView: UIView!
@@ -62,14 +62,8 @@ class LoginController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
-}
-
-//MARK:- UI
-extension LoginController{
     
     fileprivate func setupUI(){
-        
         numberLabel.textColor = kRGBColorFromHex(rgbValue: 0x1c1c1c)
         veritLabel.textColor = kRGBColorFromHex(rgbValue: 0x2f2f2f)
         numberBottmView.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
@@ -79,15 +73,15 @@ extension LoginController{
         let color : UIColor = kRGBColorFromHex(rgbValue: 0xe3e3e3)
         verBtn.setBackgroundImage(kCreateImageWithColor(color: color ), for: .disabled)
         verBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x7c7c7c), for: .disabled)
-
+        
         let nomalColor : UIColor = kRGBColorFromHex(rgbValue: 0x2282ff)
         verBtn.setBackgroundImage(kCreateImageWithColor(color: nomalColor ), for: .normal)
         verBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0xffffff), for: .normal)
-        verBtn.addTarget(self, action: #selector(LoginController.getVerificaCode), for: .touchUpInside)
-
+        verBtn.addTarget(self, action: #selector(getVerificaCode), for: .touchUpInside)
+        
         duiBtn.setImage(UIImage(named : "weixuanzhong"), for: .normal)
         duiBtn.setImage(UIImage(named : "selected"), for: .selected)
-        duiBtn.addTarget(self, action: #selector(LoginController.duiBtnClick(btn:)), for: .touchUpInside)
+        duiBtn.addTarget(self, action: #selector(duiBtnClick(btn:)), for: .touchUpInside)
         
         let loginDisColor = kRGBColorFromHex(rgbValue: 0xe3e3e3)
         loginBtn.setBackgroundImage(kCreateImageWithColor(color: loginDisColor), for: .disabled)
@@ -97,13 +91,13 @@ extension LoginController{
         loginBtn.setBackgroundImage(kCreateImageWithColor(color: loginAbleColor), for: .normal)
         loginBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0xffffff), for: .normal)
         
-        usernameTF.addTarget(self, action: #selector(LoginController.phoneNumChange(tf:)), for: .editingChanged)
-        passwordTF.addTarget(self, action: #selector(LoginController.vertCodeChange(tf:)), for: .editingChanged)
+        usernameTF.addTarget(self, action: #selector(phoneNumChange(tf:)), for: .editingChanged)
+        passwordTF.addTarget(self, action: #selector(vertCodeChange(tf:)), for: .editingChanged)
         
         verBtn.isEnabled = false
         loginBtn.isEnabled = false
         duiBtn.isSelected = true
-
+        
         loginTipLabel.textColor = kRGBColorFromHex(rgbValue: 0x878787)
         let serviceTap = UITapGestureRecognizer(target: self, action: #selector(LoginController.serviceClick))
         serviceLabel.isUserInteractionEnabled = true
@@ -111,7 +105,6 @@ extension LoginController{
         serviceLabel.addGestureRecognizer(serviceTap)
         iconImgView.kf.setImage(with:URL(string : UserInfo.getUserImageStr() ?? ""), placeholder: UIImage(named : "user1"), options: nil, progressBlock: nil)
     }
-    
 }
 
 //MARK:- 事件处理
@@ -130,30 +123,30 @@ extension LoginController{
         self.verBtn.isEnabled = false
         self.usernameTF.isEnabled = false
         
-        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(LoginController.timeFireMethod), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeFireMethod), userInfo: nil, repeats: true)
         
-}
+    }
     
     @objc fileprivate func timeFireMethod(){
-            // 每秒计时一次
-            self.timeCount = (self.timeCount) - 1
-            
-            self.verBtn.setTitle("\(String(self.timeCount))秒", for: .normal)
-            // 时间到了取消时间源
-            if self.timeCount <= 0 {
-                self.timer?.invalidate()
-                self.timeCount = 60
-                self.verBtn.isEnabled = true
-                self.usernameTF.isEnabled = true
-                self.verBtn.setTitle("发送", for: .normal)
-            }
+        // 每秒计时一次
+        self.timeCount = (self.timeCount) - 1
+        
+        self.verBtn.setTitle("\(String(self.timeCount))秒", for: .normal)
+        // 时间到了取消时间源
+        if self.timeCount <= 0 {
+            self.timer?.invalidate()
+            self.timeCount = 60
+            self.verBtn.isEnabled = true
+            self.usernameTF.isEnabled = true
+            self.verBtn.setTitle("发送", for: .normal)
+        }
     }
     
     @objc fileprivate func duiBtnClick(btn : UIButton){
         
         btn.isSelected = !(btn.isSelected)
     }
-  
+    
     //输入框改变
     @objc fileprivate func phoneNumChange(tf : UITextField){
         if tf.text?.count == 11{
@@ -166,39 +159,40 @@ extension LoginController{
     }
     
     @objc fileprivate func vertCodeChange(tf : UITextField){
-        if usernameTF.text?.count == 11 && (passwordTF.text?.count)! == 6{
+        if usernameTF.text?.count == 11 && passwordTF.text?.count == 6{
             loginBtn.isEnabled = true
         }else{
             loginBtn.isEnabled = false
         }
     }
     
-
+    
     @IBAction func LoginButtonLicked(_ sender: AnyObject) {
         
         if duiBtn.isSelected {
             self.gotoMainPage()
-//            loginTask(usernameTF.text!, passwordTF.text!)
+            if let num = usernameTF.text,let code =  passwordTF.text{
+                loginTask(num, code)
+            }else{
+                SVProgressHUD.showError(withStatus: "请填写手机号或验证码")
+            }
         }else{
             SVProgressHUD.showError(withStatus: "请您勾选用户协议")
         }
     }
     
-    
     ///检查更新
-    func  checkUpgrade()
-    {
+    func  checkUpgrade(){
         
     }
     
     ///跳转手势密码
-//    func gotoGesturePassWordVC(){
-//        navigationController?.pushViewController(GesturePasswordController(), animated: true)
-//    }
+    //    func gotoGesturePassWordVC(){
+    //        navigationController?.pushViewController(GesturePasswordController(), animated: true)
+    //    }
     
     ///跳转主页
-    func gotoMainPage()
-    {
+    func gotoMainPage(){
         let homeVC = HomeViewController()
         homeVC.isFirst = true
         let homeNav = LockNavigationController(rootViewController: homeVC)
@@ -206,12 +200,10 @@ extension LoginController{
     }
     
     ///跳转没有权限的用户界面
-//    func gotoNopermissUserHomeVC(){
-//        let noperNav = LockNavigationController(rootViewController: NoPermissionController())
-//        UIApplication.shared.keyWindow?.rootViewController = noperNav
-//    }
-    
-
+    //    func gotoNopermissUserHomeVC(){
+    //        let noperNav = LockNavigationController(rootViewController: NoPermissionController())
+    //        UIApplication.shared.keyWindow?.rootViewController = noperNav
+    //    }
 }
 
 //MARK:- HTTP
@@ -227,7 +219,6 @@ extension LoginController{
         weak var weakSelf = self
         AjaxUtil<LoginResp>.actionPostAndProgress(req: req){
             (resp) in
-            
             UserInfo.saveSessionId(sessionID: (resp.data?.SessionId)!)
             UserInfo.saveUserId(userID: (resp.data?.UserId)!)
             weakSelf?.isreq = (resp.data?.isreg)!
@@ -237,18 +228,16 @@ extension LoginController{
     
     // MARK:- 获取验证码
     fileprivate func getVertCodeTask(_ userTel: String){
-        
         let req =  BaseReq<VerificatiReq>()
         req.action = GateLockActions.ACTION_SmsCode
         req.data = VerificatiReq(userTel)
         
         AjaxUtil<VerificatiResp>.actionPost(req: req){
             (resp) in
-//            SVProgressHUD.setDefaultMaskType(.none)
-//            SVProgressHUD.showSuccess(withStatus: resp.msg)
+            SVProgressHUD.setDefaultMaskType(.none)
+            SVProgressHUD.showSuccess(withStatus: resp.msg)
         }
     }
-
     
     func getUserInfo(_ sessionId : String,member : String){
         let req =  BaseReq<UserInfoReq>()
@@ -264,7 +253,7 @@ extension LoginController{
             UserInfo.savePhoneNumber(member: member)
             UserInfo.saveUserImageStr(imgStr: (resp.data?.userImage)!)
             
-//            UserDefaults.standard.set(resp.data?.userName, forKey: UserInfo.userName)
+            //            UserDefaults.standard.set(resp.data?.userName, forKey: UserInfo.userName)
             //判断是否是第一次登录,若是进入主页,不是判断
             if weakSelf?.isreq == 2{
                 if QPCKeychainTool.existNumberPassword(){
@@ -276,16 +265,14 @@ extension LoginController{
             }else{
                 weakSelf?.gotoMainPage()
             }
-//            else if GesturePasswordModel.existGesturePassword(){
-//                weakSelf?.gotoGesturePassWordVC()
-//            }
+            //            else if GesturePasswordModel.existGesturePassword(){
+            //                weakSelf?.gotoGesturePassWordVC()
+            //            }
         }
-        
     }
     
     //获取用户锁列表
     func getUserLockList(_ userID: Int){
-        
         let req =  CommonReq()
         req.action = GateLockActions.ACTION_GetLockList
         req.sessionId = UserInfo.getSessionId()!
@@ -302,8 +289,5 @@ extension LoginController{
                 self.gotoMainPage()
             }
         }
-
     }
-
-    
 }

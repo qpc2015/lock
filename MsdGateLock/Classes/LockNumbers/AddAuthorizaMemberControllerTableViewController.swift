@@ -46,15 +46,10 @@ class AddAuthorizaMemberController: UITableViewController {
             tableView?.layoutMargins = UIEdgeInsets.zero
         }
     }
-
-}
-
-//MARK:- UI
-extension AddAuthorizaMemberController{
     
     func setupUI(){
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(AddAuthorizaMemberController.okClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(okClick))
         
         addlistBtn.backgroundColor = kTextBlueColor
         isPerpetualSwitch.onTintColor = kTextBlueColor
@@ -72,12 +67,10 @@ extension AddAuthorizaMemberController{
         endTip.textColor = kTextBlockColor
         
         tableView.bounces = false
-        addlistBtn.addTarget(self, action: #selector(AddAuthorizaMemberController.seletedAdressList), for: .touchUpInside)
-        isPerpetualSwitch.addTarget(self, action: #selector(AddAuthorizaMemberController.seletedTimeClick(perpSwitch:)), for: .valueChanged)
+        addlistBtn.addTarget(self, action: #selector(seletedAdressList), for: .touchUpInside)
+        isPerpetualSwitch.addTarget(self, action: #selector(seletedTimeClick(perpSwitch:)), for: .valueChanged)
     }
 }
-
-
 
 //MARK:- 响应事件
 extension AddAuthorizaMemberController:CNContactPickerDelegate{
@@ -87,9 +80,7 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
     }
     
     func seletedTimeClick(str : String){
-        
         weak var weakSelf = self
-        
         let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { (selectDate) in
             let dateStr = selectDate?.string_from(formatter: "yyyy-MM-dd HH:mm")
             QPCLog("选择的日期:\(String(describing: dateStr))")
@@ -105,7 +96,6 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
         datepicker?.show()
     }
     
-    
     @objc func seletedTimeClick(perpSwitch : UISwitch){
         if perpSwitch.isOn {
             oneSectionCount = 1
@@ -114,9 +104,7 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
             oneSectionCount = 3
             self.tableView.reloadData()
         }
-        
     }
-    
     
     @objc func okClick(){
         QPCLog("点击了确认")
@@ -176,7 +164,6 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
             weakSelf?.navigationController?.popViewController(animated: true)
         }
     }
-    
     
     @objc func seletedAdressList(){
 

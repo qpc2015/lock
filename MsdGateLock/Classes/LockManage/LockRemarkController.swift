@@ -10,7 +10,7 @@ import UIKit
 
 class LockRemarkController: UIViewController {
 
-    var cureentLockId : String!
+    var cureentLockId : String?
     var remarkTF : UITextField!
     var oldValue : String!
     var isTemp : Bool = false  //判断是否来自临时用户
@@ -70,13 +70,13 @@ extension LockRemarkController{
     
     @objc func finishedClick(){
         
-        if (self.remarkTF.text?.count)! > 0 {
+        if  let remark = self.remarkTF.text,remark.count > 0{
             if isTemp{//临时用户修改信息
                 let req = BaseReq<TwoParam<String,String>>()
                 req.action = GateLockActions.ACTION_UpdateLockRemark
                 req.sessionId = UserInfo.getSessionId()!
                 req.sign = LockTools.getSignWithStr(str: "oxo")
-                req.data = TwoParam.init(p1: cureentLockId, p2: remarkTF.text!)
+                req.data = TwoParam.init(p1: cureentLockId ?? "", p2: remark)
                 weak var weakSelf = self
                 AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
                     SVProgressHUD.showSuccess(withStatus: resp.msg)
@@ -85,9 +85,9 @@ extension LockRemarkController{
             }else{
                 let req = BaseReq<UpdateLockNickReq>()
                 req.action = GateLockActions.ACTION_UpdateLock
-                req.sessionId = UserInfo.getSessionId()!
+                req.sessionId = UserInfo.getSessionId() ?? ""
                 req.sign = LockTools.getSignWithStr(str: "oxo")
-                req.data = UpdateLockNickReq.init(cureentLockId, remark: remarkTF.text!)
+                req.data = UpdateLockNickReq.init(cureentLockId ?? "", remark: remark)
                 
                 weak var weakSelf = self
                 AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
@@ -95,6 +95,8 @@ extension LockRemarkController{
                     weakSelf?.navigationController?.popViewController(animated: true)
                 }
             }
+        }else{
+            SVProgressHUD.showError(withStatus: "备注内容为空")
         }
     }
     

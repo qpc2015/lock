@@ -57,9 +57,9 @@ class GateLockActions
     static let  ACTION_UserKeyContent = "msd.lock.userKeyContent" //上传加密秘钥
     
     //h5
-    static let  H5_Abount = "http://lockres.diadiade.com/about.html" //关于我们
+    static let  H5_Abount = "https://www.jianshu.com/u/ead54af3990a" //关于我们
     static let  H5_Message = "http://lockres.diadiade.com/message.html" //消息通知
-    static let  H5_Instructions = "http://lockres.diadiade.com/instructions.html" //问题反馈
+    static let  H5_Instructions = "https://github.com/qpc2015" //问题反馈
     static let  H5_Agreement = "http://lock.diadiade.com/msd.lock.getAgreeMent" //用户协议
     static let  H5_FeedBack = "http://lockres.diadiade.com/feedback.html" //使用说明
 }

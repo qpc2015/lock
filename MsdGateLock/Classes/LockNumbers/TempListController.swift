@@ -13,7 +13,7 @@ class TempListController: UIViewController {
     var totalTempLabel : UILabel!
     var tableView : UITableView!
     var isOwner : Bool!
-    var lockModel : UserLockListResp! //锁信息
+    var lockModel : UserLockListResp? //锁信息
     var userInfoArr : [AuthInfoListResp]?
     var count : Int = 0
 
@@ -29,24 +29,6 @@ class TempListController: UIViewController {
         
         getTempListData()
     }
-    
-    //cell线
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        if (self.tableView?.responds(to: #selector(setter: UITableViewCell.separatorInset)))!{ 
-//            tableView?.separatorInset = UIEdgeInsets.zero
-//        }
-//        
-//        if (tableView?.responds(to: #selector(setter: UIView.layoutMargins)))!{
-//            tableView?.layoutMargins = UIEdgeInsets.zero
-//        }
-//    }
-
-}
-
-
-
-extension TempListController{
     
     func setupUI(){
         
@@ -92,14 +74,8 @@ extension TempListController{
                 make.height.equalTo(50)
             }
         }
-
     }
 
-}
-
-extension TempListController{
-    
-    
     @objc func addTemporaryNumbersClick(_ btn: UIButton) {
         
         let addTemporaryVC = UIStoryboard(name: "AddTemporaryController", bundle: nil).instantiateViewController(withIdentifier: "AddTemporaryController") as! AddTemporaryController
@@ -113,18 +89,14 @@ extension TempListController{
         tempVC.userModel = userInfoArr?[index]
         tempVC.lockModel = lockModel
         navigationController?.pushViewController(tempVC, animated: true)
-        
     }
-}
-
-extension TempListController{
     
     func getTempListData(){
         let req = BaseReq<AuthInfoListReq>()
         req.action = GateLockActions.ACTION_UserRoleInfo
         req.sign = LockTools.getSignWithStr(str: "oxo")
-        req.sessionId = UserInfo.getSessionId()!
-        req.data = AuthInfoListReq(UserInfo.getUserId()!, lockId: lockModel.lockId!, roleType: 2)
+        req.sessionId = UserInfo.getSessionId() ?? ""
+        req.data = AuthInfoListReq(UserInfo.getUserId() ?? 0, lockId: lockModel?.lockId ?? "", roleType: 2)
         
         weak var weakSelf = self
         AjaxUtil<AuthInfoListResp>.actionArrPost(req: req) { (resp) in
@@ -135,7 +107,6 @@ extension TempListController{
         }
     }
 }
-
 
 extension TempListController: UITableViewDelegate,UITableViewDataSource{
     

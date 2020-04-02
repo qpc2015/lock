@@ -16,7 +16,7 @@ class UserInfo{
     static let userImage = "userImage"
     static let userName = "userName"
     static let lastLockId = "lastLockId"
-    static let OpenFinger = UserInfo.getPhoneNumber()! + "OpenFinger"   //开启指纹
+    static let OpenFinger = UserInfo.getPhoneNumber() ?? "" + "OpenFinger"   //开启指纹
 //    static let roleType = "roleType"//用户类型
     
     static func removeUserInfo(){

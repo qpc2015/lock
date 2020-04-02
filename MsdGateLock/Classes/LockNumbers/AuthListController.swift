@@ -14,7 +14,7 @@ class AuthListController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var line: UIView!
     
-    var lockModel : UserLockListResp!   //对应锁信息
+    var lockModel : UserLockListResp?   //对应锁信息
     var userInfoArr : [AuthInfoListResp]?
 
     
@@ -27,7 +27,6 @@ class AuthListController: UIViewController {
         super.viewWillAppear(animated)
         getAuthListData() 
     }
-    
 }
 
 
@@ -86,7 +85,7 @@ extension AuthListController{
             addAuthNumberBtn.backgroundColor = kTextBlueColor
             addAuthNumberBtn.layer.cornerRadius = 4.0
             addAuthNumberBtn.layer.masksToBounds = true
-            addAuthNumberBtn.addTarget(self, action: #selector(AuthListController.addAuthorizaNumbersClick(_:)), for: .touchUpInside)
+            addAuthNumberBtn.addTarget(self, action: #selector(addAuthorizaNumbersClick(_:)), for: .touchUpInside)
             view.addSubview(addAuthNumberBtn)
             addAuthNumberBtn.snp.makeConstraints { (make) in
                 make.centerX.equalTo(view)
@@ -95,10 +94,8 @@ extension AuthListController{
                 make.height.equalTo(50)
             }
         }
-
     }
 }
-
 
 extension AuthListController{
     
@@ -106,8 +103,8 @@ extension AuthListController{
         let req = BaseReq<AuthInfoListReq>()
         req.action = GateLockActions.ACTION_UserRoleInfo
         req.sign = LockTools.getSignWithStr(str: "oxo")
-        req.sessionId = UserInfo.getSessionId()!
-        req.data = AuthInfoListReq(UserInfo.getUserId()!, lockId: lockModel.lockId!, roleType: 1)
+        req.sessionId = UserInfo.getSessionId() ?? ""
+        req.data = AuthInfoListReq(UserInfo.getUserId() ?? 0, lockId: lockModel?.lockId ?? "", roleType: 1)
         
         weak var weakSelf = self
         AjaxUtil<AuthInfoListResp>.actionArrPost(req: req) { (resp) in

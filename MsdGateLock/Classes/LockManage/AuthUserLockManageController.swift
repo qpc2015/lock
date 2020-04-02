@@ -62,8 +62,8 @@ extension AuthUserLockManageController{
     func getLockInfo(){
         let req =  BaseReq<LockSetInfoReq>()
         req.action = GateLockActions.ACTION_GetLockInfo
-        req.sessionId = UserInfo.getSessionId()!
-        req.data = LockSetInfoReq(currentLockID!)
+        req.sessionId = UserInfo.getSessionId() ?? ""
+        req.data = LockSetInfoReq(currentLockID ?? "")
         
         weak var weakSelf = self
         AjaxUtil<LockSetInfoResp>.actionPost(req: req, backJSON: { (resp) in

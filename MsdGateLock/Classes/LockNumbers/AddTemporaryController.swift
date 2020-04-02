@@ -1,5 +1,5 @@
 //
-//  AddTemporaryController.swift
+//  swift
 //  MsdGateLock
 //
 //  Created by ox o on 2017/6/26.
@@ -41,7 +41,7 @@ class AddTemporaryController: UITableViewController {
 extension AddTemporaryController{
     
     func setupUI(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(AddTemporaryController.okClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(okClick))
         
         addListBtn.backgroundColor = kTextBlueColor
         
@@ -55,7 +55,7 @@ extension AddTemporaryController{
         starTip.textColor = kTextBlockColor
         endTip.textColor = kTextBlockColor
         
-        addListBtn.addTarget(self, action: #selector(AddTemporaryController.seletedAdressList), for: .touchUpInside)
+        addListBtn.addTarget(self, action: #selector(seletedAdressList), for: .touchUpInside)
     }
     
     

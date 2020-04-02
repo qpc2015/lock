@@ -18,7 +18,7 @@ class QPCKeychainTool{
     static var secKey: String = UserInfo.getPhoneNumber()! + "GesturePassword"
     
     static let deviceId = "deviceIdentifier"   //设备id  一台仅一个
-    static let numPass = UserInfo.getPhoneNumber()! + "phoneNum"    //数字密码
+    static let numPass = UserInfo.getPhoneNumber() ?? "" + "phoneNum"    //数字密码
     let QkeyChain = KeychainSwift()
     
     //开门秘钥
