@@ -109,8 +109,7 @@ extension LoginController{
         serviceLabel.isUserInteractionEnabled = true
         serviceLabel.textColor = kTextBlueColor
         serviceLabel.addGestureRecognizer(serviceTap)
-        
-        iconImgView.kf.setImage(with: URL(string : UserInfo.getUserImageStr() ?? ""), placeholder: UIImage(named : "user1"), options: nil, progressBlock: nil, completionHandler: nil)
+        iconImgView.kf.setImage(with:URL(string : UserInfo.getUserImageStr() ?? ""), placeholder: UIImage(named : "user1"), options: nil, progressBlock: nil)
     }
     
 }

@@ -17,7 +17,7 @@ class NoPerAdCell: UITableViewCell {
 
     var model : ExplainModel? {
         didSet{
-            adImageView.kf.setImage(with: URL(string: (model?.imageUrl)!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+            adImageView.kf.setImage(with: URL(string: (model?.imageUrl)!), placeholder: nil, options: nil, progressBlock: nil)
             detailContextLabel.text = model?.context
         }
     }

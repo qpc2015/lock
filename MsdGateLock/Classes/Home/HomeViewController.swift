@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
     var tempBottomView : UIView?//临时用户底部视图
     @IBOutlet weak var lockUserBottomView: UIView!//开锁底部
     @IBOutlet weak var homeCenterView: UIView!
-    var reachability: Reachability
+    var reachability: Reachability!
     var blueManager : BleManager!
     var dataManager = QPCDataManager.shareManager
     var userWithZstr : String!

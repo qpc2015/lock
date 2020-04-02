@@ -23,7 +23,7 @@ class ChangeNumberCodeController:  UIViewController,AVCaptureMetadataOutputObjec
     var dataManager = QPCDataManager.shareManager
     var isFactorySetting : Bool = false
     var lockModel : UserLockListResp!
-    var reachability: Reachability
+    var reachability: Reachability!
     
     override func viewDidLoad() {
         super.viewDidLoad()

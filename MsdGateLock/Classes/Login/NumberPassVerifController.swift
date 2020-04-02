@@ -66,7 +66,7 @@ extension NumberPassVerifController : NumberVerificationCodeViewDelegate{
         verifictCodeView.delegate = self
         view.addSubview(verifictCodeView)
         
-        iconImgView.kf.setImage(with: URL(string : UserInfo.getUserImageStr() ?? ""), placeholder: UIImage(named : "user1"), options: nil, progressBlock: nil, completionHandler: nil)
+        iconImgView.kf.setImage(with: URL(string : UserInfo.getUserImageStr() ?? ""), placeholder: UIImage(named : "user1"), options: nil, progressBlock: nil)
         
         memberLabel.text = UserInfo.getPhoneNumber()
     }

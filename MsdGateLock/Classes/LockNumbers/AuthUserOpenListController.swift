@@ -260,7 +260,7 @@ extension AuthUserOpenListController{
                 }
                 weakSelf?.tableView.reloadData()
                 
-                self.tableView.mj_footer.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
             })
             
             

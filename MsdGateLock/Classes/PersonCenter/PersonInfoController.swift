@@ -45,7 +45,7 @@ class PersonInfoController: UITableViewController {
         numberLabel.textColor = kTextGrayColor
     
         let imgUrl = URL(string: model?.userImage ?? "")
-        iconImageView.kf.setImage(with: imgUrl, placeholder: UIImage(named : "user1") , options: nil, progressBlock: nil, completionHandler: nil)
+        iconImageView.kf.setImage(with: imgUrl, placeholder: UIImage(named : "user1") , options: nil, progressBlock: nil)
         nameLabel.text = model?.userName
         numberLabel.text = model?.userTel
     }
@@ -90,26 +90,46 @@ extension PersonInfoController:UIImagePickerControllerDelegate,UINavigationContr
         {
             return
         }
-        weak var weakSelf = self
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//        weak var weakSelf = self
+        AF.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(token.data(using: String.Encoding.utf8)!, withName: "token")
             multipartFormData.append(id.data(using: String.Encoding.utf8)!, withName: "item_id")
             multipartFormData.append(self.fileURL!, withName: "f1")
-        }, to: uploadUrl, encodingCompletion: { (encodingResult) in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseString{
-                    response in
-                    QPCLog(response)
-                    let relult = response.result.value
-                    QPCLog(relult)
-                    weakSelf?.updateUserAvatar(imageUrl: relult!)
+        }, to: uploadUrl).responseJSON(completionHandler: {
+            data in
+            print("upload finished: \(data)")
+            }).response(completionHandler: {
+                (encodingResult) in
+                switch encodingResult.result {
+                case .success(let dataObj):
+                    print("upload success result: \(dataObj)")
+//                    upload.responseString{
+//                        response in
+//                        QPCLog(response)
+//                        let relult = response.result.value
+//                        QPCLog(relult)
+//                        weakSelf?.updateUserAvatar(imageUrl: relult!)
+//                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                    print("请求失败")
                 }
-            case .failure(let encodingError):
-                print(encodingError)
-                print("请求失败")
-            }
-        })
+            })
+//        AF.upload(multipartFormData: , to: uploadUrl, encodingCompletion: { (encodingResult) in
+//            switch encodingResult {
+//            case .success(let upload, _, _):
+//                upload.responseString{
+//                    response in
+//                    QPCLog(response)
+//                    let relult = response.result.value
+//                    QPCLog(relult)
+//                    weakSelf?.updateUserAvatar(imageUrl: relult!)
+//                }
+//            case .failure(let encodingError):
+//                print(encodingError)
+//                print("请求失败")
+//            }
+//        })
     }
     
     //用户头像更新
@@ -219,40 +239,40 @@ extension PersonInfoController: SetNickNameControllerDelegate{
 //        let parameters = [
 //            "access_token": UserInstance.accessToken
 //        ]
-           let uploadIImageURLString = "上传路径"
-            //图片压缩，转nsdata类型 UIImageJPEGRepresentation(image, 0.3)
-            let imageData = image.jpegData(compressionQuality: 0.3)
-//            //获取当前时间格式化成String类型
-//            let date: Date = Date()
-//            let formatter : DateFormatter = DateFormatter()
-//            formatter.dateFormat = "yyyyMMddHHmmss"
-//            let dateString = formatter.string(from: date)
-//            let fileName = dateString + ".jpg"
-
-        
-    upload(multipartFormData: { multipartFormData in
-        if imageData != nil {
-        multipartFormData.append(imageData!, withName: "attach", fileName: "file", mimeType: "image/jpeg")
-        }
-//    for (key, value) in parameters {
-//    multipartFormData.append(value!.data(using: String.Encoding.utf8)!, withName: key)
-//    }
-    },to: uploadIImageURLString,encodingCompletion: { result in
-    switch result {
-    case .success(let upload, _, _):
-        upload.responseJSON { response in
-            switch response.result {
-            case .success(let data):
-                let model = Mapper<BaseResp<UploadImageModel>>().map(JSONObject:data)!
-                QPCLog(model)
-//              success(model)
-            case .failure(_):
-                failure(())
-            }
-       }
-    case .failure(let encodingError):
-          QPCLog(encodingError)
-        }
-      })
+//           let uploadIImageURLString = "上传路径"
+//            //图片压缩，转nsdata类型 UIImageJPEGRepresentation(image, 0.3)
+//            let imageData = image.jpegData(compressionQuality: 0.3)
+////            //获取当前时间格式化成String类型
+////            let date: Date = Date()
+////            let formatter : DateFormatter = DateFormatter()
+////            formatter.dateFormat = "yyyyMMddHHmmss"
+////            let dateString = formatter.string(from: date)
+////            let fileName = dateString + ".jpg"
+//
+//        
+//        AF.upload(multipartFormData: { multipartFormData in
+//        if imageData != nil {
+//        multipartFormData.append(imageData!, withName: "attach", fileName: "file", mimeType: "image/jpeg")
+//        }
+////    for (key, value) in parameters {
+////    multipartFormData.append(value!.data(using: String.Encoding.utf8)!, withName: key)
+////    }
+//    },to: uploadIImageURLString,encodingCompletion: { result in
+//    switch result {
+//    case .success(let upload, _, _):
+//        upload.responseJSON { response in
+//            switch response.result {
+//            case .success(let data):
+//                let model = Mapper<BaseResp<UploadImageModel>>().map(JSONObject:data)!
+//                QPCLog(model)
+////              success(model)
+//            case .failure(_):
+//                failure(())
+//            }
+//       }
+//    case .failure(let encodingError):
+//          QPCLog(encodingError)
+//        }
+//      })
     }
 }

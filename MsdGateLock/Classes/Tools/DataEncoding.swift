@@ -52,7 +52,7 @@ extension String  {
             
             // 用AES的方式將Data加密
             
-            let aecEnc: AES = try AES(key: key.bytes, blockMode: .ECB)
+            let aecEnc: AES = try AES(key: key.bytes, blockMode: ECB())
             let enc = try aecEnc.encrypt(data.bytes)
             
             // 用UTF8的編碼方式將解完密的Data轉回字串
@@ -82,7 +82,7 @@ extension String  {
             
             // 用AES方式將Data解密
             
-            let aesDec: AES = try AES(key: key.bytes,blockMode: .ECB)
+            let aesDec: AES = try AES(key: key.bytes,blockMode: ECB())
             let dec = try aesDec.decrypt(data.bytes)
             
             // 用UTF8的編碼方式將解完密的Data轉回字串
@@ -105,7 +105,7 @@ extension String  {
     /// - returns: Data represented by this hexadecimal string.
     
     func hexadecimal() -> Data? {
-        var data = Data(capacity: characters.count / 2)
+        var data = Data(capacity: self.count / 2)
         
         let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
         regex.enumerateMatches(in: self, range: NSMakeRange(0, utf16.count)) { match, flags, stop in

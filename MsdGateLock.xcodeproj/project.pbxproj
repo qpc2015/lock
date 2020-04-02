@@ -298,7 +298,6 @@
 		D4382A281F2897DD00561FB0 /* GesturePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordController.swift; sourceTree = "<group>"; };
 		D447BB671F238455009C0895 /* CheckLockIdModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckLockIdModel.swift; sourceTree = "<group>"; };
 		D447BB6A1F24BCDA009C0895 /* AuthInfoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthInfoList.swift; sourceTree = "<group>"; };
-		D44D50E81EE8F71A004243FD /* ocHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ocHeader.h; path = ../ocHeader.h; sourceTree = "<group>"; };
 		D44D50F11EE94A37004243FD /* BaseReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseReq.swift; sourceTree = "<group>"; };
 		D44D50F21EE94A37004243FD /* BaseResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResp.swift; sourceTree = "<group>"; };
 		D44D50F31EE94A37004243FD /* MsdGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsdGlobals.swift; sourceTree = "<group>"; };
@@ -456,7 +455,6 @@
 				002E0B671ED57E3A001D209F /* Products */,
 				73F275B6B9709E4D67479ECA /* Pods */,
 				AE4F01309E0FE0B0904261A4 /* Frameworks */,
-				0052F6011ED6BB6D0035F569 /* MsdGateLock-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -479,6 +477,7 @@
 				002E0B761ED57E3A001D209F /* LaunchScreen.storyboard */,
 				D4B9CE4F1F7A69BE00861329 /* Localizable.strings */,
 				002E0B791ED57E3A001D209F /* Info.plist */,
+				0052F6011ED6BB6D0035F569 /* MsdGateLock-Bridging-Header.h */,
 			);
 			path = MsdGateLock;
 			sourceTree = "<group>";
@@ -960,7 +959,6 @@
 		DB4E6A791EE6BD700003A460 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D44D50E81EE8F71A004243FD /* ocHeader.h */,
 				D44FB0801EEF9A4700358CDC /* Const.swift */,
 			);
 			path = Common;
@@ -1572,7 +1570,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qinpengcheng.lock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MsdGateLock/Classes/ocHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MsdGateLock/MsdGateLock-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
@@ -1597,7 +1595,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qinpengcheng.lock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MsdGateLock/Classes/ocHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MsdGateLock/MsdGateLock-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
@@ -1613,7 +1611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = msd.gatelock.MsdGateLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = "";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MsdGateLock.app/MsdGateLock";
 			};
 			name = Debug;
@@ -1628,7 +1626,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = msd.gatelock.MsdGateLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = "";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MsdGateLock.app/MsdGateLock";
 			};
 			name = Release;
@@ -1642,7 +1640,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = msd.gatelock.MsdGateLockUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = "";
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = MsdGateLock;
 			};
 			name = Debug;
@@ -1656,7 +1654,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = msd.gatelock.MsdGateLockUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = "";
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = MsdGateLock;
 			};
 			name = Release;

@@ -61,26 +61,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 }
 
 //MARK:- 第三方初始化
-extension AppDelegate{
-    
+extension AppDelegate: JPUSHRegisterDelegate{
     
     func setupJpush(launchOptions: [UIApplication.LaunchOptionsKey : Any]?){
-        if #available(iOS 10.0, *){
-            let entiity = JPUSHRegisterEntity()
-            entiity.types = Int(UNAuthorizationOptions.alert.rawValue |
-                UNAuthorizationOptions.badge.rawValue |
-                UNAuthorizationOptions.sound.rawValue)
-            JPUSHService.register(forRemoteNotificationConfig: entiity, delegate: self)
-        }else {
-            let type = UIRemoteNotificationType.badge.rawValue |
-                UIRemoteNotificationType.sound.rawValue |
-                UIRemoteNotificationType.alert.rawValue
-            JPUSHService.register(forRemoteNotificationTypes: type, categories: nil)
-        }
-        
+        let entity = JPUSHRegisterEntity()
+        entity.types = 1 << 0 | 1 << 1 | 1 << 2
+        //通知类型（这里将声音、消息、提醒角标都给加上）
+        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
         JPUSHService.setup(withOption: launchOptions,
-                           appKey: "99b340b9a890a31180407e0b",
-                           channel: "app store",
+                           appKey:"492bea3f208d2805ecb58159",
+                           channel:"app store",
                            apsForProduction: false)
     }
     
@@ -97,12 +87,15 @@ extension AppDelegate{
         JPUSHService.handleRemoteNotification(userInfo)
     }
     
-}
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, openSettingsFor notification: UNNotification!) {
 
-
-extension AppDelegate : JPUSHRegisterDelegate{
+    }
+    
+    func jpushNotificationAuthorization(_ status: JPAuthorizationStatus, withInfo info: [AnyHashable : Any]!) {
+        
+    }
+    
     //处于前台是接收到通知
-    @available(iOS 10.0, *)
     func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
         print(">JPUSHRegisterDelegate jpushNotificationCenter willPresent");
         let userInfo = notification.request.content.userInfo
@@ -114,7 +107,6 @@ extension AppDelegate : JPUSHRegisterDelegate{
         completionHandler(Int(UNAuthorizationOptions.alert.rawValue))// 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
     }
     //点击处理事件
-    @available(iOS 10.0, *)
     func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
         print(">JPUSHRegisterDelegate jpushNotificationCenter didReceive");
         //需要处理
@@ -126,7 +118,6 @@ extension AppDelegate : JPUSHRegisterDelegate{
         completionHandler()
     }
     
-    
     func extrasOfNotificationWithUserinfo(userInfo: [AnyHashable : Any]){
         QPCLog(userInfo)
         let webVC = LockWebViewContrller()
@@ -134,7 +125,7 @@ extension AppDelegate : JPUSHRegisterDelegate{
         let navVC = self.window?.rootViewController as? LockNavigationController
         navVC?.pushViewController(webVC, animated: true)
     }
-
+    
 }
 
 

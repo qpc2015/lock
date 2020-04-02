@@ -79,7 +79,7 @@ extension LockInfoController{
             SVProgressHUD.showSuccess(withStatus: resp.msg)
             
             //切换权限用户界面
-            let homeNav = LockNavigationController(rootViewController: HomeViewController())
+            ;            let homeNav = LockNavigationController(rootViewController: HomeViewController())
             UIApplication.shared.keyWindow?.rootViewController = homeNav
         }
     }

@@ -162,7 +162,7 @@ extension PersonTableController{
             (resp) in
             QPCLog(resp)
             let imageUrl  = URL(string: (resp.data?.userImage) ?? "")
-            weakSelf!.iconImgView.kf.setImage(with: imageUrl, placeholder: UIImage(named : "user2"), options: nil, progressBlock: nil, completionHandler: nil)
+            weakSelf!.iconImgView.kf.setImage(with: imageUrl, placeholder: UIImage(named : "user2"), options: nil, progressBlock: nil)
             weakSelf!.nickName.text = resp.data?.userName
             weakSelf!.phoneLabel.text = resp.data?.userTel
             
