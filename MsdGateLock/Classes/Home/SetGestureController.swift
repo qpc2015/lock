@@ -22,7 +22,7 @@
 //        super.viewDidLoad()
 //
 //        self.title = "设置手势密码"
-//        self.view.backgroundColor = kGlobalBackColor
+//        self.view.backgroundColor = UIColor.globalBackColor
 //        setupUI()
 //    }
 //
@@ -33,7 +33,7 @@
 ////        tipLabel.textAlignment = .center
 ////        tipLabel.font = kGlobalTextFont
 ////        tipLabel.text = "请连接至少5个点"
-////        tipLabel.textColor = kTextBlueColor
+////        tipLabel.textColor = UIColor.textBlueColor
 ////        self.view.addSubview(tipLabel)
 //        
 //        // 进来先清空存的密码

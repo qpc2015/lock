@@ -56,7 +56,7 @@ class LmyPicker: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         cancelBtn.frame = CGRect(x: 0, y:  0, width: 60, height: 44)
         cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         cancelBtn.setTitle("取 消", for: UIControl.State.normal)
-        cancelBtn.setTitleColor(kTextBlockColor, for: UIControl.State.normal)
+        cancelBtn.setTitleColor(UIColor.textBlackColor, for: UIControl.State.normal)
         cancelBtn.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
         self.addSubview(cancelBtn)
         
@@ -64,7 +64,7 @@ class LmyPicker: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         doneBtn.frame = CGRect(x: UIScreen.width - 60, y: 0, width: 60, height: 44)
         doneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         doneBtn.setTitle("确 定", for: UIControl.State.normal)
-        doneBtn.setTitleColor(kTextBlueColor, for: UIControl.State.normal)
+        doneBtn.setTitleColor(UIColor.textBlueColor, for: UIControl.State.normal)
         doneBtn.addTarget(self, action: #selector(doneButtonClick), for: .touchUpInside)
         self.addSubview(doneBtn)
         

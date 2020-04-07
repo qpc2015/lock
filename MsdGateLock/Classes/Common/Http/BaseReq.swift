@@ -11,7 +11,6 @@ import ObjectMapper
 
 typealias CommonReq = BaseReq<EmptyParam>
 
-
 class BaseReq<T :Mappable> :Mappable
 {
     init(){}
@@ -28,7 +27,6 @@ class BaseReq<T :Mappable> :Mappable
     }
     
     func mapping(map: Map) {
-        
         id <- map["id"]
         sessionId <- map["sessionId"]
         action  <- map["action"]
@@ -36,7 +34,6 @@ class BaseReq<T :Mappable> :Mappable
         data <- map["data"]
         //  regTime <-  (map["regTime"], GameDateTransform())
     }
-
 }
 
 class BaseArrReq<T :Mappable> :Mappable

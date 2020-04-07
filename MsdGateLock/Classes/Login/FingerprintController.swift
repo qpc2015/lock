@@ -49,9 +49,9 @@ class FingerprintController: UIViewController {
 extension FingerprintController{
     
     func setupUI(){
-        self.phoneNumLabel.textColor = kTextBlockColor
-//        self.changeVeriStyleBtn.setTitleColor(kTextBlueColor, for: .normal)
-//        self.switchBtn.setTitleColor(kTextBlueColor, for: .normal)
+        self.phoneNumLabel.textColor = UIColor.textBlackColor
+//        self.changeVeriStyleBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
+//        self.switchBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
 //        
 //        changeVeriStyleBtn.addTarget(self, action: #selector(FingerprintController.changeVeriClick), for: .touchUpInside)
 //        switchBtn.addTarget(self, action: #selector(FingerprintController.switchUserClick), for: .touchUpInside)

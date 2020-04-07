@@ -15,7 +15,7 @@
 //
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
-//        self.view.backgroundColor = kGlobalBackColor
+//        self.view.backgroundColor = UIColor.globalBackColor
 //        setupUI()
 //    }
 //
@@ -47,7 +47,7 @@
 //        
 //        let numberLabel = UILabel()
 //        numberLabel.text = UserInfo.getPhoneNumber()
-//        numberLabel.textColor = kTextBlockColor
+//        numberLabel.textColor = UIColor.textBlackColor
 //        numberLabel.font = kGlobalTextFont
 //        self.view.addSubview(numberLabel)
 //        numberLabel.snp.makeConstraints { (make) in
@@ -70,7 +70,7 @@
 //        
 //        let changeVertStyleBtn = UIButton(type: .custom)
 //        changeVertStyleBtn.setTitle("更改验证方式", for: .normal)
-//        changeVertStyleBtn.setTitleColor(kTextBlueColor, for: .normal)
+//        changeVertStyleBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
 //        changeVertStyleBtn.titleLabel?.font = kGlobalTextFont
 //        changeVertStyleBtn.addTarget(self, action: #selector(GesturePasswordController.changeVertStyleBtnDidClick), for: .touchUpInside)
 //        self.view.addSubview(changeVertStyleBtn)
@@ -81,7 +81,7 @@
 //        
 //        let changeUserBtn = UIButton(type: .custom)
 //        changeUserBtn.setTitle("切换用户", for: .normal)
-//        changeUserBtn.setTitleColor(kTextBlueColor, for: .normal)
+//        changeUserBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
 //        changeUserBtn.titleLabel?.font = kGlobalTextFont
 //        changeUserBtn.addTarget(self, action: #selector(GesturePasswordController.changeUserBtnDidClick), for: .touchUpInside)
 //        self.view.addSubview(changeUserBtn)
@@ -92,7 +92,7 @@
 //        
 //        let forgetPassBtn = UIButton(type: .custom)
 //        forgetPassBtn.setTitle("忘记密码", for: .normal)
-//        forgetPassBtn.setTitleColor(kTextBlueColor, for: .normal)
+//        forgetPassBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
 //        forgetPassBtn.titleLabel?.font = kGlobalTextFont
 //        forgetPassBtn.addTarget(self, action: #selector(GesturePasswordController.forgetPassBtnDidClick), for: .touchUpInside)
 //        self.view.addSubview(forgetPassBtn)

@@ -35,8 +35,8 @@ extension MessageCell{
     
     func setupUI(){
         
-        timeLabel.textColor = kTextGrayColor
-        contantLabel.textColor = kTextBlockColor
+        timeLabel.textColor = UIColor.textGrayColor
+        contantLabel.textColor = UIColor.textBlackColor
         
         
     }

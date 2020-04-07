@@ -18,7 +18,7 @@ class ReviseRemarkController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "修改备注"
         self.remark.text = oldValue
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(ReviseRemarkController.okClick))

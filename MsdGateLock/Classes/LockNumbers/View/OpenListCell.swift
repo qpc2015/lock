@@ -27,9 +27,9 @@ class OpenListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        openStyle.textColor = kTextGrayColor
-        time.textColor = kTextGrayColor
-        nameLabel.textColor = kTextGrayColor
+        openStyle.textColor = UIColor.textGrayColor
+        time.textColor = UIColor.textGrayColor
+        nameLabel.textColor = UIColor.textGrayColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

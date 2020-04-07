@@ -33,7 +33,7 @@ class AuthIconCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        adminLabel.textColor = kRGBColorFromHex(rgbValue: 0x474747)
+        adminLabel.textColor = UIColor.hex(hexString: "474747")
         isAdminImgView.isHidden = true
         adminLabel.isHidden = true
         

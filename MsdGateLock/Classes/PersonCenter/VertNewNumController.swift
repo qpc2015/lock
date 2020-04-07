@@ -24,7 +24,7 @@ class VertNewNumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         
         self.title = "验证新手机"
         
@@ -52,7 +52,7 @@ extension VertNewNumController{
         
         
         let newLabel = UILabel()
-        newLabel.textColor = kTextBlockColor
+        newLabel.textColor = UIColor.textBlackColor
         newLabel.font = UIFont.systemFont(ofSize: 14)
         newLabel.text = "新手机"
         lineView.addSubview(newLabel)
@@ -61,7 +61,7 @@ extension VertNewNumController{
             make.top.equalTo(11)
         }
         
-        numTF.attributedPlaceholder = NSAttributedString.init(string: "请输入新手机号", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),NSAttributedString.Key.foregroundColor: kTextGrayColor])
+        numTF.attributedPlaceholder = NSAttributedString.init(string: "请输入新手机号", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),NSAttributedString.Key.foregroundColor: UIColor.textGrayColor])
         numTF.borderStyle = .none
         numTF.keyboardType = .numberPad
         lineView.addSubview(numTF)
@@ -72,7 +72,7 @@ extension VertNewNumController{
         }
         
         let line = UIView()
-        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        line.backgroundColor = UIColor.hex(hexString: "f0f0f0")
         lineView.addSubview(line)
         line.snp.makeConstraints { (make) in
             make.left.equalTo(0)
@@ -82,7 +82,7 @@ extension VertNewNumController{
         }
         
         let tipLabel = UILabel()
-        tipLabel.textColor = kTextBlockColor
+        tipLabel.textColor = UIColor.textBlackColor
         tipLabel.font = UIFont.systemFont(ofSize: 14)
         tipLabel.text = "验证码"
         lineView.addSubview(tipLabel)
@@ -91,7 +91,7 @@ extension VertNewNumController{
             make.left.equalTo(14)
         }
         
-        textTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的短信验证码", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),NSAttributedString.Key.foregroundColor: kTextGrayColor])
+        textTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的短信验证码", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),NSAttributedString.Key.foregroundColor: UIColor.textGrayColor])
         textTF.borderStyle = .none
         textTF.keyboardType = .numberPad
         lineView.addSubview(textTF)
@@ -100,12 +100,12 @@ extension VertNewNumController{
             make.centerY.equalTo(tipLabel)
         }
         
-        let norColor = kTextBlueColor
+        let norColor = UIColor.textBlueColor
         verBtn.setBackgroundImage(kCreateImageWithColor(color: norColor), for: .normal)
         verBtn.setTitleColor(UIColor.white, for: .normal)
-        let disColor = kRGBColorFromHex(rgbValue: 0xd7d7d7)
+        let disColor = UIColor.hex(hexString: "d7d7d7")
         verBtn.setBackgroundImage(kCreateImageWithColor(color: disColor), for: .disabled)
-        verBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x676767), for: .disabled)
+        verBtn.setTitleColor(UIColor.hex(hexString: "676767"), for: .disabled)
         verBtn.layer.cornerRadius = 4
         verBtn.layer.masksToBounds = true
         verBtn.setTitle("发送", for: .normal)

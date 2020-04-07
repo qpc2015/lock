@@ -71,12 +71,12 @@ class QRCodeController: UIViewController,AVCaptureMetadataOutputObjectsDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.scannerStar()
-        navigationController?.navigationBar.barTintColor = kRGBColorFromHex(rgbValue: 0x353535)
+        navigationController?.navigationBar.barTintColor = UIColor.hex(hexString: "353535")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-           navigationController?.navigationBar.barTintColor = kNavigationBarColor
+           navigationController?.navigationBar.barTintColor = UIColor.navigaBarColor
     }
     
     deinit {

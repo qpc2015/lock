@@ -31,7 +31,7 @@ class AddTemporaryController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "添加临时用户"
         setupUI()
     }
@@ -43,17 +43,17 @@ extension AddTemporaryController{
     func setupUI(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(okClick))
         
-        addListBtn.backgroundColor = kTextBlueColor
+        addListBtn.backgroundColor = UIColor.textBlueColor
         
-        phoneNumberTF.textColor = kTextGrayColor
-        remarkTF.textColor = kTextGrayColor
-        starTimeLabel.textColor = kTextGrayColor
-        endTimeLabel.textColor = kTextGrayColor        
+        phoneNumberTF.textColor = UIColor.textGrayColor
+        remarkTF.textColor = UIColor.textGrayColor
+        starTimeLabel.textColor = UIColor.textGrayColor
+        endTimeLabel.textColor = UIColor.textGrayColor        
         
-        pTip.textColor = kTextBlockColor
-        bLabel.textColor = kTextBlockColor
-        starTip.textColor = kTextBlockColor
-        endTip.textColor = kTextBlockColor
+        pTip.textColor = UIColor.textBlackColor
+        bLabel.textColor = UIColor.textBlackColor
+        starTip.textColor = UIColor.textBlackColor
+        endTip.textColor = UIColor.textBlackColor
         
         addListBtn.addTarget(self, action: #selector(seletedAdressList), for: .touchUpInside)
     }
@@ -78,9 +78,9 @@ extension AddTemporaryController:CNContactPickerDelegate{
                 weakSelf!.endTimeLabel.text = dateStr
             }
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
         
 //        weak var weakSelf = self
@@ -256,14 +256,14 @@ extension AddTemporaryController{
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
             label.text = "   \(lockModel.remark!)"
             label.font = UIFont.systemFont(ofSize: 30.0)
-            label.textColor = kTextBlueColor
+            label.textColor = UIColor.textBlueColor
             return label
         }else{
             let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
             timeLabel.font = UIFont.systemFont(ofSize: 12.0)
             timeLabel.textAlignment = .natural
             timeLabel.text = "      请为该成员设置开门权限有效期"
-            timeLabel.textColor = kRGBColorFromHex(rgbValue: 0x878787)
+            timeLabel.textColor = UIColor.hex(hexString: "878787")
             return timeLabel
         }
     }

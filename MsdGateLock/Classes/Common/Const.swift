@@ -27,26 +27,6 @@ var kIsSreen5 : Bool {
 let kVersion = (UIDevice.current.systemVersion as NSString).floatValue
 
 
-//MARK:- 颜色相关
-///16进制颜色转换
-func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-    return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,
-                   green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,
-                   blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,
-                   alpha: 1.0)
-}
-
-///灰色背景颜色
-let  kGlobalBackColor = kRGBColorFromHex(rgbValue: 0xf3f3f3)
-///黑色字体颜色
-let kTextBlockColor = kRGBColorFromHex(rgbValue: 0x1c1c1c)
-///灰色颜色字体
-let kTextGrayColor = kRGBColorFromHex(rgbValue: 0x878787)
-//蓝色字体颜色
-let kTextBlueColor = kRGBColorFromHex(rgbValue: 0x2282ff)
-//navigationBar颜色
-let kNavigationBarColor = kRGBColorFromHex(rgbValue: 0x2282ff)
-
 ///全局字体大小
 let kGlobalTextFont = UIFont.systemFont(ofSize: 14)
 

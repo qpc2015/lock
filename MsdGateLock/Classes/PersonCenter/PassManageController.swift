@@ -19,7 +19,7 @@ class PassManageController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
     }
 
     //cell线

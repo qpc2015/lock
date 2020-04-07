@@ -42,7 +42,7 @@
 //        super.viewDidLoad()
 //
 //        self.title = "输入门锁编码"
-//        self.view.backgroundColor = kGlobalBackColor
+//        self.view.backgroundColor = UIColor.globalBackColor
 //        
 //        numTextfield.becomeFirstResponder()
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "下一步", style: .plain, target: self, action: #selector(NumLockCodeViewController.nextStep))

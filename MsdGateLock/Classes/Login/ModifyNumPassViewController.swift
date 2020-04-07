@@ -17,13 +17,13 @@ class ModifyNumPassViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "修改数字密码"
         setupUI()
     }
 
     func setupUI(){
-        tipLabel.textColor = kTextBlockColor
+        tipLabel.textColor = UIColor.textBlackColor
     
         verifictCodeView = NumberVerificationCodeView(frame: CGRect(x: 0, y: 50, width: kScreenWidth, height: 50))
         verifictCodeView.delegate = self

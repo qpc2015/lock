@@ -25,7 +25,6 @@ class LoginReq:Mappable
         userTel <- map["userTel"]
         smsCode <- map["smsCode"]
     }
-    
 }
 
 

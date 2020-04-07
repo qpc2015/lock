@@ -35,7 +35,7 @@ class TempUserDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "\(String(describing: userModel.sourceName))的详情"
         self.setupUI()
     }
@@ -71,17 +71,17 @@ extension TempUserDetailController{
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named : "more"), style: .plain, target: self, action: #selector(TempUserDetailController.moreCick))
         
-        memberTip.textColor = kTextBlockColor
-        bzTip.textColor = kTextBlockColor
-        starTip.textColor = kTextBlockColor
-        endTip.textColor = kTextBlockColor
+        memberTip.textColor = UIColor.textBlackColor
+        bzTip.textColor = UIColor.textBlackColor
+        starTip.textColor = UIColor.textBlackColor
+        endTip.textColor = UIColor.textBlackColor
         
-        memberLabel.textColor = kTextGrayColor
-        remarkLabel.textColor = kTextGrayColor
-        starTimeLabel.textColor = kTextGrayColor
-        endTimeLabel.textColor = kTextGrayColor
+        memberLabel.textColor = UIColor.textGrayColor
+        remarkLabel.textColor = UIColor.textGrayColor
+        starTimeLabel.textColor = UIColor.textGrayColor
+        endTimeLabel.textColor = UIColor.textGrayColor
         
-        openListBtn.setTitleColor(kTextBlockColor, for: .normal)
+        openListBtn.setTitleColor(UIColor.textBlackColor, for: .normal)
         openListBtn.addTarget(self, action: #selector(TempUserDetailController.openListClick), for: .touchUpInside)
         
         
@@ -178,9 +178,9 @@ extension TempUserDetailController{
                 weakSelf!.endTimeLabel.text = dateStr
             }
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
         
         
@@ -314,7 +314,7 @@ extension TempUserDetailController{
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
             label.text = "   \(lockModel.remark!)"
             label.font = UIFont.systemFont(ofSize: 30.0)
-            label.textColor = kTextBlueColor
+            label.textColor = UIColor.textBlueColor
             return label
         }
 //        else{
@@ -322,7 +322,7 @@ extension TempUserDetailController{
 //            timeLabel.font = UIFont.systemFont(ofSize: 12.0)
 //            timeLabel.textAlignment = .natural
 //            timeLabel.text = "      请问该成员设置开门权限有效期"
-//            timeLabel.textColor = kRGBColorFromHex(rgbValue: 0x878787)
+//            timeLabel.textColor = UIColor.hex(hexString: "878787)
 //            return timeLabel
 //        }
         return nil

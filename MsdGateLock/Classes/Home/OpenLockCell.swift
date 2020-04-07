@@ -31,9 +31,9 @@ class OpenLockCell: UITableViewCell {
         // Initialization code
         //取消选中
         self.selectionStyle = .none
-        userNameLabel.textColor = kRGBColorFromHex(rgbValue: 0x9d9d9d)
-        openStyleLabel.textColor = kRGBColorFromHex(rgbValue: 0x9d9d9d)
-        timeLabel.textColor = kRGBColorFromHex(rgbValue: 0x9d9d9d)
+        userNameLabel.textColor = UIColor.hex(hexString: "9d9d9d")
+        openStyleLabel.textColor = UIColor.hex(hexString: "9d9d9d")
+        timeLabel.textColor = UIColor.hex(hexString: "9d9d9d")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

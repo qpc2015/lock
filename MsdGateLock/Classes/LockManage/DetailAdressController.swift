@@ -18,7 +18,7 @@ class DetailAdressController: UIViewController {
         super.viewDidLoad()
 
         self.title = "修改详细地址"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
     }
 }
@@ -41,7 +41,7 @@ extension DetailAdressController{
         
         let label = UILabel()
         label.text = "详细地址"
-        label.textColor = kTextBlockColor
+        label.textColor = UIColor.textBlackColor
         label.font = kGlobalTextFont
         backView.addSubview(label)
         label.snp.makeConstraints { (make) in
@@ -53,7 +53,7 @@ extension DetailAdressController{
         let tf = UITextField()
         tf.placeholder = "请输入您的详细地址"
         tf.font = kGlobalTextFont
-        tf.textColor = kTextGrayColor
+        tf.textColor = UIColor.textGrayColor
         tf.text = oldValue
         backView.addSubview(tf)
         self.adressTF = tf

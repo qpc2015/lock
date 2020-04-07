@@ -35,7 +35,7 @@ extension NoPermissionController{
     
     func setupUI(){
         
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         
         let tableFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight-65)
         let tableView = UITableView(frame:tableFrame, style: .grouped)
@@ -59,7 +59,7 @@ extension NoPermissionController{
         }
         
         let topLine = UIView()
-        topLine.backgroundColor = kRGBColorFromHex(rgbValue: 0xe9e9e9)
+        topLine.backgroundColor = UIColor.hex(hexString: "e9e9e9")
         bottomView.addSubview(topLine)
         topLine.snp.makeConstraints { (make) in
             make.left.equalTo(0)
@@ -73,7 +73,7 @@ extension NoPermissionController{
         let addLockBtn = UIButton.init(type: .custom)
         addLockBtn.setTitle("添加门锁", for: .normal)
         addLockBtn.titleLabel?.font = kGlobalTextFont
-        addLockBtn.setTitleColor(kTextBlueColor, for: .normal)
+        addLockBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
         addLockBtn.addTarget(self, action: #selector(NoPermissionController.addLockClick), for: .touchUpInside)
         bottomView.addSubview(addLockBtn)
         addLockBtn.snp.makeConstraints { (make) in
@@ -86,7 +86,7 @@ extension NoPermissionController{
         let orderLockBtn = UIButton.init(type: .custom)
         orderLockBtn.setTitle("预约门锁", for: .normal)
         orderLockBtn.titleLabel?.font = kGlobalTextFont
-        orderLockBtn.setTitleColor(kTextBlueColor, for: .normal)
+        orderLockBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
         orderLockBtn.addTarget(self, action: #selector(NoPermissionController.orderLockClick), for: .touchUpInside)
         bottomView.addSubview(orderLockBtn)
         orderLockBtn.snp.makeConstraints { (make) in
@@ -97,10 +97,10 @@ extension NoPermissionController{
         
     }
     
-    fileprivate func setupNavigationBar(){
+    private func setupNavigationBar(){
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named : "message icon "), style: .plain, target: self, action: #selector(HomeViewController.messageCenterClick))
-        navigationItem.rightBarButtonItem =  UIBarButtonItem.init(image: UIImage(named : "user"), style: .plain, target: self, action: #selector(HomeViewController.personCenterClick))
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named : "message icon "), style: .plain, target: self, action: #selector(messageCenterClick))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem.init(image: UIImage(named : "user"), style: .plain, target: self, action: #selector(personCenterClick))
     }
     
     fileprivate func getExplainList(){
@@ -127,13 +127,13 @@ extension NoPermissionController : BleManagerDelegate{
 
 extension NoPermissionController{
     
-    func personCenterClick(){
+    @objc func personCenterClick(){
         QPCLog("person")
         let vc = UIStoryboard(name: "Person", bundle: nil).instantiateViewController(withIdentifier: "personCenter")
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func messageCenterClick(){
+    @objc func messageCenterClick(){
         QPCLog("message")
         let webVC = LockWebViewContrller()
         webVC.urlStr = GateLockActions.H5_Message
@@ -199,7 +199,7 @@ extension NoPermissionController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headLabel = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
         headLabel.text = "    \(self.stepTitle ?? "")"
-        headLabel.textColor = kTextBlockColor
+        headLabel.textColor = UIColor.textBlackColor
         headLabel.font = UIFont.boldSystemFont(ofSize: 18)
         return headLabel
     }
@@ -210,7 +210,7 @@ extension NoPermissionController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! NoPerAdCell
-        cell.backgroundColor = kGlobalBackColor
+        cell.backgroundColor = UIColor.globalBackColor
         cell.model = self.imgList?[indexPath.row]
         return cell
     }

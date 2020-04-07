@@ -21,7 +21,7 @@
 //        super.viewDidLoad()
 //
 //        self.title = "转让管理员"
-//        self.view.backgroundColor = kGlobalBackColor
+//        self.view.backgroundColor = UIColor.globalBackColor
 //        
 //        setupUI()
 ////        setupBluetool(perName: currentLockModel.bluetoothName!)
@@ -46,12 +46,12 @@
 //        let totalTempLabel = UILabel(frame: CGRect(x: 14, y: 0, width: kScreenWidth, height: 34))
 //        totalTempLabel.backgroundColor = UIColor.white
 //        totalTempLabel.text = toptipStr
-//        totalTempLabel.textColor = kRGBColorFromHex(rgbValue: 0x858585)
+//        totalTempLabel.textColor = UIColor.hex(hexString: "858585)
 //        totalTempLabel.font = UIFont.systemFont(ofSize: 12)
 //        view.addSubview(totalTempLabel)
 //        
 //        let line = UIView(frame: CGRect(x: 0, y: 34, width: kScreenWidth, height: 1))
-//        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+//        line.backgroundColor = UIColor.hex(hexString: "f0f0f0)
 //        view.addSubview(line)
 //        
 //        

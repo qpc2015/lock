@@ -22,9 +22,9 @@ class LockNavigationController: UINavigationController {
     func initNavigation() {
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font:UIFont.systemFont(ofSize: 18.0)]
         navigationBar.tintColor = UIColor.white
-//        navigationBar.barTintColor = kNavigationBarColor
-//        navigationBar.backgroundColor = kNavigationBarColor
-        navigationBar.setBackgroundImage(kCreateImageWithColor(color: kNavigationBarColor), for: .default)
+//        navigationBar.barTintColor = UIColor.navigaBarColor
+//        navigationBar.backgroundColor = UIColor.navigaBarColor
+        navigationBar.setBackgroundImage(kCreateImageWithColor(color: UIColor.navigaBarColor), for: .default)
    
     }
 

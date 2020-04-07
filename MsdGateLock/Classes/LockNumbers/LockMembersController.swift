@@ -49,18 +49,18 @@ extension LockMembersController{
     
     func setupUI(){
         
-        authUserBtn.setTitleColor(kTextBlockColor, for: .normal)
-        authUserBtn.setTitleColor(kTextBlueColor, for: .selected)
-        tempUserBtn.setTitleColor(kTextBlockColor, for: .normal)
-        tempUserBtn.setTitleColor(kTextBlueColor, for: .selected)
+        authUserBtn.setTitleColor(UIColor.textBlackColor, for: .normal)
+        authUserBtn.setTitleColor(UIColor.textBlueColor, for: .selected)
+        tempUserBtn.setTitleColor(UIColor.textBlackColor, for: .normal)
+        tempUserBtn.setTitleColor(UIColor.textBlueColor, for: .selected)
         authUserBtn.addTarget(self, action: #selector(LockMembersController.authUserDidClick(btn:)), for: .touchUpInside)
         tempUserBtn.addTarget(self, action: #selector(LockMembersController.tempUserDidClick(btn:)), for: .touchUpInside)
         
         authUserLine.isHidden = true
         tempUserLine.isHidden = true
-        authUserLine.backgroundColor = kTextBlueColor
-        tempUserLine.backgroundColor = kTextBlueColor
-        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        authUserLine.backgroundColor = UIColor.textBlueColor
+        tempUserLine.backgroundColor = UIColor.textBlueColor
+        line.backgroundColor = UIColor.hex(hexString: "f0f0f0")
         
         self.view.addSubview(contentView)
         

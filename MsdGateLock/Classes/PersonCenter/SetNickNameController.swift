@@ -22,7 +22,7 @@ class SetNickNameController: UIViewController {
         super.viewDidLoad()
 
         self.title = "设置昵称"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         
         setupUI()
     }
@@ -54,7 +54,7 @@ extension SetNickNameController{
         tf.placeholder = "请输入您的昵称"
         tf.font = kGlobalTextFont
         tf.becomeFirstResponder()
-        tf.textColor = kTextGrayColor
+        tf.textColor = UIColor.textGrayColor
         backView.addSubview(tf)
         self.textfield = tf
         tf.snp.makeConstraints { (make) in

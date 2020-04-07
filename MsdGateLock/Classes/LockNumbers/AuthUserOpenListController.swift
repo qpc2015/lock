@@ -27,7 +27,7 @@ class AuthUserOpenListController: UIViewController {
         super.viewDidLoad()
 
         self.title = "开门记录"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
     
         setupUI()  //底部视图
         setupPlaceHolderUI()   //占位视图
@@ -46,11 +46,11 @@ extension AuthUserOpenListController{
     func setupUI(){
         
         headView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 59))
-        headView.backgroundColor = kGlobalBackColor
+        headView.backgroundColor = UIColor.globalBackColor
         self.view.addSubview(headView)
         
         let homeLabel = UILabel()
-        homeLabel.textColor = kTextBlueColor
+        homeLabel.textColor = UIColor.textBlueColor
         homeLabel.text = lockTitle ?? "家"
         homeLabel.font = UIFont.systemFont(ofSize: 30)
         headView.addSubview(homeLabel)
@@ -60,7 +60,7 @@ extension AuthUserOpenListController{
         }
         
         let listLabel = UILabel()
-        listLabel.textColor = kTextBlockColor
+        listLabel.textColor = UIColor.textBlackColor
         listLabel.text = "\(subTitleStr ?? "")的记录"
         listLabel.font = UIFont.systemFont(ofSize: 14)
         listLabel.isHidden = isHiddenSub
@@ -71,7 +71,7 @@ extension AuthUserOpenListController{
         }
         
         let line = UIView()
-        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        line.backgroundColor = UIColor.hex(hexString: "f0f0f0")
         headView.addSubview(line)
         line.snp.makeConstraints { (make) in
             make.left.equalTo(0)
@@ -106,7 +106,7 @@ extension AuthUserOpenListController{
     func setupPlaceHolderUI(){
         
         placeHolderView = UIView()
-        placeHolderView?.backgroundColor = kGlobalBackColor
+        placeHolderView?.backgroundColor = UIColor.globalBackColor
         self.view.addSubview(placeHolderView!)
         placeHolderView?.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -124,7 +124,7 @@ extension AuthUserOpenListController{
         
         let tipLabel = UILabel()
         tipLabel.text = "还未任何记录"
-        tipLabel.textColor =  kRGBColorFromHex(rgbValue: 0x999999)
+        tipLabel.textColor =  UIColor.hex(hexString: "999999")
         tipLabel.font = kGlobalTextFont
         placeHolderView?.addSubview(tipLabel)
         tipLabel.snp.makeConstraints { (make) in

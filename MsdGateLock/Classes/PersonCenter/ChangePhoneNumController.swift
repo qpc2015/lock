@@ -22,7 +22,7 @@ class ChangePhoneNumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         
         self.title = "验证旧手机"
         
@@ -51,7 +51,7 @@ extension ChangePhoneNumController{
         view.addSubview(lineView)
         
         let tipLabel = UILabel()
-        tipLabel.textColor = kTextBlockColor
+        tipLabel.textColor = UIColor.textBlackColor
         tipLabel.font = UIFont.systemFont(ofSize: 14)
         tipLabel.text = "验证码"
         lineView.addSubview(tipLabel)
@@ -60,7 +60,7 @@ extension ChangePhoneNumController{
             make.centerY.equalTo(lineView)
         }
         
-        textTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的短信验证码", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),NSAttributedString.Key.foregroundColor: kTextGrayColor])
+        textTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的短信验证码", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),NSAttributedString.Key.foregroundColor: UIColor.textGrayColor])
         textTF.borderStyle = .none
         textTF.keyboardType = .numberPad
         lineView.addSubview(textTF)
@@ -71,12 +71,12 @@ extension ChangePhoneNumController{
             make.right.equalTo(70)
         }
         
-        let norColor = kTextBlueColor
+        let norColor = UIColor.textBlueColor
         verBtn.setBackgroundImage(kCreateImageWithColor(color: norColor), for: .normal)
         verBtn.setTitleColor(UIColor.white, for: .normal)
-        let disColor = kRGBColorFromHex(rgbValue: 0xd7d7d7)
+        let disColor = UIColor.hex(hexString: "d7d7d7")
         verBtn.setBackgroundImage(kCreateImageWithColor(color: disColor), for: .disabled)
-        verBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x676767), for: .disabled)
+        verBtn.setTitleColor(UIColor.hex(hexString: "676767"), for: .disabled)
         verBtn.layer.cornerRadius = 4
         verBtn.layer.masksToBounds = true
         verBtn.setTitle("发送", for: .normal)

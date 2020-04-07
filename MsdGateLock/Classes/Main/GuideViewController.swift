@@ -44,7 +44,7 @@ class GuideViewController: UIViewController {
         }
         
         self.view.insertSubview(scrollView, at: 0)
-        startButton.backgroundColor = kTextBlueColor
+        startButton.backgroundColor = UIColor.textBlueColor
         startButton.setTitleColor(UIColor.white, for: .normal)
         // 给开始按钮设置圆角
         startButton.layer.cornerRadius = 4.0

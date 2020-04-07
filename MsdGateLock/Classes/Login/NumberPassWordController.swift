@@ -21,7 +21,7 @@ class NumberPassWordController: UITableViewController {
         super.viewDidLoad()
 
         self.title = "设置数字密码"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
     }
 

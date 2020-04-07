@@ -29,7 +29,7 @@ class PersonInfoController: UITableViewController {
         super.viewDidLoad()
 
         self.title = "个人资料"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.tableView.tableFooterView = UIView()
         setupUI()
         
@@ -37,12 +37,12 @@ class PersonInfoController: UITableViewController {
     }
 
     func setupUI(){
-        iconTip.textColor = kTextBlockColor
-        nickNameTip.textColor = kTextBlockColor
-        mumberTip.textColor = kTextBlockColor
+        iconTip.textColor = UIColor.textBlackColor
+        nickNameTip.textColor = UIColor.textBlackColor
+        mumberTip.textColor = UIColor.textBlackColor
         
-        nameLabel.textColor = kTextGrayColor
-        numberLabel.textColor = kTextGrayColor
+        nameLabel.textColor = UIColor.textGrayColor
+        numberLabel.textColor = UIColor.textGrayColor
     
         let imgUrl = URL(string: model?.userImage ?? "")
         iconImageView.kf.setImage(with: imgUrl, placeholder: UIImage(named : "user1") , options: nil, progressBlock: nil)

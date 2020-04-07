@@ -16,7 +16,7 @@
 //        super.viewDidLoad()
 //
 //        self.title = "修改手势密码"
-//        self.view.backgroundColor = kGlobalBackColor
+//        self.view.backgroundColor = UIColor.globalBackColor
 //
 //        setupUI()
 //    }

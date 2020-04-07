@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import Reachability
 
 class ChangeNumberCodeController:  UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     //扫描视图
@@ -23,22 +22,21 @@ class ChangeNumberCodeController:  UIViewController,AVCaptureMetadataOutputObjec
     var dataManager = QPCDataManager.shareManager
     var isFactorySetting : Bool = false
     var lockModel : UserLockListResp!
-    var reachability: Reachability!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            try reachability = Reachability()
-        } catch {
-            print(error)
-        }
+//        do {
+//            try reachability = Reachability()
+//        } catch {
+//            print(error)
+//        }
         
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(cameraView)
         
-        if (self.title == "恢复出厂值"){
-            startListenNetStatuChange()
-        }
+//        if (self.title == "恢复出厂值"){
+//            startListenNetStatuChange()
+//        }
         
         let label = UILabel()
         label.text = "为了您的安全,管理员更换手机,需要重新\n扫描门锁内二维码"
@@ -94,13 +92,12 @@ class ChangeNumberCodeController:  UIViewController,AVCaptureMetadataOutputObjec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.scannerStar()
-        navigationController?.navigationBar.barTintColor = kRGBColorFromHex(rgbValue: 0x353535)
+        navigationController?.navigationBar.barTintColor = UIColor.hex(hexString: "353535")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.barTintColor = kNavigationBarColor
-        reachability.stopNotifier()
+        navigationController?.navigationBar.barTintColor = UIColor.navigaBarColor
     }
     
 
@@ -142,24 +139,6 @@ extension ChangeNumberCodeController{
 
 //MARK:- CLICK
 extension ChangeNumberCodeController{
-    
-    //检查网络
-    fileprivate func startListenNetStatuChange(){
-        weak var weakSelf = self
-        
-        reachability.whenUnreachable = { reachability in
-            DispatchQueue.main.async {
-                QPCLog("Not reachable")
-               weakSelf?.checkNoNetworkWithAlext()
-            }
-        }
-        
-        do{
-            try reachability.startNotifier()
-        }catch{
-            print("Unable to start notifier")
-        }
-    }
     
     private func checkNoNetworkWithAlext(){
         let alertVC = UIAlertController(title: nil, message: "当前网络不可用,请检查网络是否连接", preferredStyle: .alert)

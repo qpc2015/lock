@@ -25,7 +25,7 @@ class NoPerAdCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.detailContextLabel.textColor = kTextGrayColor
+        self.detailContextLabel.textColor = UIColor.textGrayColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

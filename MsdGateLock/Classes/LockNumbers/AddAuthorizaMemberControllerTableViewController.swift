@@ -32,7 +32,7 @@ class AddAuthorizaMemberController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "添加授权成员"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
     }
 
@@ -51,20 +51,20 @@ class AddAuthorizaMemberController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(okClick))
         
-        addlistBtn.backgroundColor = kTextBlueColor
-        isPerpetualSwitch.onTintColor = kTextBlueColor
+        addlistBtn.backgroundColor = UIColor.textBlueColor
+        isPerpetualSwitch.onTintColor = UIColor.textBlueColor
         
-        numberTF.textColor = kTextGrayColor
-        remarkTF.textColor = kTextGrayColor
+        numberTF.textColor = UIColor.textGrayColor
+        remarkTF.textColor = UIColor.textGrayColor
         
-        starLabel.textColor = kTextGrayColor
-        endLabel.textColor = kTextGrayColor
+        starLabel.textColor = UIColor.textGrayColor
+        endLabel.textColor = UIColor.textGrayColor
         
-        pLabel.textColor = kTextBlockColor
-        bLabel.textColor = kTextBlockColor
-        timesLabel.textColor = kTextBlockColor
-        starTop.textColor = kTextBlockColor
-        endTip.textColor = kTextBlockColor
+        pLabel.textColor = UIColor.textBlackColor
+        bLabel.textColor = UIColor.textBlackColor
+        timesLabel.textColor = UIColor.textBlackColor
+        starTop.textColor = UIColor.textBlackColor
+        endTip.textColor = UIColor.textBlackColor
         
         tableView.bounces = false
         addlistBtn.addTarget(self, action: #selector(seletedAdressList), for: .touchUpInside)
@@ -90,9 +90,9 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
                 weakSelf!.endLabel.text = dateStr
             }
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
     }
     
@@ -254,14 +254,14 @@ extension AddAuthorizaMemberController{
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
             label.text = "   \(String(describing: lockModel.remark!))"
             label.font = UIFont.systemFont(ofSize: 30.0)
-            label.textColor = kTextBlueColor
+            label.textColor = UIColor.textBlueColor
             return label
         }else{
             let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
             timeLabel.font = UIFont.systemFont(ofSize: 12.0)
             timeLabel.textAlignment = .natural
             timeLabel.text = "      请为该成员设置开门权限有效期"
-            timeLabel.textColor = kRGBColorFromHex(rgbValue: 0x878787)
+            timeLabel.textColor = UIColor.hex(hexString: "878787")
             return timeLabel
         }
     }

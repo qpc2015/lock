@@ -39,7 +39,7 @@ class TroubleRepairController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "故障报修"
         setupUI()
     }
@@ -62,30 +62,30 @@ extension TroubleRepairController{
     func setupUI(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(TroubleRepairController.submitClick))
         
-        contantTip.textColor = kTextBlockColor
-        personTip.textColor = kTextBlockColor
-        areaTip.textColor = kTextBlockColor
-        adressTip.textColor = kTextBlockColor
-        installTip.textColor = kTextBlockColor
+        contantTip.textColor = UIColor.textBlackColor
+        personTip.textColor = UIColor.textBlackColor
+        areaTip.textColor = UIColor.textBlackColor
+        adressTip.textColor = UIColor.textBlackColor
+        installTip.textColor = UIColor.textBlackColor
         
-        numberTF.attributedPlaceholder = NSAttributedString.init(string: "请输入成员手机号", attributes: [NSAttributedString.Key.foregroundColor:kTextGrayColor])
-        nameTF.attributedPlaceholder = NSAttributedString.init(string: "请输入联系人姓名", attributes: [NSAttributedString.Key.foregroundColor:kTextGrayColor])
-        adressTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的详细地址", attributes: [NSAttributedString.Key.foregroundColor:kTextGrayColor])
+        numberTF.attributedPlaceholder = NSAttributedString.init(string: "请输入成员手机号", attributes: [NSAttributedString.Key.foregroundColor:UIColor.textGrayColor])
+        nameTF.attributedPlaceholder = NSAttributedString.init(string: "请输入联系人姓名", attributes: [NSAttributedString.Key.foregroundColor:UIColor.textGrayColor])
+        adressTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的详细地址", attributes: [NSAttributedString.Key.foregroundColor:UIColor.textGrayColor])
         
-        numberTF.textColor = kTextGrayColor
-        nameTF.textColor = kTextGrayColor
-        adressTF.textColor = kTextGrayColor
-        areaLabel.textColor = kTextGrayColor
-        timeLabel.textColor = kTextGrayColor
+        numberTF.textColor = UIColor.textGrayColor
+        nameTF.textColor = UIColor.textGrayColor
+        adressTF.textColor = UIColor.textGrayColor
+        areaLabel.textColor = UIColor.textGrayColor
+        timeLabel.textColor = UIColor.textGrayColor
         
-        numListBtn.backgroundColor = kTextBlueColor
+        numListBtn.backgroundColor = UIColor.textBlueColor
         numListBtn.addTarget(self, action: #selector(seletedAdressList), for: .touchUpInside)
         
-        tipView.backgroundColor = kGlobalBackColor
-        tip1Label.textColor = kTextBlockColor
-        tip1DetailLabel.textColor = kTextGrayColor
-        tip2Label.textColor = kTextBlockColor
-        tip2DetailLabel.textColor = kTextGrayColor
+        tipView.backgroundColor = UIColor.globalBackColor
+        tip1Label.textColor = UIColor.textBlackColor
+        tip1DetailLabel.textColor = UIColor.textGrayColor
+        tip2Label.textColor = UIColor.textBlackColor
+        tip2DetailLabel.textColor = UIColor.textGrayColor
     }
 }
 
@@ -199,9 +199,9 @@ extension TroubleRepairController : PickerDelegate{
             QPCLog("选择的日期:\(String(describing: dateStr))")
             weakSelf?.timeLabel.text = dateStr
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
         
         //        weak var weakSelf = self

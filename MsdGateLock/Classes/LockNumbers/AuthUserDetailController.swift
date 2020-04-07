@@ -38,7 +38,7 @@ class AuthUserDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "\(String(describing: userModel.sourceName))的详情"
         self.setupUI()
     }
@@ -82,20 +82,20 @@ extension AuthUserDetailController{
             }
         }
 
-        phoneNumberTip.textColor = kTextBlockColor
-        bzTip.textColor = kTextBlockColor
-//        timeTip.textColor = kTextBlockColor
-        startip.textColor = kTextBlockColor
-        endLabel.textColor = kTextBlockColor
-        phoneLabel.textColor = kTextGrayColor
-        phoneLabel.textColor = kTextGrayColor
-        remarkLabel.textColor = kTextGrayColor
-        starLabel.textColor = kTextGrayColor
-        endLabel.textColor = kTextGrayColor
-//        isPerpetualLabel.textColor = kTextGrayColor
-        openListBtn.setTitleColor(kTextBlockColor, for: .normal)
+        phoneNumberTip.textColor = UIColor.textBlackColor
+        bzTip.textColor = UIColor.textBlackColor
+//        timeTip.textColor = UIColor.textBlackColor
+        startip.textColor = UIColor.textBlackColor
+        endLabel.textColor = UIColor.textBlackColor
+        phoneLabel.textColor = UIColor.textGrayColor
+        phoneLabel.textColor = UIColor.textGrayColor
+        remarkLabel.textColor = UIColor.textGrayColor
+        starLabel.textColor = UIColor.textGrayColor
+        endLabel.textColor = UIColor.textGrayColor
+//        isPerpetualLabel.textColor = UIColor.textGrayColor
+        openListBtn.setTitleColor(UIColor.textBlackColor, for: .normal)
         openListBtn.addTarget(self, action: #selector(AuthUserDetailController.openListClick), for: .touchUpInside)
-//        isPerpeSwitch.onTintColor = kTextBlueColor
+//        isPerpeSwitch.onTintColor = UIColor.textBlueColor
 //        isPerpeSwitch.addTarget(self, action: #selector(AuthUserDetailController.seletedTimeClick(perpSwitch:)), for: .touchUpInside)
     }
     
@@ -421,7 +421,7 @@ extension AuthUserDetailController{
                 label.text = "   \(lockModel.remark!)"
             }
             label.font = UIFont.systemFont(ofSize: 30.0)
-            label.textColor = kTextBlueColor
+            label.textColor = UIColor.textBlueColor
             return label
         }else{
             if oneSectionCount == 0 {
@@ -431,13 +431,13 @@ extension AuthUserDetailController{
                 let tipLabel = UILabel(frame: CGRect(x: 25, y: 16, width: 150, height: 14))
                 tipLabel.text = "开门权限有效期"
                 tipLabel.font = kGlobalTextFont
-                tipLabel.textColor = kTextBlockColor
+                tipLabel.textColor = UIColor.textBlackColor
                 head.addSubview(tipLabel)
                 
                 let yongjiu = UILabel(frame: CGRect(x: kScreenWidth - 47, y: 16, width: 150, height: 14))
                 yongjiu.text = "永久"
                 yongjiu.font = kGlobalTextFont
-                yongjiu.textColor = kTextGrayColor
+                yongjiu.textColor = UIColor.textGrayColor
                 head.addSubview(yongjiu)
                 
                 return head
@@ -450,7 +450,7 @@ extension AuthUserDetailController{
 //                timeLabel.font = UIFont.systemFont(ofSize: 12.0)
 //                timeLabel.textAlignment = .natural
 //                timeLabel.text = "      开门权限有效期"
-//                timeLabel.textColor = kRGBColorFromHex(rgbValue: 0x878787)
+//                timeLabel.textColor = UIColor.hex(hexString: "878787)
 //                return timeLabel
 //            }
 

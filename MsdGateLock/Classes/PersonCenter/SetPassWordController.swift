@@ -18,7 +18,7 @@ class SetPassWordController: UIViewController {
         super.viewDidLoad()
 
         self.title = "设置密码"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
         switchView.addTarget(self, action: #selector(SetPassWordController.switchDidClick), for: .valueChanged)
     }
@@ -47,7 +47,7 @@ extension SetPassWordController{
     func setupUI(){
         tableView = UITableView(frame: CGRect(x: 0, y: 20, width: kScreenWidth, height: kScreenHeight), style: .plain)
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = kGlobalBackColor
+        tableView.backgroundColor = UIColor.globalBackColor
         tableView.rowHeight = 46
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,12 +85,12 @@ extension SetPassWordController: UITableViewDelegate,UITableViewDataSource{
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         if cell == nil {
             cell = UITableViewCell(style: .value1, reuseIdentifier: cellId)
-            cell?.textLabel?.textColor = kTextBlockColor
+            cell?.textLabel?.textColor = UIColor.textBlackColor
             cell?.textLabel?.font = kGlobalTextFont
         }
         cell?.textLabel?.text = titleArr[indexPath.row]
         if indexPath.row == 1{
-            switchView.onTintColor = kTextBlueColor
+            switchView.onTintColor = UIColor.textBlueColor
             cell?.accessoryView = switchView
         }else{
             cell?.accessoryType = .disclosureIndicator

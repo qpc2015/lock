@@ -20,7 +20,7 @@ class TempListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
     }
 
@@ -35,12 +35,12 @@ class TempListController: UIViewController {
         totalTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 33))
         totalTempLabel.text = "    临时用户 (0位)"
         totalTempLabel.backgroundColor = UIColor.white
-        totalTempLabel.textColor = kRGBColorFromHex(rgbValue: 0x858585)
+        totalTempLabel.textColor = UIColor.hex(hexString: "858585")
         totalTempLabel.font = UIFont.systemFont(ofSize: 12)
         view.addSubview(totalTempLabel)
         
 //        let line = UIView(frame: CGRect(x: 0, y: 34, width: kScreenWidth, height: 1))
-//        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+//        line.backgroundColor = UIColor.hex(hexString: "f0f0f0)
 //        view.addSubview(line)
         
 //        let tableHeight : CGFloat = CGFloat(68 * count)
@@ -62,7 +62,7 @@ class TempListController: UIViewController {
             let addAuthNumberBtn =  UIButton(type: .custom)
             addAuthNumberBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             addAuthNumberBtn.setTitle("添加临时成员", for: .normal)
-            addAuthNumberBtn.backgroundColor = kTextBlueColor
+            addAuthNumberBtn.backgroundColor = UIColor.textBlueColor
             addAuthNumberBtn.layer.cornerRadius = 4.0
             addAuthNumberBtn.layer.masksToBounds = true
             addAuthNumberBtn.addTarget(self, action: #selector(TempListController.addTemporaryNumbersClick(_:)), for: .touchUpInside)

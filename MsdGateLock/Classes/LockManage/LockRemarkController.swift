@@ -19,7 +19,7 @@ class LockRemarkController: UIViewController {
         super.viewDidLoad()
 
         self.title = "修改门锁备注"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
     }
 }
@@ -42,7 +42,7 @@ extension LockRemarkController{
         
         let label = UILabel()
         label.text = "门锁备注"
-        label.textColor = kTextBlockColor
+        label.textColor = UIColor.textBlackColor
         label.font = kGlobalTextFont
         backView.addSubview(label)
         label.snp.makeConstraints { (make) in
@@ -54,7 +54,7 @@ extension LockRemarkController{
         let tf = UITextField()
         tf.placeholder = "输入您的门锁备注"
         tf.font = kGlobalTextFont
-        tf.textColor = kTextGrayColor
+        tf.textColor = UIColor.textGrayColor
         tf.text = oldValue
         backView.addSubview(tf)
         remarkTF = tf

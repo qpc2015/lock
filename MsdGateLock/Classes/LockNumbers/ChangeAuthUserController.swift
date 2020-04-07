@@ -38,14 +38,14 @@ extension ChangeAuthUserController{
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(ChangeAuthUserController.affirmClick))
         
-        setVailTip.textColor = kTextBlockColor
-        isLongSwitch.onTintColor = kTextBlueColor
+        setVailTip.textColor = UIColor.textBlackColor
+        isLongSwitch.onTintColor = UIColor.textBlueColor
         
-        starTip.textColor = kTextBlockColor
-        endTip.textColor = kTextBlockColor
+        starTip.textColor = UIColor.textBlackColor
+        endTip.textColor = UIColor.textBlackColor
         
-        starTimeLabel.textColor = kTextGrayColor
-        endTimeLabel.textColor = kTextGrayColor
+        starTimeLabel.textColor = UIColor.textGrayColor
+        endTimeLabel.textColor = UIColor.textGrayColor
         
         isLongSwitch.addTarget(self, action: #selector(AddAuthorizaMemberController.seletedTimeClick(perpSwitch:)), for: .valueChanged)
     }
@@ -89,9 +89,9 @@ extension ChangeAuthUserController{
                 weakSelf!.endTimeLabel.text = dateStr
             }
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
         
 //        
@@ -131,7 +131,7 @@ extension ChangeAuthUserController{
         timeLabel.font = UIFont.systemFont(ofSize: 12.0)
         timeLabel.textAlignment = .natural
         timeLabel.text = "      转换权限前，请为该成员设置开门权限有效期"
-        timeLabel.textColor = kTextGrayColor
+        timeLabel.textColor = UIColor.textGrayColor
         return timeLabel
     }
     

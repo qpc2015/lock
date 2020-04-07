@@ -24,7 +24,7 @@ class LockManageController: UIViewController {
         super.viewDidLoad()
 
         self.title = "门锁管理"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.setupNavigationItem()
         self.setupUI()
     }
@@ -59,7 +59,7 @@ extension LockManageController{
         
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 320), style: .grouped)
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = kGlobalBackColor
+        tableView.backgroundColor = UIColor.globalBackColor
         tableView.rowHeight = 46
         tableView.delegate = self
         tableView.dataSource = self
@@ -73,7 +73,7 @@ extension LockManageController{
 //        button.layer.cornerRadius = 4
 //        button.layer.masksToBounds = true
 //        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-//        button.backgroundColor = kTextBlueColor
+//        button.backgroundColor = UIColor.textBlueColor
 //        button.addTarget(self, action: #selector(LockManageController.closeLock), for: .touchUpInside)
 //        view.addSubview(button)
 //        button.snp.makeConstraints { (make) in
@@ -352,10 +352,10 @@ extension LockManageController: UITableViewDelegate,UITableViewDataSource,Picker
         var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         if cell == nil {
             cell = UITableViewCell(style: .value1, reuseIdentifier: cellID)
-            cell?.textLabel?.textColor = kTextBlockColor
+            cell?.textLabel?.textColor = UIColor.textBlackColor
             cell?.textLabel?.font = kGlobalTextFont
             cell?.detailTextLabel?.font = kGlobalTextFont
-            cell?.detailTextLabel?.textColor = kTextGrayColor
+            cell?.detailTextLabel?.textColor = UIColor.textGrayColor 
             cell?.accessoryType = .disclosureIndicator
         }
         cell?.textLabel?.text = titleArr[indexPath.section][indexPath.row]

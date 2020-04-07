@@ -17,7 +17,7 @@ class MessageNotiController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "消息通知"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         tableView.rowHeight = 74
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: cellID)
     }
@@ -69,7 +69,7 @@ extension MessageNotiController{
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 160))
-        view.backgroundColor = kGlobalBackColor
+        view.backgroundColor = UIColor.globalBackColor
         
         let head = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 140))
         head.backgroundColor = UIColor.white

@@ -26,7 +26,7 @@ class ChangeTempUserController: UITableViewController {
         super.viewDidLoad()
 
         self.title = "设置时效"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         
         setupUI()
     }
@@ -40,13 +40,13 @@ extension ChangeTempUserController{
     func setupUI(){
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确认", style: .plain, target: self, action: #selector(ChangeTempUserController.okClick))
-        repeatTip.textColor = kTextBlockColor
-        starTip.textColor = kTextBlockColor
-        endTip.textColor = kTextBlockColor
+        repeatTip.textColor = UIColor.textBlackColor
+        starTip.textColor = UIColor.textBlackColor
+        endTip.textColor = UIColor.textBlackColor
         
-        repeatLabel.textColor = kTextGrayColor
-        starTimeLabel.textColor = kTextGrayColor
-        endTimeLabel.textColor = kTextGrayColor
+        repeatLabel.textColor = UIColor.textGrayColor
+        starTimeLabel.textColor = UIColor.textGrayColor
+        endTimeLabel.textColor = UIColor.textGrayColor
     }
     
     
@@ -68,9 +68,9 @@ extension ChangeTempUserController{
                 weakSelf!.endTimeLabel.text = dateStr
             }
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
         
 //        weak var weakSelf = self
@@ -126,7 +126,7 @@ extension ChangeTempUserController{
             timeLabel.font = UIFont.systemFont(ofSize: 12.0)
             timeLabel.textAlignment = .natural
             timeLabel.text = "      转换权限前，请为该成员设置开门权限有效期"
-            timeLabel.textColor = kRGBColorFromHex(rgbValue: 0x878787)
+            timeLabel.textColor = UIColor.hex(hexString: "878787")
             return timeLabel
         }
         return nil

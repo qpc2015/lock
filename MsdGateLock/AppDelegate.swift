@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Alamofire
 
 @UIApplicationMain
 
@@ -15,10 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
     
+    lazy var reachability: NetworkReachabilityManager? = {
+        return NetworkReachabilityManager(host: "lock.diadiade.com")
+    }()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
+        
         //保存标识
         QPCKeychainTool.syncDeviceIdentifier()
+        getRootController()
+        setupBaseConfig(launchOptions: launchOptions)
+        return true
+    }
+    
+    func getRootController() {
+        window = UIWindow(frame: UIScreen.main.bounds)
         // 得到当前应用的版本号
         let infoDictionary = Bundle.main.infoDictionary
         let currentAppVersion = infoDictionary!["CFBundleShortVersionString"] as! String
@@ -26,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         // 取出之前保存的版本号
         let userDefaults = UserDefaults.standard
         let appVersion = userDefaults.string(forKey: "appVersion")
-        
         if appVersion == nil || appVersion != currentAppVersion {
             QPCLog("--\(String(describing: appVersion))---当前版本\(currentAppVersion)")
             // 保存最新的版本号
@@ -44,19 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                 window?.rootViewController = LockNavigationController(rootViewController: LoginController())
             }
         }
+        window?.makeKeyAndVisible()
+    }
+    
+    func setupBaseConfig(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         IQKeyboardManager.shared.enable = true
         //初始化程序语言
         LanguageHelper.shareInstance.initUserLanguage()
-        setupJpush(launchOptions: launchOptions)
-        window?.makeKeyAndVisible()
-        return true
-    }
-}
-
-//MARK:- 第三方初始化
-extension AppDelegate: JPUSHRegisterDelegate{
-    
-    func setupJpush(launchOptions: [UIApplication.LaunchOptionsKey : Any]?){
+        //推送
         let entity = JPUSHRegisterEntity()
         entity.types = 1 << 0 | 1 << 1 | 1 << 2
         //通知类型（这里将声音、消息、提醒角标都给加上）
@@ -65,7 +71,32 @@ extension AppDelegate: JPUSHRegisterDelegate{
                            appKey:"492bea3f208d2805ecb58159",
                            channel:"app store",
                            apsForProduction: false)
+        //网络监控
+        reachability?.startListening(onQueue: .main, onUpdatePerforming: { [weak self] status in
+            switch status {
+            case .notReachable:
+                HomeViewController.isConnectNetWork = false
+                self?.checkNoNetworkWithAlext()
+                print("网络已断开")
+            default:
+                HomeViewController.isConnectNetWork = true
+                print("网络已连接")
+            }
+        })
     }
+    
+    private func checkNoNetworkWithAlext(){
+        let alertVC = UIAlertController(title: nil, message: "当前网络不可用,请检查网络是否连接", preferredStyle: .alert)
+        let acSure = UIAlertAction(title: "确定", style: .default) { (UIAlertAction) in
+            QPCLog("打开")
+        }
+        alertVC.addAction(acSure)
+        self.window?.rootViewController?.present(alertVC, animated: true, completion: nil)
+    }
+}
+
+//MARK:- 第三方初始化
+extension AppDelegate: JPUSHRegisterDelegate{
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         JPUSHService.registerDeviceToken(deviceToken)

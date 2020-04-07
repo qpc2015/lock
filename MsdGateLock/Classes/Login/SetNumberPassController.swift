@@ -33,8 +33,8 @@ class SetNumberPassController: UIViewController {
 
     func setupUI(){
         tableView = UITableView(frame: kScreenBounds, style: .grouped)
-        tableView?.backgroundColor = kRGBColorFromHex(rgbValue: 0xf3f3f3)
-        tableView?.separatorColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        tableView?.backgroundColor = UIColor.hex(hexString: "f3f3f3")
+        tableView?.separatorColor = UIColor.hex(hexString: "f0f0f0")
         tableView?.dataSource = self
         tableView?.delegate = self
         tableView?.rowHeight = 46.0

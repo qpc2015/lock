@@ -115,24 +115,24 @@ extension OrderListCell{
     func setupUI(){
         self.backgroundColor = UIColor.white
         
-        orderTip.textColor = kTextGrayColor
-        contactTip.textColor = kTextGrayColor
-        numberTip.textColor = kTextGrayColor
-        adressTip.textColor = kTextGrayColor
-        timeTip.textColor = kTextGrayColor
-        orderLabel.textColor = kTextBlockColor
-        contactLabel.textColor = kTextBlockColor
-        numberLabel.textColor = kTextBlockColor
-        adressLabel.textColor = kTextBlockColor
-        timeLabel.textColor = kTextBlockColor
-        statuLabel.textColor = kTextBlueColor
-        alterBtn.backgroundColor = kTextBlueColor
-        cancleBtn.backgroundColor = kTextBlueColor
+        orderTip.textColor = UIColor.textGrayColor
+        contactTip.textColor = UIColor.textGrayColor
+        numberTip.textColor = UIColor.textGrayColor
+        adressTip.textColor = UIColor.textGrayColor
+        timeTip.textColor = UIColor.textGrayColor
+        orderLabel.textColor = UIColor.textBlackColor
+        contactLabel.textColor = UIColor.textBlackColor
+        numberLabel.textColor = UIColor.textBlackColor
+        adressLabel.textColor = UIColor.textBlackColor
+        timeLabel.textColor = UIColor.textBlackColor
+        statuLabel.textColor = UIColor.textBlueColor
+        alterBtn.backgroundColor = UIColor.textBlueColor
+        cancleBtn.backgroundColor = UIColor.textBlueColor
         
-        line1.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
-        line2.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
-        line3.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
-        line4.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        line1.backgroundColor = UIColor.hex(hexString: "f0f0f0")
+        line2.backgroundColor = UIColor.hex(hexString: "f0f0f0")
+        line3.backgroundColor = UIColor.hex(hexString: "f0f0f0")
+        line4.backgroundColor = UIColor.hex(hexString: "f0f0f0")
         
         alterBtn.addTarget(self, action: #selector(OrderListCell.alterBtnClick(btn:)), for: .touchUpInside)
         cancleBtn.addTarget(self, action: #selector(OrderListCell.cancleBtnClick(btn:)), for: .touchUpInside)

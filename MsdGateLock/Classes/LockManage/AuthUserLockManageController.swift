@@ -19,7 +19,7 @@ class AuthUserLockManageController: UIViewController {
         super.viewDidLoad()
 
         self.title = "门锁管理"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         
         setupUI()
     }
@@ -51,7 +51,7 @@ extension AuthUserLockManageController{
         
         tableView = UITableView(frame: CGRect(x: 0, y: 20, width: kScreenWidth, height: kScreenHeight), style: .plain)
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = kGlobalBackColor
+        tableView.backgroundColor = UIColor.globalBackColor
         tableView.rowHeight = 46
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,10 +84,10 @@ extension AuthUserLockManageController: UITableViewDelegate,UITableViewDataSourc
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         if cell == nil {
             cell = UITableViewCell(style: .value1, reuseIdentifier: cellId)
-            cell?.textLabel?.textColor = kTextBlockColor
+            cell?.textLabel?.textColor = UIColor.textBlackColor
             cell?.textLabel?.font = kGlobalTextFont
             cell?.detailTextLabel?.font = kGlobalTextFont
-            cell?.detailTextLabel?.textColor = kTextGrayColor
+            cell?.detailTextLabel?.textColor = UIColor.textGrayColor
             cell?.accessoryType = .disclosureIndicator
         }
         

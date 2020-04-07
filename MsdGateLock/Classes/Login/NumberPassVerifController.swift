@@ -19,7 +19,7 @@ class NumberPassVerifController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
         
         if !isChangePhone && UserInfo.isOpenFingerPrint()  {

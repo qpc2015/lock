@@ -40,10 +40,10 @@ class TempListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        nameLabel.textColor = kRGBColorFromHex(rgbValue: 0x1c1c1c)
-        time1Label.textColor = kTextGrayColor
-        time2Label.textColor = kTextGrayColor
-        pastDueLabel.textColor = kTextGrayColor
+        nameLabel.textColor = UIColor.hex(hexString: "1c1c1c")
+        time1Label.textColor = UIColor.textGrayColor
+        time2Label.textColor = UIColor.textGrayColor
+        pastDueLabel.textColor = UIColor.textGrayColor
         pastDueLabel.isHidden = true
         
     }

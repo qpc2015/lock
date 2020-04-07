@@ -33,7 +33,7 @@ class OrderInstallLockController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         self.title = "预约门锁"
         setupUI()
     }
@@ -56,27 +56,27 @@ extension OrderInstallLockController{
     func setupUI(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(OrderInstallLockController.commitOrderClick))
         
-        numberTip.textColor = kTextBlockColor
-        contantTip.textColor = kTextBlockColor
-        areaTip.textColor = kTextBlockColor
-        detailTip.textColor = kTextBlockColor
-        timeLabel.textColor = kTextBlockColor
-        adressListBtn.backgroundColor = kTextBlueColor
-        numberTF.textColor = kTextGrayColor
-        numberTF.attributedPlaceholder = NSAttributedString.init(string: "请输入成员手机号", attributes: [NSAttributedString.Key.foregroundColor:kTextGrayColor])
-        nameTF.attributedPlaceholder = NSAttributedString.init(string: "请输入联系人姓名", attributes: [NSAttributedString.Key.foregroundColor:kTextGrayColor])
-        nameTF.textColor = kTextGrayColor
-        areaLabel.textColor = kTextGrayColor
-        detailAdressTF.textColor = kTextGrayColor
-        detailAdressTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的详细地址", attributes: [NSAttributedString.Key.foregroundColor:kTextGrayColor])
-        timeSeletedLabel.textColor = kTextGrayColor
-        infoBackView.backgroundColor = kGlobalBackColor
-        title1.textColor = kTextBlockColor
+        numberTip.textColor = UIColor.textBlackColor
+        contantTip.textColor = UIColor.textBlackColor
+        areaTip.textColor = UIColor.textBlackColor
+        detailTip.textColor = UIColor.textBlackColor
+        timeLabel.textColor = UIColor.textBlackColor
+        adressListBtn.backgroundColor = UIColor.textBlueColor
+        numberTF.textColor = UIColor.textGrayColor
+        numberTF.attributedPlaceholder = NSAttributedString.init(string: "请输入成员手机号", attributes: [NSAttributedString.Key.foregroundColor:UIColor.textGrayColor])
+        nameTF.attributedPlaceholder = NSAttributedString.init(string: "请输入联系人姓名", attributes: [NSAttributedString.Key.foregroundColor:UIColor.textGrayColor])
+        nameTF.textColor = UIColor.textGrayColor
+        areaLabel.textColor = UIColor.textGrayColor
+        detailAdressTF.textColor = UIColor.textGrayColor
+        detailAdressTF.attributedPlaceholder = NSAttributedString.init(string: "请输入您的详细地址", attributes: [NSAttributedString.Key.foregroundColor:UIColor.textGrayColor])
+        timeSeletedLabel.textColor = UIColor.textGrayColor
+        infoBackView.backgroundColor = UIColor.globalBackColor
+        title1.textColor = UIColor.textBlackColor
         title1.font = UIFont.boldSystemFont(ofSize: 14)
-        info1.textColor = kTextGrayColor
-        title2.textColor = kTextBlockColor
+        info1.textColor = UIColor.textGrayColor
+        title2.textColor = UIColor.textBlackColor
         title2.font = UIFont.boldSystemFont(ofSize: 14)
-        info2.textColor = kTextGrayColor
+        info2.textColor = UIColor.textGrayColor
         
         adressListBtn.addTarget(self, action: #selector(OrderInstallLockController.seletedAdressList), for: .touchUpInside)
     }
@@ -114,10 +114,10 @@ extension OrderInstallLockController{
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 20))
-        headView.backgroundColor = kGlobalBackColor
+        headView.backgroundColor = UIColor.globalBackColor
         
         let orderNum = UILabel()
-        orderNum.textColor = kTextGrayColor
+        orderNum.textColor = UIColor.textGrayColor
         orderNum.text = "订单号: ********"
         orderNum.font = UIFont.systemFont(ofSize: 12)
         orderNum.isHidden = true
@@ -128,7 +128,7 @@ extension OrderInstallLockController{
         }
         
         let orderStatu = UILabel()
-        orderStatu.textColor = kTextBlockColor
+        orderStatu.textColor = UIColor.textBlackColor
         orderStatu.text = "待确认"
         orderStatu.font = UIFont.systemFont(ofSize: 12)
         orderStatu.isHidden = true
@@ -247,9 +247,9 @@ extension OrderInstallLockController : PickerDelegate{
             QPCLog("选择的日期:\(String(describing: dateStr))")
             weakSelf?.timeSeletedLabel.text = dateStr
         }
-        datepicker?.dateLabelColor = kTextBlueColor
-        datepicker?.datePickerColor = kTextBlockColor
-        datepicker?.doneButtonColor = kTextBlueColor
+        datepicker?.dateLabelColor = UIColor.textBlueColor
+        datepicker?.datePickerColor = UIColor.textBlackColor
+        datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
     }
     

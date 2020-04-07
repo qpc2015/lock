@@ -77,11 +77,11 @@ extension NumberVerificationCodeView{
     private func createTextField(frame:CGRect)->UITextField{
         
         let tf = VerificationTF(frame: frame)
-        tf.layer.borderColor = kRGBColorFromHex(rgbValue: 0xb6b6b6).cgColor
+        tf.layer.borderColor = UIColor.hex(hexString: "b6b6b6").cgColor
         tf.layer.borderWidth = 1
         tf.textAlignment = .center
         tf.font = UIFont.boldSystemFont(ofSize: 40)
-        tf.textColor = kTextBlockColor
+        tf.textColor = UIColor.textBlackColor
         tf.delegate = self
         tf.deleteDelegate = self
         tf.keyboardType = .numberPad

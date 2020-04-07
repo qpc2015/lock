@@ -42,8 +42,8 @@ extension AuthListController{
         backView.backgroundColor = UIColor.white
         self.view.insertSubview(backView, at: 0)
         
-        totalLabel.textColor = kRGBColorFromHex(rgbValue: 0x858585)
-        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        totalLabel.textColor = UIColor.hex(hexString: "858585")
+        line.backgroundColor = UIColor.hex(hexString: "f0f0f0")
         
         let ownerKO = (userInfoArr?.first?.userTel == UserInfo.getPhoneNumber())
         
@@ -77,12 +77,12 @@ extension AuthListController{
         self.view.addSubview(collectionView)
         
         if ownerKO{
-            self.view.backgroundColor = kGlobalBackColor
+            self.view.backgroundColor = UIColor.globalBackColor
             
             let addAuthNumberBtn = UIButton(type: .custom)
             addAuthNumberBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             addAuthNumberBtn.setTitle("添加授权成员", for: .normal)
-            addAuthNumberBtn.backgroundColor = kTextBlueColor
+            addAuthNumberBtn.backgroundColor = UIColor.textBlueColor
             addAuthNumberBtn.layer.cornerRadius = 4.0
             addAuthNumberBtn.layer.masksToBounds = true
             addAuthNumberBtn.addTarget(self, action: #selector(addAuthorizaNumbersClick(_:)), for: .touchUpInside)

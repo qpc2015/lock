@@ -121,7 +121,7 @@ extension LockInfoController : PickerDelegate{
         if section == 0{
             let label = UILabel()
             label.font = UIFont.systemFont(ofSize: 12.0)
-            label.textColor = kRGBColorFromHex(rgbValue: 0x878787)
+            label.textColor = UIColor.hex(hexString: "878787")
             label.text = "      给你提供更良好的售后服务,请填写您的门锁地址"
             return label
         }

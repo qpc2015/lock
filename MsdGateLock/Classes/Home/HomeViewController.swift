@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import Reachability
 
 class HomeViewController: UIViewController {
     
-    var isFirst : Bool = false
     @IBOutlet weak var lockTableView: UITableView!
     @IBOutlet weak var eleqLabel: UILabel!
     @IBOutlet weak var inLockLabel: UILabel!
@@ -29,47 +27,45 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var topLockLeftMagin: NSLayoutConstraint!
     @IBOutlet weak var powerRightMagin: NSLayoutConstraint!
     @IBOutlet weak var openBtnTopMagin: NSLayoutConstraint!
-    //中间线距离按钮顶部间距
-//    @IBOutlet weak var centerLineTopMagin: NSLayoutConstraint!
-    var popOverView : PopoverViewController!   //顶部锁列表
-    var lockListArr : [UserLockListResp]?   //所有所得数据
-    var waitRemoveLockArr : [String]? //待锁删除用户列表
-    var currentRemoveUserID : String?  //当前删除锁id
     @IBOutlet weak var openListTipLabel: UILabel!
-    var currentSeleteLock : UserLockListResp?{
+    @IBOutlet weak var lockUserBottomView: UIView!//开锁底部
+    @IBOutlet weak var homeCenterView: UIView!
+    var isFirst : Bool = false
+    static var isConnectNetWork : Bool = false  //当前环境是否有网络
+    private lazy var popOverView : PopoverViewController = {
+        let popOverView = PopoverViewController()
+        popOverView.modalPresentationStyle = .custom
+        popOverView.delegate = self
+        popVerAnimatior.presentedFrame = CGRect(x: (kScreenWidth - 120) * 0.5, y: 50, width: 150, height: 180)
+        popOverView.transitioningDelegate = popVerAnimatior
+        return popOverView
+    }()  //顶部锁列表
+    private var lockListArr : [UserLockListResp]?   //所有所得数据
+    private var waitRemoveLockArr : [String]? //待锁删除用户列表
+    private var currentRemoveUserID : String?  //当前删除锁id
+    private var currentSeleteLock : UserLockListResp?{
         didSet(old){
             let titleStr = currentSeleteLock?.remark
             titleBtn.setTitle(titleStr, for: .normal)
             titleBtn.sizeToFit()
         }
     }        //当前选中门锁
-    var openLockModelArr : [OpenLockList]? //当前门锁记录
-    var lockMessageArr : [InRoleModel]? //拉取授权结果集
-    var resetNumTipNameArr = [String]() //重新更换手机需重新绑定锁名
-    var nopermissVC : NoPermissionController?
-    var tempBottomView : UIView?//临时用户底部视图
-    @IBOutlet weak var lockUserBottomView: UIView!//开锁底部
-    @IBOutlet weak var homeCenterView: UIView!
-    var reachability: Reachability!
-    var blueManager : BleManager!
-    var dataManager = QPCDataManager.shareManager
-    var userWithZstr : String!
-    fileprivate lazy var titleBtn : TitleButton = TitleButton()
-    var isConnectNetWork : Bool = false  //当前环境是否有网络
-    lazy var popVerAnimatior : PopoverAnimator = PopoverAnimator(callBack: {[weak self] (isPresent) in
+    private var openLockModelArr : [OpenLockList]? //当前门锁记录
+    private var lockMessageArr : [InRoleModel]? //拉取授权结果集
+    private var resetNumTipNameArr = [String]() //重新更换手机需重新绑定锁名
+    private var tempBottomView : UIView?//临时用户底部视图
+    private var blueManager : BleManager = {
+        return BleManager.shared()
+    }()
+    private var dataManager = QPCDataManager.shareManager
+    private var userWithZstr : String!
+    private lazy var titleBtn : TitleButton = TitleButton()
+    private lazy var popVerAnimatior : PopoverAnimator = PopoverAnimator(callBack: {[weak self] (isPresent) in
         self?.titleBtn.isSelected = isPresent
     })
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            try reachability = Reachability()
-        } catch  {
-            print(error)
-        }
-        //开始监听网络状态
-        startListenNetStatuChange()
-        //UI
         setupStyle()
         setupNavigationBarWithShowAdd()
         //检查创建门锁表
@@ -79,7 +75,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         _ = [super.viewWillAppear(animated)]
         //开启蓝牙
-        setupBluetool()
+        blueManager.bleManagerDelegate = self
         //获取锁列表
         guard UserInfo.getUserId() != nil else {
             SVProgressHUD.showError(withStatus: LanguageHelper.getString(key: "Global_LogBackinError"))
@@ -104,10 +100,8 @@ class HomeViewController: UIViewController {
             tipLabelTop.constant = CGFloat(152.0 * 0.7)
         }
         //根据有无网络做不同操作
-        if isConnectNetWork {
+        if HomeViewController.isConnectNetWork {
             getUserLockList(UserInfo.getUserId()!)
-        }else{
-          
         }
     }
     
@@ -116,51 +110,41 @@ class HomeViewController: UIViewController {
         self.resetNumTipNameArr.removeAll()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        reachability.stopNotifier()
-    }
-}
-
-
-//MARK:- UI
-extension HomeViewController{
-
-    fileprivate func setupNavigationBarWithShowAdd(){
-
+    private func setupNavigationBarWithShowAdd(){
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named : "message icon "), style: .plain, target: self, action: #selector(messageCenterClick))
         
         let item1 =  UIBarButtonItem.init(image: UIImage(named : "user"), style: .plain, target: self, action: #selector(personCenterClick))
         let item2 =  UIBarButtonItem.init(image: UIImage(named : "add"), style: .plain, target: self, action: #selector(addLockClick))
-            navigationItem.rightBarButtonItems = [item1,item2]
-
+        navigationItem.rightBarButtonItems = [item1,item2]
+        
         titleBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         titleBtn.addTarget(self, action: #selector(titleViewClick(_:)), for: .touchUpInside)
         navigationItem.titleView = titleBtn
     }
     
-    fileprivate func setupStyle(){
+    private func setupStyle(){
         lockTableView.rowHeight = 27
         lockTableView.separatorStyle = .none
-        openListTipLabel.textColor = kTextGrayColor
-        eleqLabel.textColor = kTextBlockColor
-        inLockLabel.textColor = kTextBlockColor
-        powerLabel.textColor = kTextBlockColor
-        doorListLabel.textColor = kRGBColorFromHex(rgbValue: 0x282828)
-        moreBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x282828), for: .normal)
-        tipLockLabel.textColor = kTextBlueColor
-        centerLine.backgroundColor = kRGBColorFromHex(rgbValue: 0xe9e9e9)
-        bottomLine.backgroundColor = kRGBColorFromHex(rgbValue: 0xe9e9e9)
+        openListTipLabel.textColor = UIColor.textGrayColor
+        eleqLabel.textColor = UIColor.textBlackColor
+        inLockLabel.textColor = UIColor.textBlackColor
+        powerLabel.textColor = UIColor.textBlackColor
+        doorListLabel.textColor = UIColor.hex(hexString: "282828")
+        moreBtn.setTitleColor(UIColor.hex(hexString: "282828"), for: .normal)
+        tipLockLabel.textColor = UIColor.textBlueColor
+        centerLine.backgroundColor = UIColor.hex(hexString: "e9e9e9")
+        bottomLine.backgroundColor = UIColor.hex(hexString: "e9e9e9")
         //开锁按钮
         openLockBtn.setBackgroundImage(UIImage(named:"locking"), for: .selected)
-//        openLockBtn.setBackgroundImage(UIImage(named:"press"), for: .highlighted)
+        //        openLockBtn.setBackgroundImage(UIImage(named:"press"), for: .highlighted)
         openLockBtn.addTarget(self, action: #selector(openLockClick(btn:)), for: .touchUpInside)
         //底部按钮
-        lockNumbersBtn.setTitleColor(kTextBlueColor, for: .normal)
-        lockNumbersBtn.setTitleColor(kTextBlueColor, for: .highlighted)
+        lockNumbersBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
+        lockNumbersBtn.setTitleColor(UIColor.textBlueColor, for: .highlighted)
         lockNumbersBtn.addTarget(self, action: #selector(lockNumbersClick), for: .touchUpInside)
-        lockSetBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x2282ff), for: .normal)
-        lockSetBtn.setTitleColor(kRGBColorFromHex(rgbValue: 0x2282ff), for: .highlighted)
+        lockSetBtn.setTitleColor(UIColor.hex(hexString: "2282ff"), for: .normal)
+        lockSetBtn.setTitleColor(UIColor.hex(hexString: "2282ff"), for: .highlighted)
         lockSetBtn.addTarget(self, action: #selector(locksetClick), for: .touchUpInside)
         moreBtn.addTarget(self, action: #selector(moreClick), for: .touchUpInside)
         //设置临时用户底部
@@ -168,7 +152,7 @@ extension HomeViewController{
     }
     
     //临时用户底部按钮
-    fileprivate func setTempUserFootView(){
+    private func setTempUserFootView(){
         let bottomView = UIView()
         bottomView.backgroundColor = UIColor.white
         bottomView.isHidden = true
@@ -182,7 +166,7 @@ extension HomeViewController{
         tempBottomView = bottomView
         
         let topLine = UIView()
-        topLine.backgroundColor = kRGBColorFromHex(rgbValue: 0xe9e9e9)
+        topLine.backgroundColor = UIColor.hex(hexString:"e9e9e9")
         bottomView.addSubview(topLine)
         topLine.snp.makeConstraints { (make) in
             make.left.equalTo(0)
@@ -194,7 +178,7 @@ extension HomeViewController{
         let addLockBtn = UIButton.init(type: .custom)
         addLockBtn.setTitle("修改门锁备注", for: .normal)
         addLockBtn.titleLabel?.font = kGlobalTextFont
-        addLockBtn.setTitleColor(kTextBlueColor, for: .normal)
+        addLockBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
         addLockBtn.addTarget(self, action: #selector(reviseLockMarkClick), for: .touchUpInside)
         bottomView.addSubview(addLockBtn)
         addLockBtn.snp.makeConstraints { (make) in
@@ -206,7 +190,7 @@ extension HomeViewController{
         let orderLockBtn = UIButton.init(type: .custom)
         orderLockBtn.setTitle("退出门锁组", for: .normal)
         orderLockBtn.titleLabel?.font = kGlobalTextFont
-        orderLockBtn.setTitleColor(kTextBlueColor, for: .normal)
+        orderLockBtn.setTitleColor(UIColor.textBlueColor, for: .normal)
         orderLockBtn.addTarget(self, action: #selector(outLockClick), for: .touchUpInside)
         bottomView.addSubview(orderLockBtn)
         orderLockBtn.snp.makeConstraints { (make) in
@@ -215,13 +199,10 @@ extension HomeViewController{
             make.bottom.equalTo(0)
         }
     }
-}
-
-//MARK:- 接口调用
-extension HomeViewController{
     
+    //MARK:- 接口调用
     //添加电量，正/反锁记录
-    func addLockBatteryAndState(battery: Int,mainState: Int, backState: Int){
+    private func addLockBatteryAndState(battery: Int,mainState: Int, backState: Int){
         let req = BaseReq<LockStateModel>()
         req.action = GateLockActions.ACTION_AddLockBatteryAndState
         req.sessionId = UserInfo.getSessionId()!
@@ -235,7 +216,7 @@ extension HomeViewController{
     }
     
     //更新锁权限分配状态为已绑定
-    func updateAuthStatusCommand(lockid : String){
+    private func updateAuthStatusCommand(lockid : String){
         let req = BaseReq<TwoParam<String,Int>>()
         req.action = GateLockActions.ACTION_UpdateAuthStatus
         req.sessionId = UserInfo.getSessionId()!
@@ -247,7 +228,7 @@ extension HomeViewController{
     }
     
     //添加门锁日志
-    func addLockLog(){
+    private func addLockLog(){
         let req = BaseArrReq<ThreeParam<String,Int,String>>()
         req.action = GateLockActions.ACTION_AddLockLog
         req.sessionId = UserInfo.getSessionId()!
@@ -261,20 +242,19 @@ extension HomeViewController{
     }
     
     //获取用户锁列表
-    func getUserLockList(_ userID: Int){
-        
+    private func getUserLockList(_ userID: Int){
         let req =  CommonReq()
         req.action = GateLockActions.ACTION_GetLockList
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         
-        weak var weakSelf = self
-        AjaxUtil<UserLockListResp>.actionArrPostWithError(req: req, backArrJSON: { (resp) in
-
+        //        weak var weakSelf = self
+        AjaxUtil<UserLockListResp>.actionArrPostWithError(req: req, backArrJSON: {[weak self] (resp) in
+            guard let weakSelf = self else{ return }
             if let lockArr = resp.data,lockArr.count > 0 {
                 if UserInfo.getLastLock() == nil{
                     //默认选中第一个
-                    weakSelf?.currentSeleteLock = lockArr.first
+                    weakSelf.currentSeleteLock = lockArr.first
                 }else{
                     var lastIndex = 0
                     for index in 0 ..< lockArr.count{
@@ -283,74 +263,73 @@ extension HomeViewController{
                         }
                     }
                     //取出上次最后一个,如果上次的未找到默认取第一个
-                    weakSelf?.currentSeleteLock = lockArr[lastIndex]
+                    weakSelf.currentSeleteLock = lockArr[lastIndex]
                 }
-
-                weakSelf?.lockListArr = lockArr
+                
+                weakSelf.lockListArr = lockArr
                 //这里判断是否显示+
-                switch weakSelf?.currentSeleteLock?.roleType ?? 3{
+                switch weakSelf.currentSeleteLock?.roleType ?? 3{
                 case 0,1:
-                    self.openBtnTopMagin.constant = 92 * kHeight6Scale
-                    self.tempBottomView?.isHidden = true
-                    self.lockTableView.isHidden = false
-                    self.lockUserBottomView.isHidden = false
-                    self.homeCenterView.isHidden = false
+                    weakSelf.openBtnTopMagin.constant = 92 * kHeight6Scale
+                    weakSelf.tempBottomView?.isHidden = true
+                    weakSelf.lockTableView.isHidden = false
+                    weakSelf.lockUserBottomView.isHidden = false
+                    weakSelf.homeCenterView.isHidden = false
                     
                     //查询是否设置过密码
                     if !QPCKeychainTool.existNumberPassword() {
-                        weakSelf?.firstSetPassword()
+                        weakSelf.firstSetPassword()
                     }
                 case 2:
-                    self.tempBottomView?.isHidden = false
-                    self.lockTableView.isHidden = true
-                    self.lockUserBottomView.isHidden = true
-                    self.homeCenterView.isHidden = true
-                    self.openBtnTopMagin.constant = 152 * kHeight6Scale
+                    weakSelf.tempBottomView?.isHidden = false
+                    weakSelf.lockTableView.isHidden = true
+                    weakSelf.lockUserBottomView.isHidden = true
+                    weakSelf.homeCenterView.isHidden = true
+                    weakSelf.openBtnTopMagin.constant = 152 * kHeight6Scale
                     //查询是否设置过密码
                     if !QPCKeychainTool.existNumberPassword() {
-                        weakSelf?.firstSetPassword()
+                        weakSelf.firstSetPassword()
                     }
                 default:
                     QPCLog("我是未知数")
                 }
                 
                 //获取当前锁信息
-                weakSelf?.getCurrentLockInfo()
+                weakSelf.getCurrentLockInfo()
                 //筛选出未有密码的门锁
                 for lockInfo in lockArr{
                     if lockInfo.roleType == 0 {
                         if QPCKeychainTool.getOpenPassWordWithKeyChain(lockID: lockInfo.lockId!) == nil{
-                            weakSelf?.resetNumTipNameArr.append(lockInfo.remark!)
+                            weakSelf.resetNumTipNameArr.append(lockInfo.remark!)
                         }
                     }
                 }
                 //如有发现未有本地门锁的给予弹窗
-                if (weakSelf?.resetNumTipNameArr.count)! > 0 {
+                if weakSelf.resetNumTipNameArr.count > 0 {
                     var totalStr = ""
-                    for i in 0 ..< (weakSelf?.resetNumTipNameArr.count)!{
-                        totalStr += "\(i+1)、\(String(describing: (weakSelf?.resetNumTipNameArr[i])!))"
+                    for i in 0 ..< weakSelf.resetNumTipNameArr.count{
+                        totalStr += "\(i+1)、\(String(describing: weakSelf.resetNumTipNameArr[i]))"
                     }
                     //弹框
                     let alterVC = UIAlertController(title: "系统通知", message: "亲爱的门锁用户您好!\n为了保障您和家人的安全，作为管理员，更换手机后需要重新扫描门内二维码以绑定，\n以下门锁需要您重新绑定：\n\(totalStr)", preferredStyle: .alert)
                     let alertAc = UIAlertAction(title: "去设置", style: .default) { (action) in
                         let resetVC = ChangeNumberCodeController()
                         resetVC.title = "更换手机"
-                        resetVC.lockModel = self.currentSeleteLock!
-                        weakSelf!.navigationController?.pushViewController(resetVC, animated: true)
+                        resetVC.lockModel = weakSelf.currentSeleteLock!
+                        weakSelf.navigationController?.pushViewController(resetVC, animated: true)
                         
                     }
                     let knowAc = UIAlertAction(title: "我知道了", style: .default, handler: { (action) in
                         QPCLog("点击了知道")
                     })
-                    knowAc.setValue(kTextBlockColor, forKey: "_titleTextColor")
+                    knowAc.setValue(UIColor.textBlackColor, forKey: "_titleTextColor")
                     alterVC.addAction(alertAc)
                     alterVC.addAction(knowAc)
-                    self.present(alterVC, animated: true, completion: nil)
+                    weakSelf.present(alterVC, animated: true, completion: nil)
                 }
-                
                 //保存列表到到数据库
-                weakSelf?.dataManager.deleteTabelAllData((weakSelf?.dataManager.lockListTableName)!)
-                weakSelf?.dataManager.insertTableWithModelArr(model: resp.data!)
+                weakSelf.dataManager.deleteTabelAllData(weakSelf.dataManager.lockListTableName)
+                weakSelf.dataManager.insertTableWithModelArr(model: resp.data!)
             }else{
                 UIApplication.shared.keyWindow?.rootViewController = LockNavigationController(rootViewController: NoPermissionController())
             }
@@ -360,7 +339,7 @@ extension HomeViewController{
     }
     
     //待锁删除用户列表
-    func getUserWaitLockRemove(){
+    private func getUserWaitLockRemove(){
         let req = BaseReq<OneParam<String>>()
         req.action = GateLockActions.ACTION_UserWaitLockRemove
         req.sessionId = UserInfo.getSessionId()!
@@ -377,7 +356,7 @@ extension HomeViewController{
     }
     
     //操作删除门锁内用户
-    func sendCommandBlueToolToRemoveUser(){
+    private func sendCommandBlueToolToRemoveUser(){
         if (self.waitRemoveLockArr?.count)! > 0{
             for removeUserID in self.waitRemoveLockArr!{
                 self.currentRemoveUserID = removeUserID
@@ -387,7 +366,7 @@ extension HomeViewController{
     }
     
     //删除user更新状态
-    func updateRemovedList(){
+    private func updateRemovedList(){
         let req = BaseReq<UpdateLockRemoveReq>()
         req.action = GateLockActions.ACTION_UpdateUserLockRemove
         req.sessionId = UserInfo.getSessionId()!
@@ -400,22 +379,7 @@ extension HomeViewController{
     }
     
     
-    //获取我接收到的邀请
-//    func getInRole(){
-//        let req = BaseReq<OneParam<Int>>()
-//        req.action = GateLockActions.ACTION_InRole
-//        //用于测试 UserInfo.getSessionId()
-//        req.sessionId = UserInfo.getSessionId()
-//        //"5996c2a211c12013000ba08f"
-//        req.data = OneParam.init(p1:1|2|4)
-//        weak var weakSelf = self
-//        AjaxUtil<InRoleModel>.actionArrPost(req: req) { (resp) in
-//            QPCLog("--授权列表--\(resp)")
-//            weakSelf?.lockMessageArr = resp.data
-//        }
-//    }
-    
-    func getCurrentLockInfo(){
+    private func getCurrentLockInfo(){
         let req =  BaseReq<LockInfoReq>()
         req.action = GateLockActions.ACTION_GetLock
         req.sessionId = UserInfo.getSessionId()!
@@ -471,48 +435,26 @@ extension HomeViewController{
         getUserWaitLockRemove()
     }
     
-    //监听网路状态
-    fileprivate func startListenNetStatuChange(){
-
-        weak var weakSelf = self
-        reachability.whenUnreachable = { reachability in
-            weakSelf?.isConnectNetWork = false
-            DispatchQueue.main.async {
-                weakSelf?.checkNoNetworkWithAlext()
-            }
-        }
-        // 网络可用或切换网络类型时执行
-        reachability.whenReachable = { reachability in
-            weakSelf?.isConnectNetWork = true
-        }
-        
-        do {
-            try reachability.startNotifier()
-        }catch{
-            QPCLog("Unable to start notifier")
-        }
-    }
-    
 }
 
 //MARK:- 响应事件
 extension HomeViewController{
     
-    func firstSetPassword(){
+   private func firstSetPassword(){
         weak var weakSelf = self
         let alterVC = UIAlertController(title: "系统通知", message: "亲爱的门锁用户您好!\n您已被授权为门锁用户,请尽快设置属于您的开门密码", preferredStyle: .alert)
         let alertAc = UIAlertAction(title: "去设置", style: .default) { (action) in
-
-                let vc = UIStoryboard(name: "NumberPassWordController", bundle: nil).instantiateViewController(withIdentifier: "numberPassWordVC") as! NumberPassWordController
-                vc.isHideBack = true
-                weakSelf?.navigationController?.pushViewController(vc, animated: true)
+            
+            let vc = UIStoryboard(name: "NumberPassWordController", bundle: nil).instantiateViewController(withIdentifier: "numberPassWordVC") as! NumberPassWordController
+            vc.isHideBack = true
+            weakSelf?.navigationController?.pushViewController(vc, animated: true)
         }
         alterVC.addAction(alertAc)
         self.present(alterVC, animated: true, completion: nil)
     }
     
     //临时用户修改门锁备注
-    @objc func reviseLockMarkClick(){
+    @objc private func reviseLockMarkClick(){
         let nickVC = LockRemarkController()
         nickVC.isTemp = true
         nickVC.oldValue = currentSeleteLock?.remark
@@ -520,7 +462,7 @@ extension HomeViewController{
         navigationController?.pushViewController(nickVC, animated: true)
     }
     
-    @objc fileprivate func outLockClick(){
+    @objc private func outLockClick(){
         let alertVC = UIAlertController(title: nil, message: "您确定要退出当前门锁组", preferredStyle: .alert)
         let acSure = UIAlertAction(title: "确定", style: .default) { (UIAlertAction) in
             QPCLog("确定")
@@ -534,7 +476,7 @@ extension HomeViewController{
         self.present(alertVC, animated: true, completion: nil)
     }
     
-    func exitGourpNumber(){
+   private func exitGourpNumber(){
         let req =  BaseReq<OneParam<String>>()
         req.action = GateLockActions.ACTION_ExistGroup
         req.sessionId = UserInfo.getSessionId()!
@@ -546,7 +488,7 @@ extension HomeViewController{
         }
     }
     
-    @objc func moreClick(){
+    @objc private func moreClick(){
         let authVC = AuthUserOpenListController()
         authVC.isHiddenSub = true
         authVC.currentLockID = currentSeleteLock?.lockId
@@ -554,7 +496,7 @@ extension HomeViewController{
         navigationController?.pushViewController(authVC, animated: true)
     }
     
-    @objc func openLockClick(btn : UIButton){
+    @objc private func openLockClick(btn : UIButton){
         btn.isSelected = !btn.isSelected
         if btn.isSelected {
             //连接蓝牙开门
@@ -562,42 +504,42 @@ extension HomeViewController{
         }
     }
     
-    @objc func lockNumbersClick(){
-//        if currentSeleteLock != nil{
-            let lockNemVc = LockMembersController()
-            lockNemVc.lockModel = currentSeleteLock
-            lockNemVc.type = currentSeleteLock?.roleType
-            navigationController?.pushViewController(lockNemVc, animated: true)
-//        }
+    @objc private func lockNumbersClick(){
+        //        if currentSeleteLock != nil{
+        let lockNemVc = LockMembersController()
+        lockNemVc.lockModel = currentSeleteLock
+        lockNemVc.type = currentSeleteLock?.roleType
+        navigationController?.pushViewController(lockNemVc, animated: true)
+        //        }
     }
     
-    @objc func locksetClick(){
+    @objc private func locksetClick(){
         //拥有者和授权用户
         let usertype = currentSeleteLock?.roleType
-//        if usertype == 0{
-//            let lockVC = LockManageController()
-//            lockVC.currentLockModel = currentSeleteLock!
-//            navigationController?.pushViewController(lockVC, animated: true)
-//        }else if usertype == 1{
-            let authVC = AuthUserLockManageController()
-            authVC.currentLockID = currentSeleteLock?.lockId
-            navigationController?.pushViewController(authVC, animated: true)
-//        }
+        //        if usertype == 0{
+        //            let lockVC = LockManageController()
+        //            lockVC.currentLockModel = currentSeleteLock!
+        //            navigationController?.pushViewController(lockVC, animated: true)
+        //        }else if usertype == 1{
+        let authVC = AuthUserLockManageController()
+        authVC.currentLockID = currentSeleteLock?.lockId
+        navigationController?.pushViewController(authVC, animated: true)
+        //        }
     }
     
-    @objc func personCenterClick(){
+    @objc private func personCenterClick(){
         let vc = UIStoryboard(name: "Person", bundle: nil).instantiateViewController(withIdentifier: "personCenter")
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func messageCenterClick(){
+    @objc private func messageCenterClick(){
         let webVC = LockWebViewContrller()
         webVC.urlStr = GateLockActions.H5_Message
         webVC.title = "消息通知"
         navigationController?.pushViewController(webVC, animated: true)
     }
     
-    @objc func addLockClick(){
+    @objc private func addLockClick(){
         if blueManager.powerOn {
             let codeVC : QRCodeController = QRCodeController()
             self.navigationController?.pushViewController(codeVC, animated: true)
@@ -619,14 +561,8 @@ extension HomeViewController{
         }
     }
     
-    @objc fileprivate func titleViewClick(_ titleBtn : TitleButton) {
+    @objc private func titleViewClick(_ titleBtn : TitleButton) {
         titleBtn.isSelected = !titleBtn.isSelected
-        
-        popOverView = PopoverViewController()
-        popOverView.modalPresentationStyle = .custom
-        popOverView.delegate = self
-        popVerAnimatior.presentedFrame = CGRect(x: (kScreenWidth - 120) * 0.5, y: 50, width: 150, height: 180)
-        popOverView.transitioningDelegate = popVerAnimatior
         popOverView.listArr = lockListArr  //添加数据
         present(popOverView, animated: true, completion: nil)
     }
@@ -678,11 +614,6 @@ extension HomeViewController:UITableViewDataSource,UITableViewDelegate,PopoverVi
 //MARK: - CB
 extension HomeViewController : BleManagerDelegate{
     
-    func setupBluetool(){
-        blueManager = BleManager.shared()
-        blueManager.bleManagerDelegate = self
-    }
-    
     func starSearchBlue(){
         
         let per = (currentSeleteLock?.bluetoothName)!
@@ -705,23 +636,23 @@ extension HomeViewController : BleManagerDelegate{
             alertVC.addAction(acSure)
             self.present(alertVC, animated: true, completion: nil)
         }else{
-                SVProgressHUD.show(withStatus: LanguageHelper.getString(key: "BlueTool_LockConnectLoading"))
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10 , execute: {
-                    SVProgressHUD.dismiss()
-                })
-                let didContantPer = blueManager.connectedDevice()
-                
-                //查询当前是否有链接的设备,如有断开连接新设备
-                if didContantPer != nil {
-                    if didContantPer?.name == per {
-                        self.openLockCheckCommand()
-                    }else{
-                        blueManager.disConnectDevice(didContantPer!)
-                        blueManager.searchBleDevices()
-                    }
+            SVProgressHUD.show(withStatus: LanguageHelper.getString(key: "BlueTool_LockConnectLoading"))
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10 , execute: {
+                SVProgressHUD.dismiss()
+            })
+            let didContantPer = blueManager.connectedDevice()
+            
+            //查询当前是否有链接的设备,如有断开连接新设备
+            if didContantPer != nil {
+                if didContantPer?.name == per {
+                    self.openLockCheckCommand()
                 }else{
+                    blueManager.disConnectDevice(didContantPer!)
                     blueManager.searchBleDevices()
                 }
+            }else{
+                blueManager.searchBleDevices()
+            }
         }
     }
     
@@ -732,12 +663,12 @@ extension HomeViewController : BleManagerDelegate{
         if currentSeleteLock?.roleType == 0{
             //检查owner当前锁有没有开门秘钥
             if QPCKeychainTool.getOpenPassWordWithKeyChain(lockID: (currentSeleteLock?.lockId)!) != nil{
-                    //判断有没有初始化过
-                    let isSetup = UserInfo.getLockIsSetupWithNumberAndBlueName(soleStr: UserInfo.getPhoneNumber()! + (currentSeleteLock?.bluetoothName)!)
-                    if isSetup == nil {
-                        //时间初始化
-                        bleToolTimeSetup()
-                    }else{
+                //判断有没有初始化过
+                let isSetup = UserInfo.getLockIsSetupWithNumberAndBlueName(soleStr: UserInfo.getPhoneNumber()! + (currentSeleteLock?.bluetoothName)!)
+                if isSetup == nil {
+                    //时间初始化
+                    bleToolTimeSetup()
+                }else{
                     let isTimeSynch = UserInfo.getLockIsTimeSynch(blueName: (currentSeleteLock?.bluetoothName)!)
                     if LockTools.checkIsOverTimeWithDate(date: isTimeSynch) {
                         //检测时间同步
@@ -758,7 +689,7 @@ extension HomeViewController : BleManagerDelegate{
                 let knowAc = UIAlertAction(title: "我知道了", style: .default, handler: { (action) in
                     QPCLog("点击了知道")
                 })
-                knowAc.setValue(kTextBlockColor, forKey: "_titleTextColor")
+                knowAc.setValue(UIColor.textBlackColor, forKey: "_titleTextColor")
                 alterVC.addAction(alertAc)
                 alterVC.addAction(knowAc)
                 self.present(alterVC, animated: true, completion: nil)
@@ -770,7 +701,7 @@ extension HomeViewController : BleManagerDelegate{
                 self.addUserWithBlueTool()
             }else{
                 //查询user是否有开门秘钥
-                 let openKey = QPCKeychainTool.getOpenPassWordWithKeyChain(lockID: (currentSeleteLock?.lockId)!)
+                let openKey = QPCKeychainTool.getOpenPassWordWithKeyChain(lockID: (currentSeleteLock?.lockId)!)
                 if openKey == nil{
                     weak var weakSelf = self
                     self.getZKeyContentWithS(completionHandler: { (s) in
@@ -821,7 +752,7 @@ extension HomeViewController : BleManagerDelegate{
         var code : Int = 0
         //开门秘钥
         let privateKey =  (QPCKeychainTool.getOpenPassWordWithKeyChain(lockID: (currentSeleteLock?.lockId)!))!
-
+        
         QPCLog("开门秘钥---\(privateKey)")
         //Int(Date().timeIntervalSince1970)
         let currentTime = Int(Date().timeIntervalSince1970)
@@ -832,7 +763,7 @@ extension HomeViewController : BleManagerDelegate{
             QPCLog("我是验证码---\(code)--\(String(describing: a))----currentTime --\(currentTime)-")
         }
         func areKeysConsistent(_ key: UnsafeMutablePointer<UInt8>, _ keyLength: Int
-            ) {
+        ) {
             print(key)
         }
         var codeStr = "\(code)"
@@ -857,9 +788,7 @@ extension HomeViewController : BleManagerDelegate{
     }
     
     func `return`(withData data: String!, isSucceed succeed: Bool, backData: String!){
-        
         QPCLog("\(data)----\(backData!)")
-
         switch data! {
         case "初始化成功":
             // 记录已经初始化该锁
@@ -889,7 +818,7 @@ extension HomeViewController : BleManagerDelegate{
             UserInfo.saveLockIsTimeSynchWithBlueNameAndTime(blueName: (currentSeleteLock?.bluetoothName)!, time: currentTime)
             self.openLockCommand()
         case "时间被重置":
-             self.bleToolTimeSetup()
+            self.bleToolTimeSetup()
         case "开门成功":
             Utils.showTip("开锁成功")
             let power = (backData as NSString).substring(to: 1)
@@ -923,7 +852,7 @@ extension HomeViewController : BleManagerDelegate{
             self.openLockBtn.isSelected = false
         }
     }
-
+    
     func addUserWithBlueTool(){
         //查询s
         let req =  BaseReq<UserGetKeyModel>()
@@ -959,7 +888,7 @@ extension HomeViewController : BleManagerDelegate{
         let z = str.aesEncrypt(key: keyStr)
         QPCLog("-\(String(describing: z!))")
         req.data = UserKeyContentModel.init("Z", content: z!, lockid: (currentSeleteLock?.lockId)!, tel: UserInfo.getPhoneNumber()!, isdel: 0)
-
+        
         AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
             QPCLog(resp.data?.msg)
         }) { (error) in
@@ -986,9 +915,9 @@ extension HomeViewController : BleManagerDelegate{
             let nStr = np + np + np + np
             let s = Z!.aesDecrypt(key: nStr)
             completionHandler(s!)
-
+            
         }) { (errStr) in
-           QPCLog(errStr)
+            QPCLog(errStr)
         }
     }
     

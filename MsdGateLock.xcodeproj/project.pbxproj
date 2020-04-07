@@ -12,9 +12,13 @@
 		002E0B781ED57E3A001D209F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 002E0B761ED57E3A001D209F /* LaunchScreen.storyboard */; };
 		002E0B831ED57E3A001D209F /* MsdGateLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0B821ED57E3A001D209F /* MsdGateLockTests.swift */; };
 		002E0B8E1ED57E3A001D209F /* MsdGateLockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E0B8D1ED57E3A001D209F /* MsdGateLockUITests.swift */; };
-		0052F5F51ED5883A0035F569 /* SwiftHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052F5F41ED5883A0035F569 /* SwiftHelper.swift */; };
 		0052F6001ED6AE380035F569 /* RKDropdownAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0052F5FF1ED6AE380035F569 /* RKDropdownAlert.framework */; };
 		45165E63F4D9751BC73E8E57 /* Pods_MsdGateLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0502FDC7043EEF091E35131A /* Pods_MsdGateLock.framework */; };
+		5D8D2C7F243C530400392D08 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D2C7E243C530400392D08 /* UIColorExtension.swift */; };
+		5D8D2C81243C5CDD00392D08 /* LanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D2C80243C5CDD00392D08 /* LanguageHelper.swift */; };
+		5D8D2C83243C5D1900392D08 /* SwiftHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D2C82243C5D1900392D08 /* SwiftHelper.swift */; };
+		5D8D2C85243C5D5D00392D08 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D2C84243C5D5D00392D08 /* Utils.swift */; };
+		5D8D2C87243C5D7400392D08 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8D2C86243C5D7400392D08 /* UserInfo.swift */; };
 		D402A9F31F1E107800D8535F /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402A9F21F1E107800D8535F /* UserInfoModel.swift */; };
 		D402A9FA1F1E272600D8535F /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = D402A9F51F1E272600D8535F /* area.plist */; };
 		D402A9FB1F1E272600D8535F /* DateLmyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402A9F61F1E272600D8535F /* DateLmyExtension.swift */; };
@@ -30,7 +34,6 @@
 		D403EFAD1F349C9B00151713 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D403EFA71F349C9B00151713 /* BLEUtility.m */; };
 		D403EFAE1F349C9B00151713 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D403EFA91F349C9B00151713 /* NSData+Hex.m */; };
 		D403EFAF1F349C9B00151713 /* XOREncryptAndDecrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = D403EFAB1F349C9B00151713 /* XOREncryptAndDecrypt.m */; };
-		D4044E651F14A44A009FAFFA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4044E641F14A44A009FAFFA /* UserInfo.swift */; };
 		D41909D31F4C19DC001DE053 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D41909C81F4C19DC001DE053 /* FMDatabase.m */; };
 		D41909D41F4C19DC001DE053 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D41909CA1F4C19DC001DE053 /* FMDatabaseAdditions.m */; };
 		D41909D51F4C19DC001DE053 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D41909CC1F4C19DC001DE053 /* FMDatabasePool.m */; };
@@ -77,8 +80,8 @@
 		D44D50F61EE94A37004243FD /* MsdGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D50F31EE94A37004243FD /* MsdGlobals.swift */; };
 		D44FB0811EEF9A4700358CDC /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0801EEF9A4700358CDC /* Const.swift */; };
 		D44FB0831EEFE47600358CDC /* SwiftTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0821EEFE47600358CDC /* SwiftTimer.swift */; };
-		D44FB0951EF002FB00358CDC /* UIBarButtonItem-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0931EF002FB00358CDC /* UIBarButtonItem-Extension.swift */; };
-		D44FB0961EF002FB00358CDC /* UIButton-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0941EF002FB00358CDC /* UIButton-Extension.swift */; };
+		D44FB0951EF002FB00358CDC /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0931EF002FB00358CDC /* UIBarButtonItemExtension.swift */; };
+		D44FB0961EF002FB00358CDC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0941EF002FB00358CDC /* UIButtonExtension.swift */; };
 		D44FB0981EF1395400358CDC /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0971EF1395400358CDC /* TitleButton.swift */; };
 		D44FB0A71EF148D700358CDC /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0A61EF148D700358CDC /* BottomButton.swift */; };
 		D44FB0AB1EF255DB00358CDC /* PersonTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44FB0A91EF255DB00358CDC /* PersonTableController.swift */; };
@@ -113,7 +116,6 @@
 		D45865C81F04F13A002F4AE2 /* TransferAdminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45865C71F04F13A002F4AE2 /* TransferAdminController.swift */; };
 		D45865CB1F04F6AF002F4AE2 /* TransferUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45865C91F04F6AF002F4AE2 /* TransferUserCell.swift */; };
 		D45865CC1F04F6AF002F4AE2 /* TransferUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45865CA1F04F6AF002F4AE2 /* TransferUserCell.xib */; };
-		D45865D01F05FF42002F4AE2 /* LYJUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45865CF1F05FF42002F4AE2 /* LYJUITextView.swift */; };
 		D45865D41F063B17002F4AE2 /* AuthUserOpenListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45865D31F063B17002F4AE2 /* AuthUserOpenListController.swift */; };
 		D45865D71F064242002F4AE2 /* OpenListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45865D51F064242002F4AE2 /* OpenListCell.swift */; };
 		D45865D81F064242002F4AE2 /* OpenListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45865D61F064242002F4AE2 /* OpenListCell.xib */; };
@@ -163,13 +165,11 @@
 		D4B2BC551F18AA2B00AA7982 /* GuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B2BC541F18AA2B00AA7982 /* GuideViewController.xib */; };
 		D4B2BC571F18C4A000AA7982 /* DataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2BC561F18C4A000AA7982 /* DataEncoding.swift */; };
 		D4B9CE4D1F7A69BE00861329 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4B9CE4F1F7A69BE00861329 /* Localizable.strings */; };
-		D4B9CE521F7B3D6900861329 /* LanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B9CE511F7B3D6900861329 /* LanguageHelper.swift */; };
 		D4BA41D21F4D2EF9005E47DA /* LockStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA41D11F4D2EF9005E47DA /* LockStateModel.swift */; };
 		D4FD6E5D1EFCF450009FFE39 /* QRCodeBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD6E5C1EFCF450009FFE39 /* QRCodeBottomButton.swift */; };
 		D4FD6E5F1EFD03F9009FFE39 /* SetGestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD6E5E1EFD03F9009FFE39 /* SetGestureController.swift */; };
 		DB17BE24201817E700F7F751 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB17BE23201817E700F7F751 /* CryptoSwift.framework */; };
 		DB4E6A8D1EE6BD700003A460 /* GateLockActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E6A7B1EE6BD700003A460 /* GateLockActions.swift */; };
-		DB4E6A8E1EE6BD700003A460 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E6A7C1EE6BD700003A460 /* Utils.swift */; };
 		DB4E6A8F1EE6BD700003A460 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E6A811EE6BD700003A460 /* LoginController.swift */; };
 		DB4E6A901EE6BD700003A460 /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB4E6A821EE6BD700003A460 /* LoginController.xib */; };
 		DB4E6A931EE6BD700003A460 /* CommonParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E6A861EE6BD700003A460 /* CommonParam.swift */; };
@@ -214,11 +214,15 @@
 		002E0B891ED57E3A001D209F /* MsdGateLockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MsdGateLockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		002E0B8D1ED57E3A001D209F /* MsdGateLockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsdGateLockUITests.swift; sourceTree = "<group>"; };
 		002E0B8F1ED57E3A001D209F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0052F5F41ED5883A0035F569 /* SwiftHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftHelper.swift; path = ../../SwiftHelper.swift; sourceTree = "<group>"; };
 		0052F5FF1ED6AE380035F569 /* RKDropdownAlert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RKDropdownAlert.framework; path = "Pods/../build/Debug-iphoneos/RKDropdownAlert/RKDropdownAlert.framework"; sourceTree = "<group>"; };
 		0052F6011ED6BB6D0035F569 /* MsdGateLock-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MsdGateLock-Bridging-Header.h"; sourceTree = "<group>"; };
 		0502FDC7043EEF091E35131A /* Pods_MsdGateLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MsdGateLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CE90C318548883AB0A81FF4 /* Pods-MsdGateLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MsdGateLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-MsdGateLock/Pods-MsdGateLock.release.xcconfig"; sourceTree = "<group>"; };
+		5D8D2C7E243C530400392D08 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		5D8D2C80243C5CDD00392D08 /* LanguageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageHelper.swift; path = BLE/LanguageHelper.swift; sourceTree = "<group>"; };
+		5D8D2C82243C5D1900392D08 /* SwiftHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHelper.swift; sourceTree = "<group>"; };
+		5D8D2C84243C5D5D00392D08 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5D8D2C86243C5D7400392D08 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		8F2EBD2BC6B810267BD3F29E /* Pods-MsdGateLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MsdGateLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MsdGateLock/Pods-MsdGateLock.debug.xcconfig"; sourceTree = "<group>"; };
 		D402A9F21F1E107800D8535F /* UserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		D402A9F51F1E272600D8535F /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
@@ -240,7 +244,6 @@
 		D403EFAA1F349C9B00151713 /* XOREncryptAndDecrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XOREncryptAndDecrypt.h; sourceTree = "<group>"; };
 		D403EFAB1F349C9B00151713 /* XOREncryptAndDecrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XOREncryptAndDecrypt.m; sourceTree = "<group>"; };
 		D4044E5B1F138AD2009FAFFA /* MsdGateLock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MsdGateLock.entitlements; sourceTree = "<group>"; };
-		D4044E641F14A44A009FAFFA /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = ../Login/Model/UserInfo.swift; sourceTree = "<group>"; };
 		D41909C71F4C19DC001DE053 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		D41909C81F4C19DC001DE053 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		D41909C91F4C19DC001DE053 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -303,8 +306,8 @@
 		D44D50F31EE94A37004243FD /* MsdGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsdGlobals.swift; sourceTree = "<group>"; };
 		D44FB0801EEF9A4700358CDC /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		D44FB0821EEFE47600358CDC /* SwiftTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTimer.swift; sourceTree = "<group>"; };
-		D44FB0931EF002FB00358CDC /* UIBarButtonItem-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem-Extension.swift"; sourceTree = "<group>"; };
-		D44FB0941EF002FB00358CDC /* UIButton-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton-Extension.swift"; sourceTree = "<group>"; };
+		D44FB0931EF002FB00358CDC /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
+		D44FB0941EF002FB00358CDC /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		D44FB0971EF1395400358CDC /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
 		D44FB0A61EF148D700358CDC /* BottomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		D44FB0A91EF255DB00358CDC /* PersonTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonTableController.swift; sourceTree = "<group>"; };
@@ -339,7 +342,6 @@
 		D45865C71F04F13A002F4AE2 /* TransferAdminController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferAdminController.swift; sourceTree = "<group>"; };
 		D45865C91F04F6AF002F4AE2 /* TransferUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferUserCell.swift; sourceTree = "<group>"; };
 		D45865CA1F04F6AF002F4AE2 /* TransferUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferUserCell.xib; sourceTree = "<group>"; };
-		D45865CF1F05FF42002F4AE2 /* LYJUITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYJUITextView.swift; sourceTree = "<group>"; };
 		D45865D31F063B17002F4AE2 /* AuthUserOpenListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUserOpenListController.swift; sourceTree = "<group>"; };
 		D45865D51F064242002F4AE2 /* OpenListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenListCell.swift; sourceTree = "<group>"; };
 		D45865D61F064242002F4AE2 /* OpenListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenListCell.xib; sourceTree = "<group>"; };
@@ -395,13 +397,11 @@
 		D4B9CE4A1F7A68AF00861329 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D4B9CE4E1F7A69BE00861329 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4B9CE501F7A69C100861329 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		D4B9CE511F7B3D6900861329 /* LanguageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageHelper.swift; path = MsdGateLock/Classes/Tools/LanguageHelper.swift; sourceTree = SOURCE_ROOT; };
 		D4BA41D11F4D2EF9005E47DA /* LockStateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockStateModel.swift; sourceTree = "<group>"; };
 		D4FD6E5C1EFCF450009FFE39 /* QRCodeBottomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeBottomButton.swift; sourceTree = "<group>"; };
 		D4FD6E5E1EFD03F9009FFE39 /* SetGestureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetGestureController.swift; path = ../../Home/SetGestureController.swift; sourceTree = "<group>"; };
 		DB17BE23201817E700F7F751 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/MsdGateLock-fhwucsdoygladvcmmpvryhhuxxai/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
 		DB4E6A7B1EE6BD700003A460 /* GateLockActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GateLockActions.swift; path = ../../Common/GateLockActions.swift; sourceTree = "<group>"; };
-		DB4E6A7C1EE6BD700003A460 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = ../Common/Utils.swift; sourceTree = "<group>"; };
 		DB4E6A811EE6BD700003A460 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		DB4E6A821EE6BD700003A460 /* LoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginController.xib; sourceTree = "<group>"; };
 		DB4E6A861EE6BD700003A460 /* CommonParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonParam.swift; path = ../../Login/Model/CommonParam.swift; sourceTree = "<group>"; };
@@ -568,15 +568,6 @@
 			path = BLE;
 			sourceTree = "<group>";
 		};
-		D4044E5C1F139857009FAFFA /* Libs */ = {
-			isa = PBXGroup;
-			children = (
-				D470D2151F74F62800135554 /* WSDaePickerView */,
-				D402A9F41F1E272600D8535F /* LmyPicker */,
-			);
-			path = Libs;
-			sourceTree = "<group>";
-		};
 		D41909C61F4C19DC001DE053 /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,26 +682,25 @@
 		D44D50E91EE94956004243FD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				D470D2151F74F62800135554 /* WSDaePickerView */,
+				D402A9F41F1E272600D8535F /* LmyPicker */,
 				D41909C61F4C19DC001DE053 /* fmdb */,
 				D4E0B2C71F3C2A3000D462F9 /* OTPGenerator */,
 				D403EFA31F349C9B00151713 /* BLE */,
-				D4044E5C1F139857009FAFFA /* Libs */,
-				D44FB0921EF002FB00358CDC /* Extension */,
 				D44FB0821EEFE47600358CDC /* SwiftTimer.swift */,
-				D4B9CE511F7B3D6900861329 /* LanguageHelper.swift */,
-				0052F5F41ED5883A0035F569 /* SwiftHelper.swift */,
+				5D8D2C82243C5D1900392D08 /* SwiftHelper.swift */,
+				5D8D2C80243C5CDD00392D08 /* LanguageHelper.swift */,
 				D44FB0971EF1395400358CDC /* TitleButton.swift */,
 				D44FB0A61EF148D700358CDC /* BottomButton.swift */,
 				D4FD6E5C1EFCF450009FFE39 /* QRCodeBottomButton.swift */,
 				D4B2BC561F18C4A000AA7982 /* DataEncoding.swift */,
-				DB4E6A7C1EE6BD700003A460 /* Utils.swift */,
-				D4044E641F14A44A009FAFFA /* UserInfo.swift */,
+				5D8D2C84243C5D5D00392D08 /* Utils.swift */,
+				5D8D2C86243C5D7400392D08 /* UserInfo.swift */,
 				D402AA081F21E37E00D8535F /* LockTools.swift */,
 				D4A768191F5EA6E4003D6A93 /* QPCKeychainTool.swift */,
-				D44D50F01EE94A37004243FD /* Http */,
 			);
 			name = Tools;
-			path = MsdGateLock/Classes/Tools;
+			path = MsdGateLock/Classes/Common/Tools;
 			sourceTree = SOURCE_ROOT;
 		};
 		D44D50F01EE94A37004243FD /* Http */ = {
@@ -728,9 +718,9 @@
 		D44FB0921EF002FB00358CDC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D45865CF1F05FF42002F4AE2 /* LYJUITextView.swift */,
-				D44FB0931EF002FB00358CDC /* UIBarButtonItem-Extension.swift */,
-				D44FB0941EF002FB00358CDC /* UIButton-Extension.swift */,
+				D44FB0931EF002FB00358CDC /* UIBarButtonItemExtension.swift */,
+				D44FB0941EF002FB00358CDC /* UIButtonExtension.swift */,
+				5D8D2C7E243C530400392D08 /* UIColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -951,7 +941,6 @@
 				D453B2BA1EF28FE00002F02D /* QRCode */,
 				DB4E6A801EE6BD700003A460 /* Login */,
 				DB4E6A791EE6BD700003A460 /* Common */,
-				D44D50E91EE94956004243FD /* Tools */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -959,6 +948,9 @@
 		DB4E6A791EE6BD700003A460 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D44D50F01EE94A37004243FD /* Http */,
+				D44D50E91EE94956004243FD /* Tools */,
+				D44FB0921EF002FB00358CDC /* Extension */,
 				D44FB0801EEF9A4700358CDC /* Const.swift */,
 			);
 			path = Common;
@@ -1223,7 +1215,6 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RKDropdownAlert/RKDropdownAlert.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -1238,7 +1229,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKDropdownAlert.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -1260,6 +1250,7 @@
 				D45865B91F03B06A002F4AE2 /* TempListController.swift in Sources */,
 				D4382A1B1F2877DD00561FB0 /* PCCircle.m in Sources */,
 				D45865ED1F0A3A89002F4AE2 /* AuthUserLockManageController.swift in Sources */,
+				5D8D2C85243C5D5D00392D08 /* Utils.swift in Sources */,
 				DB4E6A8F1EE6BD700003A460 /* LoginController.swift in Sources */,
 				D45865E31F066733002F4AE2 /* LockManageController.swift in Sources */,
 				D45865C81F04F13A002F4AE2 /* TransferAdminController.swift in Sources */,
@@ -1273,6 +1264,7 @@
 				D45865E51F067C4E002F4AE2 /* LockRemarkController.swift in Sources */,
 				D4A7681A1F5EA6E5003D6A93 /* QPCKeychainTool.swift in Sources */,
 				D45C6BC71F0B2C5C003DD60A /* OrderInstallLockController.swift in Sources */,
+				5D8D2C87243C5D7400392D08 /* UserInfo.swift in Sources */,
 				D4A7681C1F5FC380003D6A93 /* ChangeNumberCodeController.swift in Sources */,
 				DBD804E01F07837E00AD98C1 /* PersonInfoController.swift in Sources */,
 				D44FB0BC1EF2560C00358CDC /* PopoverViewController.swift in Sources */,
@@ -1280,10 +1272,9 @@
 				D402AA091F21E37E00D8535F /* LockTools.swift in Sources */,
 				D48196081F00F1FB0046681B /* ReviseRemarkController.swift in Sources */,
 				DB4E6A951EE6BD700003A460 /* User.swift in Sources */,
-				D44FB0961EF002FB00358CDC /* UIButton-Extension.swift in Sources */,
+				D44FB0961EF002FB00358CDC /* UIButtonExtension.swift in Sources */,
 				D42703461EFA406400401292 /* FingerprintController.swift in Sources */,
 				D402A9F31F1E107800D8535F /* UserInfoModel.swift in Sources */,
-				0052F5F51ED5883A0035F569 /* SwiftHelper.swift in Sources */,
 				D45865AF1F020B5D002F4AE2 /* VerificationTF.swift in Sources */,
 				D42703501EFA87C200401292 /* NumLockCodeViewController.swift in Sources */,
 				D49183001F2206A000EE86C7 /* UploadImageModel.swift in Sources */,
@@ -1292,7 +1283,6 @@
 				D44FB0BB1EF2560C00358CDC /* PopoverAnimator.swift in Sources */,
 				D43325A91F2B053F004819DA /* UpdateLockModel.swift in Sources */,
 				D4841BC01F5021A1001DA40E /* RoleUserDetail.swift in Sources */,
-				D4B9CE521F7B3D6900861329 /* LanguageHelper.swift in Sources */,
 				D447BB681F238455009C0895 /* CheckLockIdModel.swift in Sources */,
 				D427033F1EF927AA00401292 /* LockWebViewContrller.swift in Sources */,
 				D403EFAD1F349C9B00151713 /* BLEUtility.m in Sources */,
@@ -1302,8 +1292,6 @@
 				D44FB0B71EF2560C00358CDC /* HomeViewController.swift in Sources */,
 				D45C6BD01F0B413D003DD60A /* MessageCell.swift in Sources */,
 				D4382A291F2897DD00561FB0 /* GesturePasswordController.swift in Sources */,
-				D4044E651F14A44A009FAFFA /* UserInfo.swift in Sources */,
-				D45865D01F05FF42002F4AE2 /* LYJUITextView.swift in Sources */,
 				D45865CB1F04F6AF002F4AE2 /* TransferUserCell.swift in Sources */,
 				D44FB0981EF1395400358CDC /* TitleButton.swift in Sources */,
 				D45C6BCC1F0B4102003DD60A /* MessageNotiController.swift in Sources */,
@@ -1321,7 +1309,6 @@
 				D4382A1C1F2877DD00561FB0 /* PCCircleView.m in Sources */,
 				D45865D71F064242002F4AE2 /* OpenListCell.swift in Sources */,
 				D44FB0831EEFE47600358CDC /* SwiftTimer.swift in Sources */,
-				DB4E6A8E1EE6BD700003A460 /* Utils.swift in Sources */,
 				D41909DE1F4C1B98001DE053 /* QPCDataManager.swift in Sources */,
 				D45865E71F06801D002F4AE2 /* DetailAdressController.swift in Sources */,
 				D402A9FC1F1E272600D8535F /* LmyPicker.swift in Sources */,
@@ -1337,6 +1324,7 @@
 				D402A9FB1F1E272600D8535F /* DateLmyExtension.swift in Sources */,
 				D453B2BD1EF28FE00002F02D /* QRCodeController.swift in Sources */,
 				D45865A81F00FDE4002F4AE2 /* TempUserDetailController.swift in Sources */,
+				5D8D2C83243C5D1900392D08 /* SwiftHelper.swift in Sources */,
 				D41909D41F4C19DC001DE053 /* FMDatabaseAdditions.m in Sources */,
 				D427034D1EFA662700401292 /* NoPermissionController.swift in Sources */,
 				D49D6BC81F0A52E900CEBDA6 /* PassManageController.swift in Sources */,
@@ -1364,7 +1352,8 @@
 				D402AA011F1F8A7000D8535F /* NoPerAdCell.swift in Sources */,
 				DB4E6A8D1EE6BD700003A460 /* GateLockActions.swift in Sources */,
 				DBD804E41F0792D200AD98C1 /* ChangePhoneNumController.swift in Sources */,
-				D44FB0951EF002FB00358CDC /* UIBarButtonItem-Extension.swift in Sources */,
+				D44FB0951EF002FB00358CDC /* UIBarButtonItemExtension.swift in Sources */,
+				5D8D2C7F243C530400392D08 /* UIColorExtension.swift in Sources */,
 				D4841BBE1F4ECB1E001DA40E /* ExpireDateModel.swift in Sources */,
 				DBD804EE1F079EBC00AD98C1 /* OrderListCell.swift in Sources */,
 				D470D21E1F74F62900135554 /* UIView+Extension.m in Sources */,
@@ -1373,6 +1362,7 @@
 				002E0B6A1ED57E3A001D209F /* AppDelegate.swift in Sources */,
 				D4B2BC531F18A92800AA7982 /* GuideViewController.swift in Sources */,
 				D43829F81F276B0200561FB0 /* TouchIdManager.swift in Sources */,
+				5D8D2C81243C5CDD00392D08 /* LanguageHelper.swift in Sources */,
 				D4A445E11F3DCB94007A0451 /* InRoleModel.swift in Sources */,
 				D41909D51F4C19DC001DE053 /* FMDatabasePool.m in Sources */,
 				D43325A41F2A1E2B004819DA /* OrderLockModel.swift in Sources */,

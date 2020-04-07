@@ -178,7 +178,7 @@ extension ScannerBackgroundView{
         
         let bottomInView = UIView(frame: CGRect(x: 0, y: kScreenHeight * 0.88 - 64, width: kScreenWidth, height: btnWH))
 //        bottomInView.backgroundColor = UIColor.blue
-        bottomInView.backgroundColor = kRGBColorFromHex(rgbValue: 0x353535)
+        bottomInView.backgroundColor = UIColor.hex(hexString: "353535")
         self.addSubview(bottomInView)
         
         //输入编号
@@ -214,7 +214,7 @@ extension ScannerBackgroundView{
     //创建单一边角线
     func createRowLine()-> UIView{
         let line = UIView()
-        line.backgroundColor = kTextBlueColor
+        line.backgroundColor = UIColor.textBlueColor
         return line
     }
     

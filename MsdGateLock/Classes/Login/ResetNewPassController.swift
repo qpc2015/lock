@@ -21,7 +21,7 @@ class ResetNewPassController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "重置数字密码"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
         newTF.addTarget(self, action: #selector(ResetNewPassController.newTFValueChange(tf:)), for: .editingChanged)
         okTF.addTarget(self, action: #selector(ResetNewPassController.okTFValueChange(tf:)), for: .editingChanged)
@@ -33,9 +33,9 @@ extension ResetNewPassController{
     
     func setupUI(){
         self.newTF.becomeFirstResponder()
-        newLabel.textColor = kTextBlockColor
-        okLabel.textColor = kTextBlockColor
-        line.backgroundColor = kRGBColorFromHex(rgbValue: 0xf0f0f0)
+        newLabel.textColor = UIColor.textBlackColor
+        okLabel.textColor = UIColor.textBlackColor
+        line.backgroundColor = UIColor.hex(hexString: "f0f0f0")
     }
     
     @objc func newTFValueChange(tf : UITextField){

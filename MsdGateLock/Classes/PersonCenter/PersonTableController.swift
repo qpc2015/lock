@@ -24,7 +24,7 @@ class PersonTableController: UITableViewController {
         super.viewDidLoad()
 
         self.title = "个人中心"
-        self.view.backgroundColor = kGlobalBackColor
+        self.view.backgroundColor = UIColor.globalBackColor
         setupUI()
 
     }
@@ -51,13 +51,13 @@ class PersonTableController: UITableViewController {
 extension PersonTableController{
     
     func setupUI(){
-        nickName.textColor = kTextBlockColor
-        phoneLabel.textColor = kTextBlockColor
-        lockPass.textColor = kTextBlockColor
-        orderLock.textColor = kTextBlockColor
-//        useInfo.textColor = kTextBlockColor
-        aboutUs.textColor = kTextBlockColor
-        loginOut.textColor = kTextBlockColor
+        nickName.textColor = UIColor.textBlackColor
+        phoneLabel.textColor = UIColor.textBlackColor
+        lockPass.textColor = UIColor.textBlackColor
+        orderLock.textColor = UIColor.textBlackColor
+//        useInfo.textColor = UIColor.textBlackColor
+        aboutUs.textColor = UIColor.textBlackColor
+        loginOut.textColor = UIColor.textBlackColor
     }
 }
 

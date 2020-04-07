@@ -33,8 +33,8 @@ class LockStyleCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        lockTitle.textColor = kTextBlockColor
-        bottomLine.backgroundColor = kRGBColorFromHex(rgbValue: 0xe9e9e9)
+        lockTitle.textColor = UIColor.textBlackColor
+        bottomLine.backgroundColor = UIColor.hex(hexString: "e9e9e9")
 
     }
 
