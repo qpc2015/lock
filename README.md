@@ -2,9 +2,9 @@
 
 先上个项目大致效果图
 
-[](https://github.com/qpc2015/lock/blob/master/scrrenshot/01.PNG)
+![](https://github.com/qpc2015/lock/blob/master/scrrenshot/01.PNG)
 
-[](https://github.com/qpc2015/lock/blob/master/scrrenshot/02.PNG)
+![](https://github.com/qpc2015/lock/blob/master/scrrenshot/02.PNG)
 
 ## Origin
 
@@ -29,7 +29,7 @@ Use Xcode 10.1 to migrate the code to Swift 4.
 
 项目run起来后的报错,
 
-[](https://github.com/qpc2015/lock/blob/master/scrrenshot/eeror.png)
+![](https://github.com/qpc2015/lock/blob/master/scrrenshot/eeror.png)
 
 发觉大多错误是三方库升级后部分参数变化导致,原swift语法未有较大不兼容
 
