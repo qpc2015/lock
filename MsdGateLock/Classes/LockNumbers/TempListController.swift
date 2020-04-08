@@ -98,12 +98,12 @@ class TempListController: UIViewController {
         req.sessionId = UserInfo.getSessionId() ?? ""
         req.data = AuthInfoListReq(UserInfo.getUserId() ?? 0, lockId: lockModel?.lockId ?? "", roleType: 2)
         
-        weak var weakSelf = self
-        AjaxUtil<AuthInfoListResp>.actionArrPost(req: req) { (resp) in
+        AjaxUtil<AuthInfoListResp>.actionArrPost(req: req) { [weak self](resp) in
             QPCLog(resp.data)
-            weakSelf?.userInfoArr = resp.data
-            weakSelf?.totalTempLabel.text = "    临时用户 (\(weakSelf?.userInfoArr?.count ?? 0)位)"
-            weakSelf?.tableView.reloadData()
+            guard let weakSelf = self else { return }
+            weakSelf.userInfoArr = resp.data
+            weakSelf.totalTempLabel.text = "    临时用户 (\(weakSelf.userInfoArr?.count ?? 0)位)"
+            weakSelf.tableView.reloadData()
         }
     }
 }

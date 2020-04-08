@@ -118,10 +118,9 @@ extension NumberPassVerifController : NumberVerificationCodeViewDelegate{
         req.sessionId = UserInfo.getSessionId()!
         req.data = UserGetKeyModel.init("N", lockid: "0")
         
-        weak var weakSelf = self
-        AjaxUtil<OneParam<String>>.actionPost(req: req) { (resp) in
+        AjaxUtil<OneParam<String>>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.nPasswordStr = resp.data?.p1
+            self?.nPasswordStr = resp.data?.p1
         }
 
     }

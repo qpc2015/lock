@@ -164,10 +164,9 @@ extension LockMembersController{
         req.sessionId = UserInfo.getSessionId()!
         req.data = OneParam.init(p1: (lockModel?.lockId)!)
         
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req) { [weak self] resp in
             QPCLog(resp)
-            weakSelf?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
         
     }

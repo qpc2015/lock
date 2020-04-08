@@ -65,10 +65,9 @@ extension AuthUserLockManageController{
         req.sessionId = UserInfo.getSessionId() ?? ""
         req.data = LockSetInfoReq(currentLockID ?? "")
         
-        weak var weakSelf = self
-        AjaxUtil<LockSetInfoResp>.actionPost(req: req, backJSON: { (resp) in
-            weakSelf?.detailArr[0]  = resp.data?.remark ?? ""
-            weakSelf?.tableView.reloadData()
+        AjaxUtil<LockSetInfoResp>.actionPost(req: req, backJSON: { [weak self](resp) in
+            self?.detailArr[0]  = resp.data?.remark ?? ""
+            self?.tableView.reloadData()
         })
     }
 }

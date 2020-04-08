@@ -99,24 +99,24 @@ extension ResetNumberController{
             let req = BaseReq<TwoParam<String,String>>()
             req.action = GateLockActions.ACTION_CheckSMS
             req.data = TwoParam.init(p1: UserInfo.getPhoneNumber()!, p2: self.textTF.text!)
-            weak var weakSelf = self
-            AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
+            AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { [weak self](resp) in
+                guard let weakSelf = self else {return}
                 QPCLog(resp.msg)
-                if weakSelf?.title == "重置数字密码"{
+                if weakSelf.title == "重置数字密码"{
                     let resetVC = ResetNewPassController()
                     resetVC.isModify = true
-                    weakSelf?.navigationController?.pushViewController(resetVC, animated: true)
+                    weakSelf.navigationController?.pushViewController(resetVC, animated: true)
                 }
 //                else if weakSelf?.title == "重置手势密码"{
 //                    let resetG = SetGestureController()
 //                    resetG.isReset = true
 //                    weakSelf?.navigationController?.pushViewController(resetG, animated: true)
 //                }
-                else if weakSelf?.title == "删除数字密码"{
+                else if weakSelf.title == "删除数字密码"{
                     //删除
 //                    LoginKeyChainTool.deletedNumberPassword(phoneNum: <#String#>)
-                    let vcIndex = weakSelf?.navigationController?.viewControllers.index(of: self)!
-                    weakSelf?.navigationController?.popToViewController((weakSelf?.navigationController?.viewControllers[vcIndex! - 2])!, animated: true)
+                    let vcIndex = weakSelf.navigationController?.viewControllers.index(of: weakSelf)!
+                    weakSelf.navigationController?.popToViewController((weakSelf.navigationController?.viewControllers[vcIndex! - 2])!, animated: true)
                 }
 //                else if weakSelf?.title == "删除手势密码"{
 //                    //删除

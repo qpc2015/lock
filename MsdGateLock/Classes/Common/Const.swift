@@ -23,10 +23,14 @@ var kIsSreen5 : Bool {
     return false
 }
 
+var kIsIphoneX: Bool {
+    return UI_USER_INTERFACE_IDIOM() == .phone
+        && (max(UIScreen.main.bounds.height, UIScreen.main.bounds.width) == 812
+            || max(UIScreen.main.bounds.height, UIScreen.main.bounds.width) == 896)
+}
+
 ///当前系统版本
 let kVersion = (UIDevice.current.systemVersion as NSString).floatValue
-
-
 ///全局字体大小
 let kGlobalTextFont = UIFont.systemFont(ofSize: 14)
 
@@ -47,11 +51,8 @@ func kCreateImageWithColor(color : UIColor) -> UIImage{
 let str  = UserDefaults.standard.object(forKey: UserInfo.userSessionId) as? String
 var isLogin : Bool = (str != nil && str != "")
 
-
 ///检测是否为手机号
-func  kIsTelNumber(num:NSString)->Bool
-    
-{
+func  kIsTelNumber(num:NSString)->Bool{
     
     let  mobile = "^1((3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\\d{8}$)"
     
@@ -99,29 +100,18 @@ func  kIsTelNumber(num:NSString)->Bool
         
         || (regextestct.evaluate(with: num) == true)
         
-        || (regextestcu.evaluate(with: num) == true))
-        
-    {
-        
+        || (regextestcu.evaluate(with: num) == true)){
         return true
         
-    }
-    else
-    {
+    }else{
         return false
     }
 }
 
-
-
 //MARK:- 自定义打印
 func QPCLog<T>(_ message : T,file : String = #file, funcName : String = #function, lineNum : Int = #line){
-    
     #if DEBUG
-        
         let fileName = (file as NSString).lastPathComponent
-        
         print("\(fileName):(\(lineNum))-\(message)")
-        
     #endif
 }

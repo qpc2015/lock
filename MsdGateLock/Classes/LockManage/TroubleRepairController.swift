@@ -191,13 +191,10 @@ extension TroubleRepairController : PickerDelegate{
     }
     
     func seletedTimeClick(str : String){
-        
-        weak var weakSelf = self
-        
-        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { (selectDate) in
+        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { [weak self] (selectDate) in
             let dateStr = selectDate?.string_from(formatter: "yyyy-MM-dd HH:mm")
             QPCLog("选择的日期:\(String(describing: dateStr))")
-            weakSelf?.timeLabel.text = dateStr
+            self?.timeLabel.text = dateStr
         }
         datepicker?.dateLabelColor = UIColor.textBlueColor
         datepicker?.datePickerColor = UIColor.textBlackColor
@@ -242,11 +239,10 @@ extension TroubleRepairController:CNContactPickerDelegate{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = InsertFaultReq.init(currentLockID!, userId: UserInfo.getUserId()!, faultUsername: self.nameTF.text!, faultUsertel: self.numberTF.text!, faultArea: self.areaLabel.text!, faultAddress: self.adressTF.text!, faultTime: self.timeLabel.text!)
         
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
             SVProgressHUD.showSuccess(withStatus: resp.msg)
-            weakSelf?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     

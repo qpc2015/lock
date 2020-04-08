@@ -25,14 +25,5 @@ class LockWebViewContrller: UIViewController {
         let request = NSURLRequest(url: url!)
         webView.load(request as URLRequest)
         self.view.addSubview(webView)
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-
 }

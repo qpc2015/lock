@@ -77,10 +77,9 @@ extension LockRemarkController{
                 req.sessionId = UserInfo.getSessionId()!
                 req.sign = LockTools.getSignWithStr(str: "oxo")
                 req.data = TwoParam.init(p1: cureentLockId ?? "", p2: remark)
-                weak var weakSelf = self
-                AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+                AjaxUtil<CommonResp>.actionPost(req: req) { [weak self] (resp) in
                     SVProgressHUD.showSuccess(withStatus: resp.msg)
-                    weakSelf?.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }else{
                 let req = BaseReq<UpdateLockNickReq>()
@@ -88,11 +87,9 @@ extension LockRemarkController{
                 req.sessionId = UserInfo.getSessionId() ?? ""
                 req.sign = LockTools.getSignWithStr(str: "oxo")
                 req.data = UpdateLockNickReq.init(cureentLockId ?? "", remark: remark)
-                
-                weak var weakSelf = self
-                AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+                AjaxUtil<CommonResp>.actionPost(req: req) { [weak self] (resp) in
                     SVProgressHUD.showSuccess(withStatus: resp.msg)
-                    weakSelf?.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }
         }else{

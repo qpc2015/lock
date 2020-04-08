@@ -130,39 +130,38 @@ extension OrderLockListController:OrderListCellDelegate{
             
         }
         
-        weak var weakSelf = self
-        let action2 = UIAlertAction(title: "确定", style: .default) { (action) in
-            
-            if weakSelf?.title == "故障报修"{
+        let action2 = UIAlertAction(title: "确定", style: .default) { [weak self](action) in
+            guard let weakSelf = self else {return}
+            if weakSelf.title == "故障报修"{
                 let req = BaseReq<CancelFaultReq>()
                 req.sessionId = UserInfo.getSessionId()!
                 req.action = GateLockActions.ACTION_UpdateFaultStatus
                 req.sign = LockTools.getSignWithStr(str: "oxo")
-                req.data = CancelFaultReq.init((self.repairList?.first?.faultId)!, faultStatus: 1)
+                req.data = CancelFaultReq.init((weakSelf.repairList?.first?.faultId)!, faultStatus: 1)
                 
                 AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
                     QPCLog(resp.msg)
                     SVProgressHUD.showSuccess(withStatus: resp.msg)
-                    weakSelf?.navigationController?.popViewController(animated: true)
+                    weakSelf.navigationController?.popViewController(animated: true)
                 })
             }else{
                 let req = BaseReq<CancelOrderReq>()
                 req.sessionId = UserInfo.getSessionId()!
                 req.action = GateLockActions.ACTION_CancelReserved
                 req.sign = LockTools.getSignWithStr(str: "oxo")
-                req.data = CancelOrderReq.init((self.listModel?.first?.reservedId)!)
+                req.data = CancelOrderReq.init((weakSelf.listModel?.first?.reservedId)!)
                 
                 AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
                     QPCLog(resp.msg)
                     SVProgressHUD.showSuccess(withStatus: resp.msg)
-                    weakSelf?.navigationController?.popViewController(animated: true)
+                    weakSelf.navigationController?.popViewController(animated: true)
                 })
             }
 
         }
         alterVC.addAction(action1)
         alterVC.addAction(action2)
-        self.present(alterVC, animated: true, completion: nil)
+        present(alterVC, animated: true, completion: nil)
         
     }
 }

@@ -118,8 +118,6 @@ extension ChangeNumberCodeController{
     
     //扫描代理方法
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-        weak var weakSelf = self
-        
         if metadataObjects != nil && metadataObjects.count > 0{
             let metaData : AVMetadataMachineReadableCodeObject = metadataObjects.first as! AVMetadataMachineReadableCodeObject
             QPCLog(metaData.stringValue)
@@ -130,7 +128,7 @@ extension ChangeNumberCodeController{
                     return
                 }
                 //本地查询对应id锁信息
-                weakSelf?.checkLockInfo(result)
+                self.checkLockInfo(result)
             })
             captureSession.stopRunning()
         }
@@ -228,7 +226,6 @@ extension ChangeNumberCodeController{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = OneParam.init(p1:lockIdNstr)
         
-        weak var weakSelf = self
         AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
             QPCLog(resp)
             self.navigationController?.popToRootViewController(animated: true)

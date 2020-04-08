@@ -101,8 +101,6 @@ extension QRCodeController{
     
     //扫描代理方法
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-        weak var weakSelf = self
-        
         if metadataObjects != nil && metadataObjects.count > 0{
             let metaData : AVMetadataMachineReadableCodeObject = metadataObjects.first as! AVMetadataMachineReadableCodeObject
             QPCLog(metaData.stringValue)
@@ -112,7 +110,7 @@ extension QRCodeController{
                 guard let result = metaData.stringValue else{
                     return
                 }
-                weakSelf?.checkIsBindLock(result)
+                self.checkIsBindLock(result)
                 
             })
             captureSession.stopRunning()
@@ -143,20 +141,18 @@ extension QRCodeController{
         req.data = CheckLockIdReq(UserInfo.getUserId()!, lockIdNstr!)
         QPCLog("\(lockIdNstr!)---\(lockPassStr!)--\(initCode!)")
         
-        weak var weakSelf = self
-        AjaxUtil<TwoParam<String,String>>.actionPost(req: req, backJSON: { (resp) in
+        AjaxUtil<TwoParam<String,String>>.actionPost(req: req, backJSON: { [weak self](resp) in
 
-                MsdGlobals.scanLockId = weakSelf?.lockIdNstr   //记录绑定id
+                MsdGlobals.scanLockId = self?.lockIdNstr   //记录绑定id
                 QPCLog("\(String(describing: resp.data?.p1))----\(String(describing: resp.data?.p2))")
-                weakSelf?.currentLockBlueMac = resp.data?.p1?.replacingOccurrences(of: ":", with: "")
+                self?.currentLockBlueMac = resp.data?.p1?.replacingOccurrences(of: ":", with: "")
                 //蓝牙交互
-                weakSelf?.setupBluetool(perName: (resp.data?.p2!)!)
+                self?.setupBluetool(perName: (resp.data?.p2!)!)
 
-        }) { (errorStr) in
-            weakSelf?.scannerStar();
+        }) { [weak self](errorStr) in
+            self?.scannerStar();
             SVProgressHUD.showError(withStatus: errorStr)
         }
-        
     }
 
     

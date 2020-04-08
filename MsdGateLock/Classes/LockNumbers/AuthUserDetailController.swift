@@ -66,12 +66,11 @@ extension AuthUserDetailController{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = TwoParam.init(p1: lockModel.lockId!, p2: Int(userModel.userId)!)
         
-        weak var weakSelf = self
-        AjaxUtil<RoleUserDetail>.actionPost(req: req) { (resp) in
-            QPCLog(resp)
-            weakSelf?.userDetail = resp.data
-            weakSelf?.resetValue()
-            weakSelf?.tableView.reloadData()
+        AjaxUtil<RoleUserDetail>.actionPost(req: req) { [weak self](resp) in
+            guard let weakSelf = self else { return }
+            weakSelf.userDetail = resp.data
+            weakSelf.resetValue()
+            weakSelf.tableView.reloadData()
         }
     }
     
@@ -234,10 +233,10 @@ extension AuthUserDetailController{
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = ThreeParam.init(p1: self.userModel.userId, p2: lockModel.lockId!, p3: isNearBy)
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
+
+        AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }) { (errorStr) in
             QPCLog(errorStr)
             SVProgressHUD.showError(withStatus: errorStr)
@@ -350,14 +349,13 @@ extension AuthUserDetailController : BleManagerDelegate{
     
     func `return`(withData data: String!, isSucceed succeed: Bool, backData: String!){
         
-        QPCLog("\(data)")
+        QPCLog("\(String(describing: data))")
         //测试专用
         DispatchQueue.main.async(execute: {
             SVProgressHUD.dismiss()
         })
-        weak var weakSelf = self
         if succeed {
-            weakSelf?.deletedUserWithService(isNearBy: 1)
+            self.deletedUserWithService(isNearBy: 1)
             SVProgressHUD.showSuccess(withStatus: "删除成功")
         }else{
             //通知service

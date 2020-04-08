@@ -92,23 +92,19 @@ extension ChangePhoneNumController{
     }
     
     func nextStep(){
-        
-        weak var weakSelf = self
         if textTF.text?.count == 6 {
-            
             let req = BaseReq<VertOlderNumReq>()
             req.action = GateLockActions.ACTION_ChangeMobile1
             req.sessionId = UserInfo.getSessionId()!
             req.sign = LockTools.getSignWithStr(str: "oxo")
             req.data = VertOlderNumReq(UserInfo.getPhoneNumber()!, code: textTF.text!)
             
-            AjaxUtil<OneParam<Int>>.actionPost(req: req) { (resp) in
+            AjaxUtil<OneParam<Int>>.actionPost(req: req) { [weak self] (resp) in
                 QPCLog(resp)
                 let vertNewVC = VertNewNumController()
                 vertNewVC.stepId = resp.data?.p1
-                weakSelf?.navigationController?.pushViewController(vertNewVC, animated: true)
+                self?.navigationController?.pushViewController(vertNewVC, animated: true)
             }
-            
         }else{
             SVProgressHUD.showError(withStatus: "请输入正确验证码")
         }

@@ -170,17 +170,16 @@ extension NoPermissionController{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = CommonReq()
         
-        weak var weakSelf = self
-        AjaxUtil<OrderLockResp>.actionArrPost(req: req) { (resp) in
-            QPCLog(resp.msg)
+        AjaxUtil<OrderLockResp>.actionArrPost(req: req) { [weak self](resp) in
+            guard let weakSelf = self else{ return }
             if resp.data != nil,(resp.data?.count)! > 0 {
                 let orderListVC = OrderLockListController()
                 orderListVC.title = "预约门锁"
                 orderListVC.listModel = resp.data
-                weakSelf?.navigationController?.pushViewController(orderListVC, animated: true)
+                weakSelf.navigationController?.pushViewController(orderListVC, animated: true)
             }else{
                 let orderVC = UIStoryboard(name: "OrderInstallLockController", bundle: nil).instantiateViewController(withIdentifier: "OrderInstallLockController")
-                weakSelf?.navigationController?.pushViewController(orderVC, animated: true)
+                weakSelf.navigationController?.pushViewController(orderVC, animated: true)
             }
         }
     }

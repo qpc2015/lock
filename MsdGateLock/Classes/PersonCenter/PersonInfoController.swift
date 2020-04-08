@@ -67,15 +67,13 @@ class PersonInfoController: UITableViewController {
 extension PersonInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     func setupAlertViewController(){
-        
-        weak var weakSelf = self
         let alerVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let action1 = UIAlertAction(title: "从相册选择", style: .default) { (action) in
+        let action1 = UIAlertAction(title: "从相册选择", style: .default) { [weak self] (action) in
             QPCLog("相册")
-            weakSelf?.openPhotoAlbum()
+            self?.openPhotoAlbum()
         }
-        let action2 = UIAlertAction(title: "拍照", style: .default) { (action) in
-            weakSelf?.openCamera()
+        let action2 = UIAlertAction(title: "拍照", style: .default) { [weak self](action) in
+            self?.openCamera()
         }
         let action3 = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alerVC.addAction(action1)
@@ -213,19 +211,16 @@ extension PersonInfoController{
 extension PersonInfoController{
     
     func getAvatarUploadKey(){
-        
         let req = CommonReq()
         req.sessionId = UserInfo.getSessionId() ?? ""
         req.action = GateLockActions.ACTION_AvatarUploadKey
         
-        weak var weakSelf = self
-        AjaxUtil<TwoParam<String,String>>.actionPost(req: req) { (resp) in
-            weakSelf?.uploadUrl = resp.data?.p1 ?? ""
-            weakSelf?.iconKey = resp.data?.p2 ?? ""
+        AjaxUtil<TwoParam<String,String>>.actionPost(req: req) { [weak self](resp) in
+            self?.uploadUrl = resp.data?.p1 ?? ""
+            self?.iconKey = resp.data?.p2 ?? ""
         }
     }
 }
-
 
 extension PersonInfoController: SetNickNameControllerDelegate{
     

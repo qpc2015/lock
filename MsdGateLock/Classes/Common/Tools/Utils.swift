@@ -12,23 +12,17 @@ import RKDropdownAlert
 
 class Utils{
     
-    static func showTip(_ title:String)
-    {
+    static func showTip(_ title:String){
         RKDropdownAlert.title(title, backgroundColor: UIColor.navigaBarColor, textColor: UIColor.white, time: 1)
-//         RKDropdownAlert.title(title, time: 1)
     }
     
     static func showTip(_ view: UIView, errMsg: String) {
         RKDropdownAlert.title(errMsg, backgroundColor: UIColor.navigaBarColor, textColor: UIColor.white, time: 1)
-//        RKDropdownAlert.title(errMsg, time: 1)
     }
     
     static func showErrorMsg(_ view: UIView? = nil ,errorCode:Int, errMsg: String) {
-        
-        
         switch errorCode {
         case -1:
-            
             if view == nil {
                 showTip(errMsg)
             }else {

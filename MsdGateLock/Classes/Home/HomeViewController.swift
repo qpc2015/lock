@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var topLockLeftMagin: NSLayoutConstraint!
     @IBOutlet weak var powerRightMagin: NSLayoutConstraint!
     @IBOutlet weak var openBtnTopMagin: NSLayoutConstraint!
+    @IBOutlet weak var lockUserBottomMagin: NSLayoutConstraint!
     @IBOutlet weak var openListTipLabel: UILabel!
     @IBOutlet weak var lockUserBottomView: UIView!//开锁底部
     @IBOutlet weak var homeCenterView: UIView!
@@ -69,24 +70,7 @@ class HomeViewController: UIViewController {
         setupStyle()
         setupNavigationBarWithShowAdd()
         //检查创建门锁表
-        _ = self.dataManager.createHomeListTable()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        _ = [super.viewWillAppear(animated)]
-        //开启蓝牙
-        blueManager.bleManagerDelegate = self
-        //获取锁列表
-        guard UserInfo.getUserId() != nil else {
-            SVProgressHUD.showError(withStatus: LanguageHelper.getString(key: "Global_LogBackinError"))
-            return
-        }
-        //清除更换手机号用户
-        self.resetNumTipNameArr.removeAll()
-        //创建上传开门记录表
-        _ = self.dataManager.createLockLogTable()
-        //创建本地开门记录缓存
-        _ = self.dataManager.createLocalOpenLogTable()
+        let _ = dataManager.createHomeListTable()
         ///适配5
         if kIsSreen5 {
             let widthHeight = CGFloat(264.0 * 0.7)
@@ -99,9 +83,32 @@ class HomeViewController: UIViewController {
             openBtnTopMagin.constant = 92 * kHeight6Scale
             tipLabelTop.constant = CGFloat(152.0 * 0.7)
         }
+        
+        if !kIsIphoneX {
+            lockUserBottomMagin.constant = 0
+        }
+        //开启蓝牙
+        blueManager.bleManagerDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        //获取锁列表
+        guard let userid = UserInfo.getUserId() else {
+            SVProgressHUD.showError(withStatus: LanguageHelper.getString(key: "Global_LogBackinError"))
+            return
+        }
+        //清除更换手机号用户
+        self.resetNumTipNameArr.removeAll()
+        //创建上传开门记录表
+        _ = self.dataManager.createLockLogTable()
+        //创建本地开门记录缓存
+        _ = self.dataManager.createLocalOpenLogTable()
+
         //根据有无网络做不同操作
         if HomeViewController.isConnectNetWork {
-            getUserLockList(UserInfo.getUserId()!)
+            getUserLockList(userid)
         }
     }
     
@@ -111,9 +118,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupNavigationBarWithShowAdd(){
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named : "message icon "), style: .plain, target: self, action: #selector(messageCenterClick))
-        
         let item1 =  UIBarButtonItem.init(image: UIImage(named : "user"), style: .plain, target: self, action: #selector(personCenterClick))
         let item2 =  UIBarButtonItem.init(image: UIImage(named : "add"), style: .plain, target: self, action: #selector(addLockClick))
         navigationItem.rightBarButtonItems = [item1,item2]
@@ -208,10 +213,9 @@ class HomeViewController: UIViewController {
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = LockStateModel.init((currentSeleteLock?.lockId)!, battery: battery, mainState: mainState, backState: backState)
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.getCurrentLockInfo()
+            self?.getCurrentLockInfo()
         }
     }
     
@@ -234,10 +238,9 @@ class HomeViewController: UIViewController {
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = self.dataManager.fetchAllOpenLockData()
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.dataManager.deleteTabelAllData((weakSelf?.dataManager.lockLogTableName)!)
+            self?.dataManager.deleteTabelAllData((self?.dataManager.lockLogTableName)!)
         }
     }
     
@@ -248,7 +251,6 @@ class HomeViewController: UIViewController {
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         
-        //        weak var weakSelf = self
         AjaxUtil<UserLockListResp>.actionArrPostWithError(req: req, backArrJSON: {[weak self] (resp) in
             guard let weakSelf = self else{ return }
             if let lockArr = resp.data,lockArr.count > 0 {
@@ -346,10 +348,9 @@ class HomeViewController: UIViewController {
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = OneParam.init(p1: (currentSeleteLock?.lockId)!)
         
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionDataArrPostWithError(req: req, backArrJSON: { (resp) in
+        AjaxUtil<CommonResp>.actionDataArrPostWithError(req: req, backArrJSON: { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.waitRemoveLockArr = resp.data
+            self?.waitRemoveLockArr = resp.data
         }) { (errorStr) in
             QPCLog(errorStr)
         }
@@ -389,44 +390,44 @@ class HomeViewController: UIViewController {
         let limit = 10
         req.data = LockInfoReq.init(userID!, lockId: lockId!, start: start, limit: limit)
         
-        weak var weakSelf = self
         AjaxUtil<LockInfoResp>.actionPost(req: req){
-            (resp) in
+           [weak self] (resp) in
+            guard let weakSelf = self else{ return}
             if let lockModel = resp.data {
                 //主锁
                 if lockModel.lockMainState == 0 {
-                    weakSelf?.eleqLabel.text = "主锁:  未锁"
+                    weakSelf.eleqLabel.text = "主锁:  未锁"
                 }else{
-                    weakSelf?.eleqLabel.text = "主锁:  已锁"
+                    weakSelf.eleqLabel.text = "主锁:  已锁"
                 }
                 //反锁
                 if lockModel.lockBackState == 0 {
-                    weakSelf?.inLockLabel.text = "反锁:  未锁"
+                    weakSelf.inLockLabel.text = "反锁:  未锁"
                 }else{
-                    weakSelf?.inLockLabel.text = "反锁:  已锁"
+                    weakSelf.inLockLabel.text = "反锁:  已锁"
                 }
                 //电量
                 if lockModel.lockBattery?.count == nil{
-                    weakSelf?.powerLabel.text = "电量: 100%"
+                    weakSelf.powerLabel.text = "电量: 100%"
                 }else{
-                    weakSelf?.powerLabel.text = "电量: \(String(describing: lockModel.lockBattery!))%"
+                    weakSelf.powerLabel.text = "电量: \(String(describing: lockModel.lockBattery!))%"
                 }
             }
-            weakSelf?.openLockModelArr = resp.data?.openList
+            weakSelf.openLockModelArr = resp.data?.openList
             //数组为空显示占位否则列表
-            if weakSelf?.openLockModelArr != nil{
-                if (weakSelf?.openLockModelArr?.count)! > 0 {
+            if weakSelf.openLockModelArr != nil{
+                if (weakSelf.openLockModelArr?.count)! > 0 {
                     //右开门日志
-                    weakSelf?.openListTipLabel.isHidden = true
-                    weakSelf?.lockTableView.reloadData()
+                    weakSelf.openListTipLabel.isHidden = true
+                    weakSelf.lockTableView.reloadData()
                     
-                    weakSelf?.dataManager.deleteTabelAllData(self.dataManager.localOpenTableName)
-                    weakSelf?.dataManager.insertLocalOpenTableWithModelArr(lockID:(resp.data?.lockId)!,modelArr:(weakSelf?.openLockModelArr)!)
+                    weakSelf.dataManager.deleteTabelAllData(weakSelf.dataManager.localOpenTableName)
+                    weakSelf.dataManager.insertLocalOpenTableWithModelArr(lockID:(resp.data?.lockId)!,modelArr:(weakSelf.openLockModelArr)!)
                 }else{
-                    weakSelf?.openListTipLabel.isHidden = false
+                    weakSelf.openListTipLabel.isHidden = false
                 }
             }else{
-                weakSelf?.openListTipLabel.isHidden = false
+                weakSelf.openListTipLabel.isHidden = false
             }
         }
         //保存最后使用的锁id
@@ -441,13 +442,12 @@ class HomeViewController: UIViewController {
 extension HomeViewController{
     
    private func firstSetPassword(){
-        weak var weakSelf = self
         let alterVC = UIAlertController(title: "系统通知", message: "亲爱的门锁用户您好!\n您已被授权为门锁用户,请尽快设置属于您的开门密码", preferredStyle: .alert)
-        let alertAc = UIAlertAction(title: "去设置", style: .default) { (action) in
+        let alertAc = UIAlertAction(title: "去设置", style: .default) { [weak self](action) in
             
             let vc = UIStoryboard(name: "NumberPassWordController", bundle: nil).instantiateViewController(withIdentifier: "numberPassWordVC") as! NumberPassWordController
             vc.isHideBack = true
-            weakSelf?.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         alterVC.addAction(alertAc)
         self.present(alterVC, animated: true, completion: nil)
@@ -616,7 +616,7 @@ extension HomeViewController : BleManagerDelegate{
     
     func starSearchBlue(){
         
-        let per = (currentSeleteLock?.bluetoothName)!
+        let per = currentSeleteLock?.bluetoothName
         QPCLog("连接门锁编号为\(String(describing: per))")
         UserDefaults.standard.set(per, forKey: "per")
         
@@ -679,12 +679,11 @@ extension HomeViewController : BleManagerDelegate{
                     }
                 }
             }else{
-                weak var weakSelf = self
                 //弹框
                 let alterVC = UIAlertController(title: "系统通知", message: "亲爱的门锁用户您好！\n为了保障您和家人的安全，作为管理员，更换手机后需要重新扫描门内二维码进行绑定。", preferredStyle: .alert)
-                let alertAc = UIAlertAction(title: "去设置", style: .default) { (action) in
+                let alertAc = UIAlertAction(title: "去设置", style: .default) { [weak self](action) in
                     let resetVC = ChangeNumberCodeController()
-                    weakSelf!.navigationController?.pushViewController(resetVC, animated: true)
+                    self!.navigationController?.pushViewController(resetVC, animated: true)
                 }
                 let knowAc = UIAlertAction(title: "我知道了", style: .default, handler: { (action) in
                     QPCLog("点击了知道")
@@ -703,11 +702,10 @@ extension HomeViewController : BleManagerDelegate{
                 //查询user是否有开门秘钥
                 let openKey = QPCKeychainTool.getOpenPassWordWithKeyChain(lockID: (currentSeleteLock?.lockId)!)
                 if openKey == nil{
-                    weak var weakSelf = self
-                    self.getZKeyContentWithS(completionHandler: { (s) in
+                    self.getZKeyContentWithS(completionHandler: { [weak self] s in
                         //如果user用户本地没有开门pass重新绑定然后开门
                         let aesStr = QPCKeychainTool.getDeviceIdentifier()! + s
-                        weakSelf?.blueManager.sendCommand(withSubPackagePort: "03030700", dataStr: aesStr)
+                        self?.blueManager.sendCommand(withSubPackagePort: "03030700", dataStr: aesStr)
                     })
                 }else{
                     //判断user有没有初始化过
@@ -861,8 +859,7 @@ extension HomeViewController : BleManagerDelegate{
         req.data = UserGetKeyModel.init("S", lockid: (currentSeleteLock?.lockId)!)
         
         let userBlueMac = QPCKeychainTool.getDeviceIdentifier()
-        weak var weakSelf = self
-        AjaxUtil<OneParam<String>>.actionPost(req: req) { (resp) in
+        AjaxUtil<OneParam<String>>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
             let s = resp.data?.p1
             let aesStr = userBlueMac! + s!
@@ -871,8 +868,8 @@ extension HomeViewController : BleManagerDelegate{
                 SVProgressHUD.showError(withStatus: LanguageHelper.getString(key: "BlueTool_UserBingFail"))
                 return
             }
-            weakSelf?.userWithZstr = s!
-            weakSelf?.blueManager.sendCommand(withSubPackagePort: "03030700", dataStr: aesStr)
+            self?.userWithZstr = s!
+            self?.blueManager.sendCommand(withSubPackagePort: "03030700", dataStr: aesStr)
         }
     }
     

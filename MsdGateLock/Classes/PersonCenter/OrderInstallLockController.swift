@@ -101,11 +101,10 @@ extension OrderInstallLockController{
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = CommitOrderReq.init(reservedUsername: self.nameTF.text!, reservedUserTel: numberCode!, reservedArea: self.areaLabel.text!, reservedAddress: self.detailAdressTF.text!, reservedTime: self.timeSeletedLabel.text!)
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
             SVProgressHUD.showSuccess(withStatus: resp.msg)
-            weakSelf?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -240,20 +239,17 @@ extension OrderInstallLockController : PickerDelegate{
     }
     
     func seletedTimeClick(str : String){
-        
-        weak var weakSelf = self
-        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { (selectDate) in
+        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { [weak self](selectDate) in
+            guard let weakSelf = self else {return}
             let dateStr = selectDate?.string_from(formatter: "yyyy-MM-dd HH:mm")
             QPCLog("选择的日期:\(String(describing: dateStr))")
-            weakSelf?.timeSeletedLabel.text = dateStr
+            weakSelf.timeSeletedLabel.text = dateStr
         }
         datepicker?.dateLabelColor = UIColor.textBlueColor
         datepicker?.datePickerColor = UIColor.textBlackColor
         datepicker?.doneButtonColor = UIColor.textBlueColor
         datepicker?.show()
     }
-    
-    
 }
 
 extension OrderInstallLockController:CNContactPickerDelegate{

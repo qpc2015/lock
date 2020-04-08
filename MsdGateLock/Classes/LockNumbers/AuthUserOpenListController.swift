@@ -195,16 +195,14 @@ extension AuthUserOpenListController{
             let limit = 20
             req.data = LockInfoReq.init(userID!, lockId: lockId!, start: 1, limit: limit)
             
-            weak var weakSelf = self
-            AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { (resp) in
+            AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { [weak self](resp) in
                 
                 QPCLog(resp)
                 if let lockModel = resp.data {
-                    weakSelf?.openLockModel = lockModel
+                    self?.openLockModel = lockModel
                 }
-                weakSelf?.tableView.reloadData()
-                
-                self.tableView.mj_header?.endRefreshing()
+                self?.tableView.reloadData()
+                self?.tableView.mj_header?.endRefreshing()
             })
             
             
@@ -224,15 +222,14 @@ extension AuthUserOpenListController{
             let limit = 20
             req.data = LockAllLogReq.init(lockId!, start: start, limit: limit)
             
-            weak var weakSelf = self
-            AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { (resp) in
+            AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { [weak self](resp) in
                 QPCLog(resp)
                 if let lockModel = resp.data {
-                    weakSelf?.openLockModel = (weakSelf?.openLockModel)! + lockModel
+                    self?.openLockModel = (self?.openLockModel)! + lockModel
                 }
-                weakSelf?.tableView.reloadData()
+                self?.tableView.reloadData()
                 
-                self.tableView.mj_footer?.endRefreshing()
+                self?.tableView.mj_footer?.endRefreshing()
             })
         }else{
             listIndex += 1
@@ -245,16 +242,15 @@ extension AuthUserOpenListController{
             let limit = 20
             req.data = LockInfoReq.init(userID!, lockId: lockId!, start: start, limit: limit)
             
-            weak var weakSelf = self
-            AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { (resp) in
+            AjaxUtil<OpenLockList>.actionArrPost(req: req, backArrJSON: { [weak self](resp) in
                 
                 QPCLog(resp)
                 if let lockModel = resp.data {
-                    weakSelf?.openLockModel = (weakSelf?.openLockModel)! + lockModel
+                    self?.openLockModel = (self?.openLockModel)! + lockModel
                 }
-                weakSelf?.tableView.reloadData()
+                self?.tableView.reloadData()
                 
-                self.tableView.mj_footer?.endRefreshing()
+                self?.tableView.mj_footer?.endRefreshing()
             })
             
             

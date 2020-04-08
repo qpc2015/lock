@@ -90,18 +90,18 @@ extension LockManageController{
     //报废门锁
     func closeLock(){
         let alertVC = UIAlertController(title: "警告", message: "报废门锁后,该门锁将无法绑定新用户请确认要报废门锁吗?", preferredStyle: .alert)
-        weak var weakSelf = self
-        let acSure = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
+
+        let acSure = UIAlertAction(title: "确认", style: .default) { [weak self] UIAlertAction in
             let req = BaseReq<OneParam<String>>()
             req.sessionId = UserInfo.getSessionId()!
             req.action = GateLockActions.ACTION_AddScrapLock
             req.sign = LockTools.getSignWithStr(str: "oxo")
-            req.data = OneParam.init(p1: (weakSelf?.currentLockModel?.lockId)!)
+            req.data = OneParam.init(p1: (self?.currentLockModel?.lockId)!)
             
             AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
                 QPCLog(resp.msg)
                 SVProgressHUD.showSuccess(withStatus: resp.msg)
-                weakSelf?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: true)
             })
             
         }
@@ -116,13 +116,12 @@ extension LockManageController{
     //恢复出厂设置
     func resetFactorySetting(){
         let alertVC = UIAlertController(title: "警告", message: "恢复出厂值后,所有用户信息都将丢失,若要继续使用该门锁,需要重新绑定确认要恢复出厂值吗?", preferredStyle: .alert)
-        weak var weakSelf = self
-        let acSure = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
+        let acSure = UIAlertAction(title: "确认", style: .default) { [weak self] (UIAlertAction) in
             let resetVC = ChangeNumberCodeController()
             resetVC.title = "恢复出厂值"
-            resetVC.lockModel = weakSelf?.currentLockModel
+            resetVC.lockModel = self?.currentLockModel
             resetVC.isFactorySetting = true
-            weakSelf?.navigationController?.pushViewController(resetVC, animated: true)
+            self?.navigationController?.pushViewController(resetVC, animated: true)
         }
         let acCancle = UIAlertAction(title: "取消", style: .default) { (UIAlertAction) in
             QPCLog("点击了取消")
@@ -138,12 +137,12 @@ extension LockManageController{
     req.sessionId = UserInfo.getSessionId()!
     req.data = LockSetInfoReq(currentLockModel.lockId!)
         
-    weak var weakSelf = self
-    AjaxUtil<LockSetInfoResp>.actionPost(req: req, backJSON: { (resp) in
-       weakSelf?.detailArr[0][0]  = resp.data?.remark ?? ""
-        weakSelf?.detailArr[1][0] = resp.data?.area ?? ""
-        weakSelf?.detailArr[1][1] = resp.data?.address ?? ""
-        weakSelf?.tableView.reloadData()
+    AjaxUtil<LockSetInfoResp>.actionPost(req: req, backJSON: { [weak self](resp) in
+        guard let weakSelf = self else{ return}
+        weakSelf.detailArr[0][0]  = resp.data?.remark ?? ""
+        weakSelf.detailArr[1][0] = resp.data?.area ?? ""
+        weakSelf.detailArr[1][1] = resp.data?.address ?? ""
+        weakSelf.tableView.reloadData()
         })
     }
     
@@ -154,48 +153,46 @@ extension LockManageController{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = FaultListReq.init(currentLockModel.lockId!, userId: UserInfo.getUserId()!)
         
-        weak var weakSelf = self
-        AjaxUtil<FaultListResp>.actionArrPost(req: req) { (resp) in
+        AjaxUtil<FaultListResp>.actionArrPost(req: req) { [weak self](resp) in
             QPCLog(resp.data)
+            guard let weakSelf = self else{ return}
             if resp.data != nil,(resp.data?.count)! > 0 {
-                weakSelf?.isRepearList = true
-                weakSelf?.repairList = resp.data
+                weakSelf.isRepearList = true
+                weakSelf.repairList = resp.data
                 let ordStatu = (resp.data?.first?.faultState)!
                 switch ordStatu{
                 case 0:
-                    weakSelf?.repairLockStatu = "待确认"
+                    weakSelf.repairLockStatu = "待确认"
                 case 1:
-                    weakSelf?.repairLockStatu = "已确认"
+                    weakSelf.repairLockStatu = "已确认"
                 case 2:
-                    weakSelf?.repairLockStatu = "未订单完成"
+                    weakSelf.repairLockStatu = "未订单完成"
                 case 3:
-                    weakSelf?.repairLockStatu = "订单取消"
+                    weakSelf.repairLockStatu = "订单取消"
                 default:
                     QPCLog("超出范围")
                 }
-                weakSelf?.tableView.reloadSections(NSIndexSet.init(index: 2) as IndexSet, with: .fade)
+                weakSelf.tableView.reloadSections(NSIndexSet.init(index: 2) as IndexSet, with: .fade)
             }else{
-                weakSelf?.isRepearList = false
+                weakSelf.isRepearList = false
             }
         }
     }
     
     @objc func moreCick(){
         let altsheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        weak var weakSelf = self
-        let action1 = UIAlertAction(title: "更换手机", style: .default) { (action) in
+        let action1 = UIAlertAction(title: "更换手机", style: .default) { [weak self] (action) in
             let resetVC = ChangeNumberCodeController()
             resetVC.title = "更换手机"
-            resetVC.lockModel = weakSelf?.currentLockModel
-            weakSelf?.navigationController?.pushViewController(resetVC, animated: true)
+            resetVC.lockModel = self?.currentLockModel
+            self?.navigationController?.pushViewController(resetVC, animated: true)
         }
-        let action2 = UIAlertAction(title: "恢复出厂值", style: .default) { (action) in
-            weakSelf?.resetFactorySetting()
+        let action2 = UIAlertAction(title: "恢复出厂值", style: .default) { [weak self] (action) in
+            self?.resetFactorySetting()
         }
-        let action3 = UIAlertAction(title: "报废门锁", style: .default) { (action) in
+        let action3 = UIAlertAction(title: "报废门锁", style: .default) { [weak self] (action) in
 //            QPCLog("报废门锁")
-            weakSelf?.closeLock()
+            self?.closeLock()
         }
         let action4 = UIAlertAction(title: "取消", style: .cancel) { (action) in
             QPCLog("取消")
@@ -206,9 +203,6 @@ extension LockManageController{
         altsheet.addAction(action4)
         present(altsheet, animated: true, completion: nil)
     }
-    
-
-    
 }
 
 //MARK:蓝牙相关
@@ -322,8 +316,6 @@ extension LockManageController{
 //    }
 //    
 //}
-
-
 
 extension LockManageController: UITableViewDelegate,UITableViewDataSource,PickerDelegate{
     

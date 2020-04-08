@@ -58,12 +58,12 @@ extension TempUserDetailController{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = TwoParam.init(p1: lockModel.lockId!, p2: Int(userModel.userId)!)
         
-        weak var weakSelf = self
-        AjaxUtil<RoleUserDetail>.actionPost(req: req) { (resp) in
+        AjaxUtil<RoleUserDetail>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.userDetail = resp.data
-            weakSelf?.resetValue()
-            weakSelf?.tableView.reloadData()
+            guard let weakSelf = self else {return}
+            weakSelf.userDetail = resp.data
+            weakSelf.resetValue()
+            weakSelf.tableView.reloadData()
         }
     }
     
@@ -115,8 +115,6 @@ extension TempUserDetailController{
     
     @objc func moreCick(){
         QPCLog(#function)
-        
-        weak var weakSelf = self
         let altsheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
 //        let action1 = UIAlertAction(title: "转为授权用户", style: .default) { (action) in
@@ -125,9 +123,9 @@ extension TempUserDetailController{
 //            weakSelf!.navigationController?.pushViewController(changeAuthVC, animated: true)
 //        }
 
-        let action2 = UIAlertAction(title: "移除成员", style: .default) { (action) in
+        let action2 = UIAlertAction(title: "移除成员", style: .default) { [weak self](action) in
             QPCLog("移除成员")
-            weakSelf?.deletedUserAction()
+            self?.deletedUserAction()
         }
         
         let action3 = UIAlertAction(title: "取消", style: .cancel) { (action) in
@@ -155,10 +153,9 @@ extension TempUserDetailController{
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = ThreeParam.init(p1: self.userModel.userId, p2: lockModel.lockId!, p3: isNearBy)
-        weak var weakSelf = self
-        AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { [weak self](resp) in
             QPCLog(resp)
-            weakSelf?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }) { (errorStr) in
             QPCLog(errorStr)
             SVProgressHUD.showError(withStatus: errorStr)
@@ -167,15 +164,13 @@ extension TempUserDetailController{
     
     func seletedTimeClick(str : String){
         
-        weak var weakSelf = self
-        
-        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { (selectDate) in
+        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { [weak self](selectDate) in
             let dateStr = selectDate?.string_from(formatter: "yyyy-MM-dd HH:mm")
             QPCLog("选择的日期:\(String(describing: dateStr))")
             if str == "开始时间" {
-                weakSelf!.starTimeLabel.text = dateStr
+                self?.starTimeLabel.text = dateStr
             }else if str == "结束时间"{
-                weakSelf!.endTimeLabel.text = dateStr
+                self?.endTimeLabel.text = dateStr
             }
         }
         datepicker?.dateLabelColor = UIColor.textBlueColor
@@ -265,15 +260,13 @@ extension TempUserDetailController : BleManagerDelegate{
     }
     
     func `return`(withData data: String!, isSucceed succeed: Bool, backData: String!){
-        
         QPCLog("\(data)")
         //测试专用
         DispatchQueue.main.async(execute: {
             SVProgressHUD.dismiss()
         })
-        weak var weakSelf = self
         if succeed {
-            weakSelf?.deletedUserWithService(isNearBy: 1)
+            self.deletedUserWithService(isNearBy: 1)
             SVProgressHUD.showSuccess(withStatus: "删除成功")
         }else{
             DispatchQueue.main.async(execute: {
@@ -281,7 +274,6 @@ extension TempUserDetailController : BleManagerDelegate{
             })
         }
     }
-    
 }
 
 

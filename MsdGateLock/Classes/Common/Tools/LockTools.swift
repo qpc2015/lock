@@ -29,29 +29,21 @@ class LockTools {
         //        var b = fm.createFileAtPath(fullPath, contents: imageData, attributes: nil)
         
         let b = (try? imageData.write(to: URL(fileURLWithPath: fullPath as String), options: [])) != nil
-        
         QPCLog(b ? "写入沙盒成功:\(fullPath)" : "写入沙盒失败")
         return URL(fileURLWithPath: fullPath)     //开始上传操作
         //        print(fullPath)
-        
     }
-    
     
     /**
      时间转化MM/dd  HH:mm
-     
      */
     static func stringToTimeStamp(stringTime:String)->String {
-        
         let f = DateFormatter()
         f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let d = f.date(from: stringTime)
-        
         let forma : DateFormatter = DateFormatter()
         forma.dateFormat = "MM/dd  HH:mm"
-        
         return forma.string(from:d!)
-        
     }
     
     /**
@@ -69,22 +61,6 @@ class LockTools {
         
         return forma.string(from:d!)
     }
-    
-//    /**
-//     时间转化 yyyy-MM-dd HH:mm:ss -> 年/月/日
-//     
-//     */
-//    static func stringToTimeYMD(stringTime:String)->String {
-//        
-//        let f = DateFormatter()
-//        f.dateFormat = "yyyy-MM-dd HH:mm"
-//        let d = f.date(from: stringTime)
-//        
-//        let forma : DateFormatter = DateFormatter()
-//        forma.dateFormat = "yyyy/MM/dd HH:mm"
-//        
-//        return forma.string(from:d!)
-//    }
     
     /**
      时间转化 yyyyMMddHHmmss
@@ -108,7 +84,6 @@ class LockTools {
     
     /**
      时间转化 yyyy-MM-dd HH:mm
-     
      */
     static func stringToTimeYMDHmStr(stringTime:String)->String {
         let f = DateFormatter()

@@ -76,11 +76,10 @@ extension DetailAdressController{
             req.sign = LockTools.getSignWithStr(str: "oxo")
             req.data = UpdateLockAdressReq.init(cureentLockId,address : adressTF.text!)
             
-            weak var weakSelf = self
-            AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+            AjaxUtil<CommonResp>.actionPost(req: req) { [weak self](resp) in
                 SVProgressHUD.setDefaultMaskType(.none)
                 SVProgressHUD.showSuccess(withStatus: resp.msg)
-                weakSelf?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: true)
             }
         }
     }

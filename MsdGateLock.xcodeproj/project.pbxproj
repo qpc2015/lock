@@ -1556,7 +1556,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/RKDropdownAlert",
 				);
 				INFOPLIST_FILE = MsdGateLock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qinpengcheng.lock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1581,7 +1581,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/RKDropdownAlert",
 				);
 				INFOPLIST_FILE = MsdGateLock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qinpengcheng.lock;
 				PRODUCT_NAME = "$(TARGET_NAME)";

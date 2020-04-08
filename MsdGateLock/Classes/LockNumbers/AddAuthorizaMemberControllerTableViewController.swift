@@ -80,14 +80,14 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
     }
     
     func seletedTimeClick(str : String){
-        weak var weakSelf = self
-        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { (selectDate) in
+        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { [weak self] (selectDate) in
+            guard let weakSelf = self else { return }
             let dateStr = selectDate?.string_from(formatter: "yyyy-MM-dd HH:mm")
             QPCLog("选择的日期:\(String(describing: dateStr))")
             if str == "开始时间" {
-                weakSelf!.starLabel.text = dateStr
+                weakSelf.starLabel.text = dateStr
             }else if str == "结束时间"{
-                weakSelf!.endLabel.text = dateStr
+                weakSelf.endLabel.text = dateStr
             }
         }
         datepicker?.dateLabelColor = UIColor.textBlueColor
@@ -121,10 +121,9 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = TwoParam.init(p1:numberStr! , p2: lockModel.lockId!)
         
-        weak var weakSelf = self
-        AjaxUtil<OneParam<String>>.actionPost(req: req) { (resp) in
+        AjaxUtil<OneParam<String>>.actionPost(req: req) { [weak self] (resp) in
             QPCLog(resp.data?.p1)
-            weakSelf?.sendAuth(numberStr: numberStr, userID: (resp.data?.p1)!)
+            self?.sendAuth(numberStr: numberStr, userID: (resp.data?.p1)!)
         }
     }
     
@@ -155,13 +154,11 @@ extension AddAuthorizaMemberController:CNContactPickerDelegate{
         req.sessionId = UserInfo.getSessionId()!
         req.sign = LockTools.getSignWithStr(str: "oxo")
         req.data = AddAuthUserReq.init(UserInfo.getUserId()!,mobile : numberStr!,memberName : self.remarkTF.text!, level: 1, lockId: lockModel.lockId!, permissions: timeStr, code: aesStr!)
-        weak var weakSelf = self
-
-        AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
+        AjaxUtil<CommonResp>.actionPost(req: req) { [weak self](resp) in
             QPCLog(resp)
             SVProgressHUD.showSuccess(withStatus: resp.msg)
             //添加锁成功进入下一页
-            weakSelf?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     

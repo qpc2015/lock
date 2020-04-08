@@ -57,15 +57,13 @@ extension ChangeTempUserController{
     
     func seletedTimeClick(str : String){
         
-        weak var weakSelf = self
-        
-        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { (selectDate) in
+        let datepicker = WSDatePickerView.init(dateStyle: DateStyleShowYearMonthDayHourMinute) { [weak self](selectDate) in
             let dateStr = selectDate?.string_from(formatter: "yyyy-MM-dd HH:mm")
             QPCLog("选择的日期:\(String(describing: dateStr))")
             if str == "开始时间" {
-                weakSelf!.starTimeLabel.text = dateStr
+                self?.starTimeLabel.text = dateStr
             }else if str == "结束时间"{
-                weakSelf!.endTimeLabel.text = dateStr
+                self?.endTimeLabel.text = dateStr
             }
         }
         datepicker?.dateLabelColor = UIColor.textBlueColor

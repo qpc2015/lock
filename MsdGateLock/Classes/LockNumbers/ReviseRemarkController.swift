@@ -25,7 +25,6 @@ class ReviseRemarkController: UITableViewController {
     }
 }
 
-
 extension ReviseRemarkController{
     
     @objc func okClick(){
@@ -36,18 +35,13 @@ extension ReviseRemarkController{
             req.sessionId = UserInfo.getSessionId()!
             req.sign = LockTools.getSignWithStr(str: "oxo")
             req.data = ThreeParam.init(p1: remark.text!, p2: userID, p3:lockID ?? "")
-            
-            weak var weakSelf = self
-            AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { (resp) in
+            AjaxUtil<CommonResp>.actionPost(req: req, backJSON: { [weak self](resp) in
                 QPCLog(resp)
-                weakSelf?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: true)
             })
-            
         }else{
             SVProgressHUD.showError(withStatus: "请填写正确备注")
         }
-
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

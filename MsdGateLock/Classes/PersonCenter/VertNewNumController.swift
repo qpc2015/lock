@@ -148,7 +148,6 @@ extension VertNewNumController{
         req.sessionId = UserInfo.getSessionId()!
         req.data = ResetNumberReq.init(self.numTF.text!, code: self.textTF.text!, oldMobile: UserInfo.getPhoneNumber()!, stepId: self.stepId!)
         
-        weak var weakSelf = self
         AjaxUtil<CommonResp>.actionPost(req: req) { (resp) in
             SVProgressHUD.showSuccess(withStatus: resp.msg)
             //保存新手机号
@@ -185,7 +184,6 @@ extension VertNewNumController{
             self.verBtn.setTitle("发送", for: .normal)
         }
     }
-    
     
     //获取验证码
     func getVertCodeTask(_ userTel: String){
